@@ -1,0 +1,39 @@
+- 1. crear tablas para proyectos y tabla para los empleados asignados, y sus relaciones
+
+-- 2. crear datos en proyectos
+-- crear 3 proyectos con los nombres 'app vdeoclub', 'app gestion tienda informatica' y 'web catalogo peliculas'
+-- 'app gestion tienda informatica' debe tener la fecha en el pasado (hace 10 dias)
+
+-- 3. comprobar los datos de la tabla project
+
+-- 4. borrar todos los datos de proyectos y crearlos de nuevo usando una transancción
+
+-- 5. comprobamos de nuevo
+
+-- 6. asignar empleados a proyectos
+-- comprobamos todos IDs de los proyectos 
+-- IDs de empleados para los proyectos: 7369, 7499, 7521, 7566
+
+-- asignar por lo menos 1 empleado a cada proyecto 
+-- asignar varios empleados por lo menos a 1 proyecto
+
+-- 7. comprobad los registros insertados
+-- cambiar las fechas del proyecto q empezó hace 10 días y poner fecha de finalización hace 5 
+
+-- 1. lista de empleados trabajando en algún proyecto en este momento
+
+-- 2, lista de empleados sin proyecto
+
+-- 3. lista de todos los empleados y sus proyectos, si es q están asignados
+
+-- 4. mostrar los proyectos del empleado WARD (7521)
+
+-- 4b. mostrar los proyectos en los q trabajó el empleado WARD en el pasado
+
+-- 4c. mostrar los proyectos en los q trabajó el empleado WARD en el pasado y el proyecto haya finalizado ya
+
+-- 5. mostrar los proyectos activos
+
+-- 6. mostrar los proyectos termina
+-- 7. mostrar todos los empleados del proyecto 'app video club'
+-- 8. mostrar todos los empleados activamente trabajando proyecto 'app video club'
