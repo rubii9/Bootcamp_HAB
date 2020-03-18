@@ -1,0 +1,30 @@
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+ul {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 25% 50% 50%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  transform: translate(-20%, 0);
+}
+
+ul li {
+  background: gold;
+  padding: 1rem;
+}
+
+ul li:first-child {
+  background: rebeccapurple;
+  transition: all 500ms;
+  color: white;
+  box-shadow: 0 0 15px black;
+}
+
+body.visible ul li:first-child {
+  transform: translate(100%, 0);
+}

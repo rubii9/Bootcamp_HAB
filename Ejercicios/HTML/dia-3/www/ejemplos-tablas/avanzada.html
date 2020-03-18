@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Tablas: Avanzada</title>
+</head>
+
+<body>
+  <header>
+    <h1><a href="/tablas.html">Tablas:</a> avanzanda</h1>
+    <nav>
+      <ul>
+        <li>
+          <a href="/ejemplos-tablas/simple.html">Tabla simple</a>
+        </li>
+        <li>
+          <a href="/ejemplos-tablas/semantica.html">Tabla semántica</a>
+        </li>
+        <li>
+          <a href="/ejemplos-tablas/avanzada.html">Tabla avanzada</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="semantica">
+      <h2>Colspan y rowspan</h2>
+      <table border="1">
+        <tr>
+          <th colspan="2">Lunes</th>
+          <th>Martes</th>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>7</td>
+          <td>8</td>
+        </tr>
+        <tr>
+          <td rowspan="3">7</td>
+          <td>11</td>
+          <td rowspan="2">8</td>
+        </tr>
+        <tr>
+          <td>7</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>11</td>
+        </tr>
+      </table>
+
+      <h2>Ejercicio 1</h2>
+
+      <table border="1">
+        <caption>Time table</caption>
+        <tr>
+          <th rowspan="6">Hours</th>
+          <th>Mon</th>
+          <th>Tue</th>
+          <th>Wed</th>
+          <th>Thu</th>
+          <th>Fri</th>
+        </tr>
+        <tr>
+          <td>Science</td>
+          <td>Maths</td>
+          <td>Science</td>
+          <td>Maths</td>
+          <td>Arts</td>
+        </tr>
+        <tr>
+          <td>Social</td>
+          <td>History</td>
+          <td>English</td>
+          <td>Social</td>
+          <td>Sports</td>
+        </tr>
+        <tr>
+          <td colspan="5">Lunch</td>
+        </tr>
+        <tr>
+          <td>Science</td>
+          <td>Maths</td>
+          <td>Science</td>
+          <td>Maths</td>
+          <td rowspan="2">Project</td>
+        </tr>
+        <tr>
+          <td>Social</td>
+          <td>History</td>
+          <td>English</td>
+          <td>Social</td>
+        </tr>
+
+      </table>
+
+
+      <h2>Ejercicio 2</h2>
+
+      <table border="1">
+        <caption>Resultados Globales</caption>
+
+        <tr>
+          <td colspan="4">Curso 2019/2020</td>
+        </tr>
+
+        <tr>
+          <td colspan="2">1ºESO A</td>
+          <td colspan="2">1ºESO B</td>
+        </tr>
+
+        <tr>
+          <td>Aprobados</td>
+          <td>Suspensos</td>
+          <td>Aprobados</td>
+          <td>Suspensos</td>
+        </tr>
+
+        <tr>
+          <td>68%</td>
+          <td>57%</td>
+          <td>32%</td>
+          <td>43%</td>
+        </tr>
+      </table>
+    </section>
+
+    
+  </main>
+
+
+  <footer>
+    <p>2020, Hackabos</p>
+  </footer>
+</body>
+
+</html>

@@ -1,0 +1,105 @@
+@import url("https://fonts.googleapis.com/css?family=Passion+One:700|Roboto:400,700&display=swap");
+
+html {
+  font-size: 14px;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, sans-serif;
+  background-image: url("https://source.unsplash.com/2000x2000?tech");
+  background-size: cover;
+}
+
+div.container {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+}
+
+header {
+  background: black;
+  color: white;
+  padding: 1rem 0;
+  text-align: center;
+}
+
+header h1 {
+  font-family: "Passion One", sans-serif;
+  text-decoration: underline;
+  margin-bottom: 0;
+}
+
+header p {
+  margin: 0.5rem 0 1rem 0;
+}
+
+header a {
+  background: lightgray;
+  color: black;
+  text-decoration: none;
+  display: inline-block;
+  padding: 0.15rem 1rem;
+  font-size: 0.75rem;
+}
+
+header a strong {
+  display: block;
+  font-size: 1.25rem;
+}
+
+main {
+  padding: 1rem;
+  background: white;
+}
+
+main aside {
+  background: lightgray;
+  padding: 0.15rem 1rem;
+  text-align: center;
+  font-size: 0.75rem;
+}
+
+main aside p:first-child {
+  font-weight: bold;
+}
+
+main section {
+  color: gray;
+}
+
+main section p:first-child {
+  font-weight: bold;
+}
+
+main section p img {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+footer {
+  background: gray;
+  padding: 2rem;
+  text-align: center;
+}
+
+@media (min-width: 700px) {
+  html {
+    font-size: 16px;
+  }
+
+  header {
+    padding: 3rem 0;
+  }
+
+  main section p.content {
+    columns: 2;
+  }
+
+  main aside {
+    position: absolute;
+    right: 0;
+    top: 2rem;
+    width: 5rem;
+  }
+}

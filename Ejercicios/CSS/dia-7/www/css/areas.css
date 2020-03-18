@@ -1,0 +1,54 @@
+@import "generico.css";
+
+section.container {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 10rem 1fr;
+  grid-template-rows: 10rem 20rem 10rem;
+
+  grid-template-areas:
+    "header header"
+    "content content"
+    "sidebar 🦶";
+}
+
+header {
+  background: steelblue;
+  grid-area: header;
+}
+
+section.links {
+  background: lightcoral;
+  grid-area: sidebar;
+}
+
+section.principal {
+  background: gold;
+  grid-area: content;
+}
+
+footer {
+  background: black;
+  color: white;
+  grid-area: 🦶;
+}
+
+@media (min-width: 700px) {
+  section.container {
+    grid-template-areas:
+      "header header"
+      "sidebar content"
+      "🦶 🦶";
+  }
+}
+
+@media (min-width: 1200px) {
+  section.container {
+    grid-template-columns: 10rem 1fr 1fr;
+    grid-template-rows: 10rem 20rem 10rem;
+    grid-template-areas:
+      "header header sidebar"
+      "🦶 content sidebar"
+      "🦶 content .";
+  }
+}

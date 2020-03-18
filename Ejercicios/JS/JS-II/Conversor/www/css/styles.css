@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Roboto, sans-serif;
+  background: yellowgreen;
+}
+
+header,
+main {
+  max-width: 30rem;
+  margin: 0 auto;
+}
+
+header {
+  padding: 1rem 0;
+  text-align: center;
+  font-size: 2rem;
+}
+header h1 {
+  text-shadow: 1px 1px white;
+  color: black;
+}
+
+button {
+  background-color: coral;
+  border: 2px solid black;
+  font-weight: bold;
+  padding: 0.2rem 0.5rem;
+}
+
+button:hover {
+  transform: scale(1.3);
+}
+
+input,
+select {
+  font-weight: bold;
+  border: 2px solid black;
+  padding: 0.2rem;
+}
+
+main > section {
+  display: grid;
+  gap: 0.5rem 1rem;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: repeat(1fr, 5);
+  justify-content: center;
+  grid-template-areas:
+    'titulo titulo'
+    'amount coin1'
+    'to to'
+    'coin2 coin2'
+    'result button';
+}
+
+p#titulo {
+  grid-area: titulo;
+}
+input#amount {
+  grid-area: amount;
+}
+select#coin1 {
+  max-width: 5rem;
+  grid-area: coin1;
+}
+p#To {
+  grid-area: to;
+}
+select#coin2 {
+  grid-area: coin2;
+  max-width: 5rem;
+}
+button {
+  grid-area: button;
+  max-width: 5rem;
+}
+input#result {
+  grid-area: result;
+}

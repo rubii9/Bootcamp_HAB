@@ -1,0 +1,24 @@
+body {
+  min-height: 200vh;
+  margin: 0;
+  background-color: rebeccapurple;
+  background-image: url("/img/pika.png"),
+    url("https://source.unsplash.com/random");
+  background-repeat: no-repeat, no-repeat;
+  background-position: right bottom, top left;
+  background-size: 300px, cover;
+  background-attachment: fixed;
+}
+
+p {
+  position: fixed;
+  bottom: 10px;
+  right: 20px;
+  width: 50%;
+  min-width: 300px;
+  background: white;
+  margin: 2rem auto;
+  padding: 1rem;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 30px;
+}

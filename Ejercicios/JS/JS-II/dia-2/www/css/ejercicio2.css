@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: purple;
+  min-height: 100vh;
+}
+
+ul {
+  margin: 1rem;
+  min-height: 100vh;
+  list-style: none;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+}
+
+ul li {
+  background: rgba(255, 255, 255, 0.25);
+  transition: background 500ms;
+}

@@ -1,0 +1,237 @@
+@import "normalize.css";
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,700,900&display=swap");
+
+html {
+  --orange: #f2994a;
+  --white: #ffffff;
+  --black: #222222;
+  --gray: #bbbbbb;
+}
+
+/* Etiquetas genéricas */
+
+h1 {
+  color: white;
+  font-size: 3rem;
+  font-weight: 900;
+  margin: 0;
+}
+
+img {
+  width: 100%;
+}
+
+body {
+  background-color: var(--orange);
+  font-family: Roboto, sans-serif;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+body > main > section {
+  padding: 1rem;
+}
+
+.boton {
+  background: var(--black);
+  color: var(--white);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  margin-top: 1rem;
+}
+
+/* Header */
+
+header#principal {
+  background-image: url(/img/cabeceira.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 14rem;
+}
+
+header#principal h1 {
+  margin: 0;
+}
+
+header#principal nav {
+  flex-grow: 1;
+}
+
+header#principal nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+}
+
+header#principal nav ul li {
+  margin: 0 0.5rem;
+}
+
+header#principal nav ul li a {
+  color: var(--black);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+header#principal > a {
+}
+
+/* Section vacalogo */
+
+section#vacalogo ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+section#vacalogo ul li article {
+  background: var(--black);
+  margin-bottom: 1rem;
+}
+
+section#vacalogo ul li article header img {
+  height: 20rem;
+  object-fit: cover;
+}
+
+section#vacalogo ul li article header h1 {
+  text-align: center;
+  margin: 1.5rem 0;
+}
+
+section#vacalogo ul li article section {
+  color: var(--white);
+}
+
+section#vacalogo ul li article section p {
+  padding: 1rem;
+}
+
+section#vacalogo ul li article section a {
+  background: var(--gray);
+  display: block;
+  padding: 1rem 0;
+  text-align: center;
+  font-weight: 700;
+  color: var(--black);
+  text-decoration: none;
+}
+
+/* Section comprar */
+
+section#comprar {
+  background: var(--white);
+}
+
+section#comprar h1 {
+  color: var(--orange);
+  margin-bottom: 2rem;
+}
+
+section#comprar form fieldset {
+  padding: 0;
+  border: 0;
+  margin-bottom: 1rem;
+}
+
+section#comprar form input:not([type="checkbox"]),
+section#comprar form select,
+section#comprar form textarea {
+  border: 2px solid var(--black);
+  background: var(--orange);
+  width: 100%;
+  padding: 0.25rem;
+  color: var(--white);
+  box-sizing: border-box;
+}
+
+section#comprar form label {
+  display: block;
+  font-weight: 700;
+  font-size: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+section#comprar form fieldset:last-of-type label {
+  display: initial;
+}
+
+section#comprar form fieldset:last-of-type input {
+  vertical-align: middle;
+}
+
+@media (min-width: 700px) {
+  header#principal {
+    flex-direction: row;
+    align-items: baseline;
+    min-height: 30rem;
+  }
+
+  header#principal > * {
+    flex-basis: calc(100% / 3);
+  }
+
+  header#principal nav {
+    order: -1;
+    flex-grow: 0;
+  }
+
+  header#principal h1 {
+    text-align: center;
+  }
+
+  header#principal div {
+    text-align: right;
+  }
+
+  section#intro p {
+    columns: 2;
+  }
+
+  section#vacalogo ul {
+    display: flex;
+  }
+
+  section#vacalogo ul li {
+    margin: 0 0.5rem;
+    flex-basis: calc(100% / 3);
+    display: flex;
+  }
+
+  section#vacalogo ul li article {
+    display: flex;
+    flex-direction: column;
+  }
+
+  section#vacalogo ul li article section {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  section#vacalogo ul li article header img {
+    height: 15rem;
+  }
+
+  section#comprar form {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  section#comprar form fieldset {
+    flex-basis: 50%;
+    margin: 0;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+
+  section#comprar form fieldset.ancho {
+    flex-basis: 100%;
+  }
+}

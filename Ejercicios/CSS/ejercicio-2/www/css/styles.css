@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+header {
+  padding: 0.1rem;
+  background: black;
+}
+header ul {
+  list-style: none;
+  display: flex;
+  justify-content: flex-end;
+}
+header li {
+  margin: 0rem 0.2rem;
+}
+
+header a {
+  color: white;
+  text-decoration: none;
+  font-size: 0.8rem;
+}
+
+header a:hover {
+  color: gold;
+}
+main {
+  margin: 1rem;
+}
+
+section.nombre {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+section.nombre img {
+  width: 30%;
+  border-radius: 50%;
+  border: 2px solid black;
+}
+
+section.nombre h1 {
+  font-size: 2rem;
+  margin: 0rem;
+}
+
+section.nombre p {
+  font-size: 0.8rem;
+  margin: 0rem;
+  font-weight: bold;
+}
+
+section.texto {
+  margin-bottom: 1.5rem;
+}
+
+section.texto a {
+  background: rgb(57, 57, 206);
+  color: white;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+}
+
+section.texto p:first-of-type {
+  margin: 0;
+}
+
+section.texto a:hover {
+  background: lightblue;
+  color: black;
+}
+section.experiencia h2 {
+  margin: 0;
+}
+section.experiencia ul {
+  padding-left: 1.5rem;
+}
+
+section.experiencia li {
+  margin-bottom: 0.5rem;
+}
+
+section.experiencia a {
+  color: blue;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+@media (min-width: 700px) {
+  html {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 1000px) {
+  html {
+    font-size: 25px;
+  }
+}
+
+@media (min-width: 1200px) {
+  header {
+    margin-bottom: 2rem;
+  }
+
+  main {
+    display: flex;
+    flex-direction: row;
+  }
+
+  section.nombre {
+    padding-right: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex-basis: 30%;
+    align-items: flex-end;
+  }
+
+  section.nombre h1 {
+    font-size: 4rem;
+    text-align: right;
+  }
+
+  section.nombre p {
+    font-size: 1rem;
+  }
+
+  section.nombre img {
+    width: 60%;
+    border: 10px solid black;
+  }
+
+  section.texto {
+    flex-basis: 40%;
+  }
+
+  section.experiencia {
+    flex-basis: 30%;
+    padding-left: 1rem;
+  }
+}

@@ -1,0 +1,43 @@
+.dias {
+  color: orange;
+}
+
+.fila {
+  color: black;
+}
+
+section {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  font-family: sans-serif;
+}
+
+table {
+  padding: 0 0.5rem;
+  border: 2px solid black;
+  border-collapse: collapse;
+}
+
+table caption {
+  font-size: 2rem;
+  padding-bottom: 1rem;
+}
+
+table th {
+  padding: 0.5rem;
+  background-color: black;
+}
+
+table tr:nth-child(odd) {
+  background-color: lightgray;
+}
+
+.maxtemp {
+  color: red;
+  font-weight: bold;
+}
+.mintemp {
+  color: blue;
+  font-weight: bold;
+}

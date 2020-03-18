@@ -1,0 +1,85 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,700,900&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Lobster&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Roboto, sans-serif;
+  background-image: url("/img/fondo.jpg");
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+
+header.titulo h1 {
+  text-align: center;
+  font-family: "Lobster";
+  font-size: 4rem;
+  margin: 2rem 0;
+  color: white;
+}
+
+main > ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+}
+
+main > ul > li {
+  margin: 1rem;
+}
+
+section {
+  background: white;
+  box-shadow: 0 0 2rem rgba(0, 0, 0, 0.3);
+}
+
+section header img {
+  border-radius: 50%;
+}
+
+section header#ruben > img {
+  width: 120px;
+}
+
+section header {
+  text-align: center;
+  color: black;
+  padding: 2rem 0;
+}
+
+section header ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+section header ul li a img {
+  display: inline-block;
+  height: 60px;
+  width: 60px;
+  padding: 0 0.5rem;
+}
+section article {
+  background: #333333;
+  padding: 0.2rem;
+}
+section p {
+  padding: 0.5rem;
+  margin: 0;
+  background: #333333;
+}
+
+@media (min-width: 1000px) {
+  main > ul > li {
+    max-width: 300px;
+  }
+}

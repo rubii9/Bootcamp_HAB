@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cascada</title>
+
+  <style>
+    body {
+      min-height: 100vh;
+
+      border: 10px solid gold;
+
+      font-size: 30px;
+      font-family: fantasy;
+    }
+
+    /* especificidad: 100 */
+    #unico {
+      color: green;
+      font-family: initial;
+    }
+
+    /* especificidad: 10 */
+    .especial {
+      /* background: lightcyan; */
+      color: red;
+    }
+
+    /* especificidad: 10 */
+    .destacado {
+      /* background: pink; */
+      /* se aplica esta porque es la última que se declara */
+    }
+  </style>
+</head>
+
+<body>
+  <h1 class="especial destacado">Título especial</h1>
+  <h1 id="unico" class="especial destacado">Título especial y único</h1>
+</body>
+
+</html>

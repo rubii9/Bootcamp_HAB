@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Formularios</title>
+</head>
+
+<body>
+  <header>
+    <h1>Formularios</h1>
+  </header>
+
+  <section id="registro">
+    <h2>Registro</h2>
+
+    <form>
+
+      <fieldset>
+        <legend>Datos básicos</legend>
+
+        <ul>
+          <li>
+            <label for="user">Usuario/a:</label>
+            <input type="text" name="user" id="user" />
+          </li>
+          <li>
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email">
+          </li>
+          <li>
+            <label for="birthday">Fecha de nacimiento:</label>
+            <input type="date" name="birthday" id="birthday" max="2002-01-01" min="1900-12-31">
+          </li>
+          <li>
+            Género:
+            <ul>
+              <li>
+                <label for="masculino">Masculino:</label>
+                <input type="radio" name="genero" value="masculino" id="masculino" />
+
+              </li>
+              <li>
+                <label for="femenino">Femenino:</label>
+                <input type="radio" name="genero" value="femenino" id="femenino" />
+
+              </li>
+              <li>
+                <label for="otro">Otro:</label>
+                <input type="radio" name="genero" value="otro" id="otro" />
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+      </fieldset>
+
+      <fieldset>
+        <legend>Datos personales</legend>
+
+        <ul>
+          <li>
+            <label for="url">URL</label>
+            <input type="url" name="url" id="url" />
+          </li>
+          <li>
+            <label for="phone">Teléfono:</label>
+            <input type="tel" name="phone" id="phone" />
+          </li>
+          <li>
+            <label for="provincia">Provincia</label>
+            <select name="provincia" id="provincia" required>
+              <option value="">Selecciona..</option>
+              <optgroup label="Provincias guais">
+                <option value="27">Lugo</option>
+                <option value="15">A Coruña</option>
+              </optgroup>
+              <optgroup label="El resto">
+                <option value="36">Pontevedra</option>
+                <option value="32">Ourense</option>
+              </optgroup>
+            </select>
+          </li>
+          <li>
+            <label for="photo">Foto:</label>
+            <input type="file" name="photo" id="photo" accept="image/jpeg, image/gif, application/pdf" />
+          </li>
+        </ul>
+      </fieldset>
+
+      <fieldset>
+        <legend>Otros datos</legend>
+        <ul>
+          <li>
+            <label for="color">Color favorito:</label>
+            <input type="color" name="color" id="color" />
+          </li>
+          <li>
+            <label for="number">Número favorito:</label>
+            <input type="number" name="number" id="number" max="100" min="-20" step=".5" />
+          </li>
+          <li>
+            <label for="estado">Estado emocional:</label>
+            😑 <input type="range" name="estado" id="estado" min="-100" max="100"> 🤩
+          </li>
+          <li>
+            <label for="bio">Biografía:</label>
+            <textarea name="bio" id="bio"></textarea>
+          </li>
+
+          <li>
+            <label for="pimientos">Gústanche os pementos?</label>
+            <input type="checkbox" name="pimientos" id="pimientos" value="si">
+          </li>
+          <li>
+            <label for="fruta">Fruta preferida:</label>
+            <input list="lista-frutas" name="fruta" id="fruta" />
+
+            <datalist id="lista-frutas">
+              <option value="Peras"></option>
+              <option value="Manzanas"></option>
+              <option value="Platanos"></option>
+              <option value="Uvas"></option>
+              <option value="Fresas"></option>
+              <option value="Kiwis"></option>
+            </datalist>
+          </li>
+        </ul>
+      </fieldset>
+
+      <button type="submit">Enviar</button>
+      <button type="reset">Resetear</button>
+
+    </form>
+  </section>
+
+  <section id="login">
+    <h2>Login</h2>
+    <form>
+      <fieldset>
+        <legend>Datos de login</legend>
+        <label for="user">User:</label>
+        <input type="text" id="user" name="user" autofocus placeholder="Mínimo 3 caracteres" maxlength="10"
+          minlength="3" required />
+
+        <label for="pass">Pass:</label>
+        <input type="password" id="pass" name="pass" required />
+      </fieldset>
+      <button>Enviar</button>
+    </form>
+  </section>
+</body>
+
+</html>

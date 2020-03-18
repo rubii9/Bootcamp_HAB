@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+header {
+  padding: 0.1rem;
+  background: black;
+}
+header ul {
+  list-style: none;
+  display: flex;
+  justify-content: flex-end;
+}
+header li {
+  margin: 0rem 0.2rem;
+}
+
+header a {
+  color: white;
+  text-decoration: none;
+  font-size: 0.8rem;
+}
+
+header a:hover {
+  color: gold;
+}
+
+main {
+  margin: 1rem;
+}
+section.titulo {
+  margin-bottom: 1rem;
+}
+
+section.titulo h1 {
+  font-size: 2rem;
+
+  margin-bottom: 1rem;
+}
+
+section.titulo a {
+  background: rgb(57, 57, 206);
+  color: white;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+}
+
+section.titulo a:hover {
+  background: lightblue;
+  color: black;
+}
+
+section.texto img {
+  width: 100%;
+}
+
+@media (min-width: 700px) {
+  html {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 1000px) {
+  html {
+    font-size: 25px;
+  }
+}
+
+@media (min-width: 1200px) {
+  header {
+    margin-bottom: 2rem;
+  }
+
+  main {
+    display: flex;
+    flex-direction: row;
+  }
+
+  section.titulo {
+    display: flex;
+    flex-basis: 30%;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-right: 1.5rem;
+  }
+
+  section.titulo h1 {
+    font-size: 4rem;
+    text-align: right;
+    margin-top: 0;
+  }
+
+  section.texto {
+    flex-basis: 70%;
+  }
+}

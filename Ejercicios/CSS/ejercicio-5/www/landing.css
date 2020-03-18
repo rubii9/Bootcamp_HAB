@@ -1,0 +1,101 @@
+@import url("https://fonts.googleapis.com/css?family=Bungee&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(rebeccapurple, gold);
+  min-height: 100vh;
+  --shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
+  --white-shadow: 2px 2px 0px rgba(255, 255, 255, 0.75);
+}
+
+header {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: Bungee, display;
+}
+
+header h1 {
+  color: white;
+  font-size: 3rem;
+  text-shadow: var(--shadow);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+nav ul li a {
+  display: block;
+  width: 18rem;
+  height: 18rem;
+  margin: 1rem;
+  padding: 1rem;
+  border: 1rem solid white;
+  text-decoration: none;
+  color: white;
+  font-size: 2rem;
+  box-shadow: var(--shadow);
+  text-shadow: var(--shadow);
+  background-position: center;
+  background-size: 200%;
+  transition: all 500ms;
+}
+
+nav ul li a:hover {
+  border-width: 0;
+  background-size: 400%;
+  color: black;
+  text-shadow: var(--white-shadow);
+}
+
+a.mondrian {
+  background-image: url("https://i.imgur.com/56q2OPh.jpg");
+  animation-delay: 100ms;
+}
+
+a.matisse {
+  background-image: url("https://i.imgur.com/W00Cl5u.jpg");
+  animation-delay: 400ms;
+}
+
+a.kandinsky {
+  background-image: url("https://i.imgur.com/Jw0xc6C.jpg");
+  animation-delay: 600ms;
+}
+
+a.klee {
+  background-image: url("https://i.imgur.com/aBIyL81.jpg");
+  animation-delay: 800ms;
+}
+
+h1,
+a {
+  animation-name: showup;
+  animation-duration: 2000ms;
+  animation-fill-mode: backwards;
+}
+
+@keyframes showup {
+  0% {
+    opacity: 0;
+    transform: translate(0, 1rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}

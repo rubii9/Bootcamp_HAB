@@ -1,0 +1,55 @@
+header {
+  border: 2px solid red;
+}
+
+p {
+  border: 2px solid green;
+  display: block;
+}
+
+header h1,
+header h2 {
+  border: 2px solid black;
+  display: inline;
+}
+
+p em {
+  border: 2px solid blue;
+  display: block;
+}
+
+p.example {
+  width: 60%;
+  height: 300px;
+}
+
+p.example strong {
+  background: black;
+  color: white;
+  margin: 20px 20px; /* sólo horizontal */
+  width: 200px; /* NO */
+  height: 400px; /* NO */
+  padding: 4px;
+  border: 6px solid yellow;
+}
+
+p.example a {
+  background: blue;
+  color: white;
+  display: inline-block;
+  height: 50px;
+  width: 60px;
+  margin: 10px;
+  padding: 10px;
+}
+
+p.links {
+  background: goldenrod;
+  text-align: center;
+}
+
+p.links a {
+  display: inline-block;
+  background: lightblue;
+  padding: 0.5rem 1rem;
+}

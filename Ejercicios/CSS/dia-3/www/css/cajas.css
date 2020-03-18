@@ -1,0 +1,79 @@
+/* * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+} */
+
+body {
+  margin: 0;
+}
+
+header {
+  background: purple;
+  color: gold;
+  /* width: 50%; */
+  height: 50%;
+  padding: 3rem; /* 3rem para cada lado */
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 3rem;
+  padding-right: 1rem;
+  padding: 2rem 3rem 2rem 1rem; /* arriba, derecha, abajo, iquierda */
+  padding: 2rem 1rem; /* arriba/abajo, izquierda/derecha */
+  padding: 2rem 3rem 1rem; /* arriba, izquierda/derecha, abajo */
+  margin: 0 0 2rem 0;
+  width: 50%;
+  margin: 0 auto;
+  border: 0.5rem groove rgb(123, 123, 22);
+  border-width: 10px;
+  border-style: dashed;
+  border-color: red;
+  border-top: 3px solid green;
+  border-bottom: 8px dashed peru;
+}
+
+header ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  height: 100px;
+  background: lightblue;
+}
+
+header ul li {
+  background: pink;
+  color: black;
+  padding: 0.5rem;
+  height: 50px;
+  box-sizing: border-box;
+}
+
+section#text {
+  background: lightcyan;
+  margin-top: 3rem;
+  width: 75%;
+  margin: 2rem auto;
+  max-width: 1000px;
+  min-width: 700px;
+}
+
+section#warning {
+  background: yellow;
+  padding: 1px;
+}
+
+section#warning p {
+  background: black;
+  color: white;
+  margin: 2rem;
+}
+
+section#content {
+  width: 30rem;
+  height: 10rem;
+  margin: 2rem;
+  padding: 1rem;
+  border: 0.5rem solid black;
+  box-sizing: border-box;
+  overflow: auto;
+}

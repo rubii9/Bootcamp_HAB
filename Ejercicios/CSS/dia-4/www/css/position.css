@@ -1,0 +1,47 @@
+body {
+  font-family: sans-serif;
+  min-height: 200vh;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  position: relative;
+  background: lightgray;
+  padding: 2rem;
+}
+
+ul li {
+  font-size: 1.5rem;
+  padding: 2rem 4rem;
+  margin: 1rem 0;
+  font-weight: bold;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+}
+
+li.one {
+  background: lightpink;
+  position: relative;
+  /* top, right, bottom, left (con top y right llegaría) */
+  top: 2rem;
+  left: -2rem;
+  z-index: 1;
+}
+
+li.two {
+  z-index: 99999999;
+  background: lightseagreen;
+  position: absolute;
+  bottom: 2rem;
+  right: 1rem;
+  /* top: 1rem;
+  right: 2rem;
+  left: 1rem; */
+}
+
+li.three {
+  background: lightsalmon;
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+}

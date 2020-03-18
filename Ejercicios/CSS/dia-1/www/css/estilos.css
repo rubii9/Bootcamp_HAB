@@ -1,0 +1,115 @@
+/* Selectores simples */
+
+/* Por etiqueta */
+a {
+  background: black;
+  color: white;
+}
+
+address {
+  border: 3px solid blue;
+}
+
+p {
+  font-family: sans-serif;
+}
+
+/* Por id */
+
+#texto-principal {
+  font-size: 24px;
+  text-decoration: underline;
+}
+
+.secundario {
+  background: lightgray;
+}
+
+.especial {
+  color: red;
+}
+
+/* Por atributo */
+
+[title] {
+  text-decoration: overline;
+}
+
+[data-importancia] {
+  border: 2px solid pink;
+}
+
+[data-importancia="10"] {
+  font-size: 100px;
+}
+
+[data-importancia="5"] {
+  font-size: 40px;
+}
+
+[data-importancia="0"] {
+  font-size: 10px;
+}
+
+[data-tipo^="Do"] {
+  border: 3px solid green;
+}
+
+[data-tipo$="cia"] {
+  border-bottom: 4px solid maroon;
+}
+
+[data-tipo*="en"] {
+  background: red;
+}
+
+[href^="http"] {
+  background: pink;
+}
+
+p:hover {
+  border: 1px solid green;
+}
+
+:first-child {
+  border-top: 4px solid red;
+}
+
+p:last-child {
+  border-bottom: 4px solid pink;
+}
+
+p:nth-child(3n + 2) {
+  /* (2n+1) 1, 3, 5, 7, 9, 11 */
+  /* (3n+2) 2, 5, 8, 11 */
+  background: black;
+  color: white;
+}
+
+input {
+  border: 1px solid black;
+}
+
+input:required {
+  background: pink;
+}
+
+input:invalid {
+  border: 4px solid red;
+}
+
+input:valid {
+  border: 4px solid green;
+}
+
+p:not(.name) {
+  color: green;
+}
+
+/* comentario css */
+
+/*
+* {
+  border: 2px solid purple;
+}
+*/

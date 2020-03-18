@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TODO</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+
+  <body>
+    <header>
+      <h1>To Do's</h1>
+    </header>
+
+    <main id="todos">
+      <section class="app">
+        <form class="add">
+          <fieldset>
+            <label for="todotext">Nueva tarea:</label>
+            <input
+              required
+              type="text"
+              required
+              name="todotext"
+              id="todotext"
+              placeholder="Escribe lo que quieres hacer"
+              minlength="1"
+              maxlength="256"
+              autocomplete="off"
+            />
+          </fieldset>
+          <button class="add">Añadir ✍🏻</button>
+        </form>
+
+        <button class="clean">Borrar hechos ✅</button>
+        <button class="destroy">Borrar todos 🗑</button>
+      </section>
+      <section class="error"></section>
+
+      <section class="list">
+        <ul class="todolist"></ul>
+      </section>
+    </main>
+
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>

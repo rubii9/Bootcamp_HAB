@@ -1,0 +1,24 @@
+body {
+  background: lightgray;
+  margin: 0;
+  font-family: sans-serif;
+}
+
+article {
+  background: white;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+article h1 {
+  font-size: 3rem;
+  text-align: center;
+}
+
+article img {
+  display: block;
+  margin: auto;
+  width: 100%;
+  max-width: 600px;
+}

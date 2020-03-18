@@ -1,0 +1,17 @@
+body {
+  background: steelblue;
+  min-height: 100vh;
+}
+
+button {
+  position: absolute;
+  border: none;
+  background: black;
+  color: white;
+  font-size: 2rem;
+  width: 100px;
+  height: 100px;
+
+  top: 200px;
+  left: 200px;
+}

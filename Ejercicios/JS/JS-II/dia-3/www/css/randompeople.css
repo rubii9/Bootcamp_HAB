@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,700,900&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Muli&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Roboto;
+}
+
+section#root {
+  background-color: lightgray;
+  min-height: 100vh;
+}
+section#root > h1 {
+  text-align: center;
+  font-size: 5rem;
+  color: gold;
+  text-shadow: 1px 1px 1px black;
+}
+
+section#root ul {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+section#root li {
+  margin: 1rem;
+}
+
+section.user {
+  border: 2px solid black;
+  text-align: center;
+  min-width: 300px;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rebeccapurple;
+  color: white;
+}
+section.user img {
+  border-radius: 50%;
+  border: 2px solid white;
+  margin: 1rem;
+  object-fit: cover;
+
+  max-width: 100px;
+  min-height: auto;
+}
+
+section.user h1 {
+  font-family: Muli;
+  font-size: 2rem;
+  padding-bottom: 1rem;
+}
+section.user p {
+  padding-bottom: 1rem;
+}

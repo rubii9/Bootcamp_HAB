@@ -1,0 +1,66 @@
+p::first-letter {
+  font-size: 40px;
+  background: black;
+  color: white;
+}
+
+p::first-line {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+ul::before {
+  content: ">>";
+  background: red;
+}
+
+ul::after {
+  content: "<<";
+  background: green;
+}
+
+a[href^="http"]::after {
+  content: "↗️";
+  vertical-align: middle;
+}
+
+p::selection {
+  background-color: yellow;
+}
+
+p#principal.especial.importante:first-child:hover::first-letter {
+  font-size: 30px;
+  font-weight: bold;
+  color: pink;
+}
+
+p.especial,
+strong.importante {
+  color: blue;
+  text-decoration: underline;
+}
+
+p strong {
+  background: yellow;
+  color: green;
+}
+
+header nav a {
+  font-size: 30px;
+}
+
+section h2 {
+  color: olive;
+}
+
+section > h2 {
+  background: lightgray;
+}
+
+article.demo h2 + p {
+  background: lightblue;
+}
+
+article.demo h2 ~ address {
+  background: lightsalmon;
+}

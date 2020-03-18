@@ -1,0 +1,162 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+}
+
+.link-list {
+  display: flex;
+  justify-content: center;
+}
+
+.link-list li {
+  margin-right: 0.5rem;
+  padding-right: 0.5rem;
+  border-right: 1px solid black;
+}
+
+.link-list li:last-child {
+  border: none;
+}
+
+.link-list li a {
+  color: black;
+  text-decoration: none;
+}
+
+body {
+  font-family: sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+body > * {
+  padding: 1.5rem;
+}
+
+body > * > h2 {
+  margin-bottom: 1rem;
+}
+
+header {
+  background-color: cornflowerblue;
+  text-align: center;
+}
+
+header h1 {
+  color: white;
+  margin-bottom: 1rem;
+}
+
+header .link-list {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+section#content {
+  flex-grow: 1;
+}
+
+section#links {
+  background: darkgreen;
+  color: white;
+}
+
+section#links ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+section#links ul li a {
+  display: block;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  width: 5rem;
+  padding-top: 4.5rem;
+  text-align: center;
+  background-repeat: no-repeat;
+  background-size: 4rem;
+  background-position: top center;
+}
+section#links ul li a.twitter {
+  background-image: url(/img/twitter.svg);
+}
+
+section#links ul li a.linkedin {
+  background-image: url(/img/linkedin.svg);
+}
+
+section#links ul li a.facebook {
+  background-image: url(/img/facebook.svg);
+}
+
+section#links ul li a.tiktok {
+  background-image: url(/img/tiktok.svg);
+}
+
+footer {
+  background-color: lightgray;
+}
+
+footer p {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 700px) {
+  body {
+    display: grid;
+    grid-template-columns: 10rem 4fr 15rem;
+    grid-template-rows: 5fr 2fr 1fr;
+
+    grid-template-areas:
+      "header content content"
+      "header links links"
+      "header footer footer";
+  }
+
+  header {
+    grid-area: header;
+    text-align: right;
+  }
+
+  header .link-list {
+    flex-direction: column;
+  }
+
+  header .link-list a {
+    color: white;
+  }
+
+  header .link-list li {
+    border: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  section#content {
+    grid-area: content;
+  }
+
+  section#links {
+    grid-area: links;
+  }
+
+  footer {
+    grid-area: footer;
+  }
+}
+
+@media (min-width: 1000px) {
+  body {
+    grid-template-areas:
+      "header content links"
+      "header content links"
+      "header footer  links";
+  }
+}

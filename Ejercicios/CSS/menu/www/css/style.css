@@ -1,0 +1,72 @@
+@import url("https://fonts.googleapis.com/css?family=PT+Sans:400,700&display=swap");
+
+body {
+  font-family: "PT Sans", sans-serif;
+  background: black;
+  margin: 0;
+}
+
+header {
+  background: white;
+  min-height: 100vh;
+  width: 75%;
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+}
+
+header h1 {
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 3rem;
+  color: darkgray;
+  margin: 1rem 0;
+}
+
+header nav {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+header nav ul {
+  flex-grow: 1;
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+header nav ul li:nth-last-child(2) {
+  flex-grow: 1;
+}
+
+header nav ul li a {
+  display: block;
+  text-decoration: none;
+  color: black;
+  padding: 1rem 1rem 1rem 4rem;
+  background-repeat: no-repeat;
+  background-position: 1rem center;
+}
+
+header nav ul li a.start {
+  background-image: url(/img/inicio.svg);
+}
+
+header nav ul li a.about {
+  background-image: url(/img/about.svg);
+}
+
+header nav ul li a.cv {
+  background-image: url(/img/curriculum.svg);
+}
+
+header nav ul li a.contact {
+  background-image: url(/img/contacto.svg);
+}
+
+header nav ul li a:hover {
+  background-color: #e6d5fc;
+  background-size: 1.75rem;
+}
