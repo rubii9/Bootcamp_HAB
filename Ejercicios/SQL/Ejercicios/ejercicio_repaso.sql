@@ -1,7 +1,7 @@
 --
 -- Implementación y datos
 --
-
+use hb_employees;
 -- 1. crear tablas para proyectos y tabla para los empleados asignados, y sus relaciones
 drop table if exists assignments;
 drop table if exists project;
@@ -39,7 +39,7 @@ select * from project;
 delete from project;
 
 start transaction;
-insert into project(name, init_date) values('app videoclub', CURRENT_DATE());
+insert into project(name, start_date) values('app videoclub', CURRENT_DATE());
 insert into project values(0, 'app gestion tienda informatica', DATE_SUB(CURRENT_DATE(), INTERVAL 10 DAY), null);
 insert into project values(null, 'web catalogo peliculas', CURRENT_DATE(), null);
 commit;
@@ -107,6 +107,7 @@ where not id in (
 -- 3. lista de todos los empleados y sus proyectos, si es q están asignados
 select * from employee e left join assignments a
 on e.id = a.id_employee;
+-- De esta forma serian solo los que si estan asignados
 select * from employee e inner join assignments a
 on e.id = a.id_employee;
 
@@ -117,16 +118,30 @@ select distinct p.* from project p, assignments a where a.id_employee in (
 );
 
 -- 4b. mostrar los proyectos en los q trabajó el empleado WARD en el pasado
-
+select distinct p.* from project p, assignments a where a.id_employee in (
+	select id from employee where name = 'WARD' 
+) and p.end_date < current_date();
 -- 4c. mostrar los proyectos en los q trabajó el empleado WARD en el pasado y el proyecto haya finalizado ya
-
+select distinct p.* from project p, assignments a where a.id_employee in (
+	select id from employee where name = 'WARD' 
+) and p.end_date is not null and p.end_date < current_date();
 -- 5. mostrar los proyectos activos
+select * from project where end_date is null;
 
 -- 6. mostrar los proyectos terminados
+select * from project where end_date is not null;
 
 -- 7. mostrar todos los empleados del proyecto 'app video club'
-
+select * from employee e inner join assignments a
+on e.id = a.id_employee
+where id_project in (
+	select id from project where name = 'app videoclub'
+    );
 -- 8. mostrar todos los empleados activamente trabajando proyecto 'app video club'
-
+select * from employee e inner join assignments a
+on e.id = a.id_employee
+where id_project in (
+	select id from project where name = 'app videoclub'
+    ) and a.end_date is null;
 
 
