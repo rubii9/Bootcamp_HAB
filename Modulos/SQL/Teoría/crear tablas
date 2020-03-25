@@ -1,0 +1,26 @@
+#Crear tablas
+
+drop table if exists assignments;
+drop table if exists project;
+create table project(
+	id int primary key auto_increment,
+    name varchar(255) not null unique,
+    init_date datetime not null,
+    end_date datetime default null
+);
+create table assignments ( 
+	id_employee int not null,
+    id_project int not null,
+    init_date datetime not null,
+    end_date datetime default null,
+    constraint fk_assignment_employee foreign key (id_employee) references employee(id),
+	constraint fk_assignment_project foreign key (id_project) references project(id)
+);
+
+
+#Insertar datos 
+
+
+insert into project(name, init_date) values('app videoclub', CURRENT_DATE());
+insert into project values(0, 'app gestion tienda informatica', DATE_SUB(CURRENT_DATE(), INTERVAL 10 DAY), null);
+insert into project values(null, 'web catalogo peliculas', CURRENT_DATE(), null);
