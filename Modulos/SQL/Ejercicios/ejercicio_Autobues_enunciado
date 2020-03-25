@@ -1,0 +1,18 @@
+Vamos a gestionar la competencia de Bus Coruña
+
+
+* Necesitamos un registro de todos los buses que pertenecen a la empresa, con su matricula, año de fabricación, marca, modelo. Podemos tener varios autobuses de la misma marca y/o modelo. Los autobuses tendrán un ID autogenerado y a su vez las matrículas van a ser únicas, no queremos 2 buses con la misma matrícula.
+
+
+* Tendremos un registro de los conductores que tenemos en nómina, con su nombre, apellidos, DNI y tlf.
+
+* Vamos a tener una líneas predefinidas, las cuales llevarán un ID numérico para identificarlas y tendrán una serie de paradas. Las paradas tienen un nombre, la calle, y el número.
+
+
+* Cada línea tendrá un itinerario varias paradas, incluso la misma parada varias veces si pasa por ejemplo 2 veces por ella en el recorrido de la linea, y el horario de inicio para esa línea. También guardaremos el orden por el q pasa por las paradas y el tiempo que tarda aproximadamente en llegar a esa parada desde l
+
+
+* Cada parada puede estar incluida en varias líneas.
+
+
+* Cada conductor estará asignado a 1 línea y 1 bus, que es donde trabajarán. Puede haber varios buses haciendo una misma línea, cada uno de ellos con 1 o más conductores.
