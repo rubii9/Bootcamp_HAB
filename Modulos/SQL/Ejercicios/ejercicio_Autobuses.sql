@@ -93,20 +93,74 @@ insert into conductores_asignados values (3, 6, 8);
 --
 -- Consultas
 --
--- 1. Buses de la linea 50
-select b. * from buses b, conductores_asignados a,modelos_buses m
-where b.id= a.id_bus and a.id_linea = 50;
 
--- 2. Conductores de la linea 50
-select c.* from conductores c, conductores_asignados a
-where c.id = a.id_conductor and a.id_linea = 50;
+-- 1. buses de la linea 50
+select * from buses b inner join conductores_asignados c
+on b.id =c.id_bus and c.id_linea = 50;
 
--- 3. Conductoes de la linea 50 y sus buses
+
+-- 2. conductores de la linea 50
+select * from conductores c inner join conductores_asignados a
+on c.id =a.id_conductor and a.id_linea = 50;
+
+
+-- 3. conductores de la linea 50 y sus buses
 select c.*, b.* from conductores c, conductores_asignados a,buses b
-where c.id = a.id_conductor and a.id_linea = 50 and b.id = a.id_bus;
+where c.id = a.id_conductor  and b.id = a.id_bus and a.id_linea = 50;
 
--- 4.Itinerario por orden de parada de la linea 14 con los detalles de cada parada
-select p.*, i.orden, i.minutos_salida from paradas p, itinerario i
-where p.id = id_parada and i.id_linea = 14;
 
+-- 3b. conductores de la linea 50 y sus buses con marca y modelo
+select c.*, b.*, m.*from conductores c, conductores_asignados a,buses b,modelos_buses m
+where c.id = a.id_conductor  and b.id = a.id_bus and m.id=b.modelos_buses_id and a.id_linea = 50;
+
+
+-- 4. itinerario por orden de parada de la linea 14, con los detalles de cada parada
+select * from paradas p,itinerario i
+where p.id =i.id_parada and i.id_linea = 14 order by i.orden;
+
+
+-- 5. lineas que pasan por la parada "avda de la coruña 2"
+select i.id_linea from paradas p ,itinerario i
+where p.id = i.id_parada and p.nombre = "avda de la coruña 2";
+
+
+-- 6. lineas que empiecen a circular como muy tarde a las 10:00
+select * from lineas
+where hora_inicio <= time("10:00:00");
+
+
+
+-- 6b. BONUS: la anterior consulta de 2 formas diferentes 
+select * from lineas
+where TIMEDIFF(hora_inicio,"10:00:00") <= 0;
+
+
+-- 7. lineas que pasan por la parada "rua galicia 1" y empiecen a circular como muy tarde a las 10:00
+select * from lineas l ,itinerario i,paradas p
+where l.id = i.id_linea and p.id = i.id_parada and p.nombre= "rua galicia 1" and l.hora_inicio <= time("10:00:00");
+
+
+-- 8. lista de paradas que recorre el señor arsenio iglesias
+select distinct p.nombre from conductores c,paradas p,itinerario i
+where p.id = i.id_parada and c.nombre = "arsenio" and c.apellidos ="iglesias" ;
+
+
+-- 9. buses que pasan por "avda de la coruña 1"
+select b.* from buses b,paradas p
+where  p.nombre ="avda de la coruña 1";
+
+
+-- 10. información de la líneas y el número de paradas de cada una
+
+
+
+-- 11. información solo de la línea con más paradas
+
+
+
+-- 11b. la anterior pero de otra forma 
+
+
+
+-- 12. información conductor con el itinerario más largo
 
