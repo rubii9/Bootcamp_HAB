@@ -151,16 +151,23 @@ where  p.nombre ="avda de la coruña 1";
 
 
 -- 10. información de la líneas y el número de paradas de cada una
+select count(id_parada) as num_paradas, l.* from itinerario i, lineas l
+where i.id_linea = l.id
+group by id_linea;
 
 
 
 -- 11. información solo de la línea con más paradas
-
+	select count(id_parada) as num_paradas, l.* from itinerario i, lineas l
+	where i.id_linea = l.id 
+	group by id_linea
+    order by num_paradas desc
+    limit 1;
 
 
 -- 11b. la anterior pero de otra forma 
 
 
-
 -- 12. información conductor con el itinerario más largo
-
+	
+   
