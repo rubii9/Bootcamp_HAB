@@ -167,7 +167,42 @@ group by id_linea;
 
 -- 11b. la anterior pero de otra forma 
 
+create view NumeroDeParadas as 
+select count(id_parada) as num_paradas from itinerario 
+	group by id_linea; 
+    
+select * from NumeroDeParadas;-- consulta que muestra el numero de paradas agrupadas por linea
+
+
+select max(NumeroDeParadas.num_paradas) from NumeroDeParadas; -- obtenermos el numero maximo de paradas
+	 
+ 
+create view MaxParadas as
+select count(id_parada) as num_paradas, l.* from itinerario i inner join lineas l
+	on i.id_linea = l.id 
+	group by id_linea
+    having num_paradas = (
+		select max(NumeroDeParadas.num_paradas) from NumeroDeParadas); 
+        
+        
+select * from MaxParadas; -- obtenemos la info de la linea con mayor num_parada 
+
+
 
 -- 12. información conductor con el itinerario más largo
-	
+select c.* from conductores_asignados a inner join conductores c
+on a.id_conductor = c.id 
+where id_linea = (
+	select MaxParadas.id from MaxParadas);
+    
+
+
+
+
+
+  
+   
+
+
+
    
