@@ -95,9 +95,8 @@ insert into conductores_asignados values (3, 6, 8);
 --
 
 -- 1. buses de la linea 50
-select * from buses b inner join conductores_asignados c
-on b.id =c.id_bus and c.id_linea = 50;
-
+select b.*, m.marca, m.modelo from buses b, conductores_asignados a, modelos_buses m
+where b.id = a.id_bus and a.id_linea = 50 and b.modelos_buses_id = m.id;
 
 -- 2. conductores de la linea 50
 select * from conductores c inner join conductores_asignados a
@@ -120,34 +119,60 @@ where p.id =i.id_parada and i.id_linea = 14 order by i.orden;
 
 
 -- 5. lineas que pasan por la parada "avda de la coruña 2"
-select i.id_linea from paradas p ,itinerario i
-where p.id = i.id_parada and p.nombre = "avda de la coruña 2";
+select l.* from lineas l, itinerario i 
+where i.id_linea = l.id and i.id_parada in (
+	select id from paradas where nombre = "avda de la coruña 2");
 
 
 -- 6. lineas que empiecen a circular como muy tarde a las 10:00
 select * from lineas
 where hora_inicio <= time("10:00:00");
 
+select l.* from lineas l
+where TIME_FORMAT(l.hora_inicio, '%H:%i') <= '10:00';
 
 
 -- 6b. BONUS: la anterior consulta de 2 formas diferentes 
-select * from lineas
-where TIMEDIFF(hora_inicio,"10:00:00") <= 0;
+
+-- CAST
+select l.* from lineas l
+where l.hora_inicio <= CAST('10:00:00' AS time);
+
+--  HOUR() + MINUTE()
+select l.* from lineas l
+where HOUR(l.hora_inicio) < 10
+or (HOUR(l.hora_inicio) = 10 and MINUTE(l.hora_inicio) = 0);
 
 
 -- 7. lineas que pasan por la parada "rua galicia 1" y empiecen a circular como muy tarde a las 10:00
 select * from lineas l ,itinerario i,paradas p
 where l.id = i.id_linea and p.id = i.id_parada and p.nombre= "rua galicia 1" and l.hora_inicio <= time("10:00:00");
 
+select l.* from lineas l, itinerario i 
+where i.id_linea = l.id and i.id_parada in (
+	select id from paradas where nombre = "rua galicia 1"
+)
+and TIME_FORMAT(l.hora_inicio, '%H:%i') <= '10:00';
+
 
 -- 8. lista de paradas que recorre el señor arsenio iglesias
-select distinct p.nombre from conductores c,paradas p,itinerario i
-where p.id = i.id_parada and c.nombre = "arsenio" and c.apellidos ="iglesias" ;
+select distinct p.* from paradas p, conductores_asignados a, itinerario i
+where i.id_parada = p.id and i.id_linea in (
+	select id_linea from conductores_asignados where id_conductor in (
+		select id from conductores where nombre = 'arsenio' and apellidos = 'iglesias')
+        );
 
 
 -- 9. buses que pasan por "avda de la coruña 1"
-select b.* from buses b,paradas p
-where  p.nombre ="avda de la coruña 1";
+
+
+select b.* from buses b, conductores_asignados a
+where b.id = a.id_bus and a.id_linea in (
+	select l.id from lineas l, itinerario i 
+    where i.id_linea = l.id and i.id_parada in (
+		select id from paradas where nombre = 'avda de la coruña 1'
+    )
+);
 
 
 -- 10. información de la líneas y el número de paradas de cada una
@@ -167,39 +192,26 @@ group by id_linea;
 
 -- 11b. la anterior pero de otra forma 
 
-create view NumeroDeParadas as 
-select count(id_parada) as num_paradas from itinerario 
-	group by id_linea; 
-    
-select * from NumeroDeParadas;-- consulta que muestra el numero de paradas agrupadas por linea
-
-
-select max(NumeroDeParadas.num_paradas) from NumeroDeParadas; -- obtenermos el numero maximo de paradas
-	 
- 
-create view MaxParadas as
-select count(id_parada) as num_paradas, l.* from itinerario i inner join lineas l
-	on i.id_linea = l.id 
-	group by id_linea
-    having num_paradas = (
-		select max(NumeroDeParadas.num_paradas) from NumeroDeParadas); 
-        
-        
-select * from MaxParadas; -- obtenemos la info de la linea con mayor num_parada 
-
-
+select l.*, count(i.id_parada) as num_paradas from lineas l, itinerario i
+where l.id = i.id_linea
+group by i.id_linea
+having count(i.id_parada) = (
+	SELECT MAX(num_paradas) FROM (
+		select count(i.id_parada) as num_paradas from itinerario i group by i.id_linea
+	) as paradas_largas
+);
 
 -- 12. información conductor con el itinerario más largo
-select c.* from conductores_asignados a inner join conductores c
-on a.id_conductor = c.id 
-where id_linea = (
-	select MaxParadas.id from MaxParadas);
-    
-
-
-
-
-
+select c.* from conductores c, conductores_asignados a
+where c.id = a.id_conductor and a.id_linea in (
+	select i.id_linea from itinerario i
+	group by i.id_linea
+	having count(i.id_parada) = (
+		SELECT MAX(num_paradas) FROM (
+			select count(i.id_parada) as num_paradas from itinerario i group by i.id_linea
+		) as paradas_largas
+	)
+);
   
    
 
