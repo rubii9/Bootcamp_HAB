@@ -167,9 +167,44 @@ from horario h, usuario p, aula a, grupo g,asignatura ag
 where p.profesor=1;
 
 -- 2. listado de horarios del lunes para el grupo con nombre 'grupo1'
+
+select h.* from horario h
+where h.grupo_id in (
+	select id from grupo g
+    where g.nombre = "grupo1") and h.dia_semana = "l";
+
+
 -- 3. listado de horarios de jueves y viernes para 'jose mato'
+
+select h.* from horario h 
+where h.profesor_id in (
+	select id from usuario 
+	where nombre = "jose" and apellidos = "mato" and profesor = 1) and h.dia_semana in ("j","v");
+
 -- 4. listado de asignaturas q imparte cada profesor con el nombre 
 -- y apellidos del profesor y nombre de la asignatura
+
+select a.nombre,u.nombre,u.apellidos from asignatura a, usuario u, asignaturas_profesores ap
+where a.id = ap.asignatura_id and u.id =ap.profesor_id;
+
+
+
 -- 5. listado asignaturas del módulo 'desarrolo apps 1'
+
+select a.* from asignatura a, asignaturas_modulos am
+where a.id=am.asignatura_id and am.modulo_id in (
+	select id from modulo 
+    where nombre = "desarrolo apps 1");
+
 -- 6. listado de alumnos del grupo 'grupo1'
+
+select * from usuario 
+where grupo_id in (
+	select id from grupo 
+    where nombre = "grupo1");
+
 -- 7. listado de todos los alumnos
+
+
+select * from usuario
+where profesor = false;
