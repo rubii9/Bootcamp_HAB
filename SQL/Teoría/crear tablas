@@ -24,3 +24,9 @@ create table assignments (
 insert into project(name, init_date) values('app videoclub', CURRENT_DATE());
 insert into project values(0, 'app gestion tienda informatica', DATE_SUB(CURRENT_DATE(), INTERVAL 10 DAY), null);
 insert into project values(null, 'web catalogo peliculas', CURRENT_DATE(), null);
+
+
+#FK despues de crear tabla 
+alter table modulo
+add constraint FK_modulo_delegado
+foreign key (num_expediente_delegado) references alumno (num_expediente)
