@@ -1,0 +1,22 @@
+{
+  "name": "vaca-parlanchina",
+  "version": "0.0.1",
+  "description": "Programa que imprime en la consola una vaca que habla",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "saluda": "cowsay ola amigas!!!",
+    "insulta": "cowsay ola gelipollas!!!"
+  },
+  "author": "Berto Yáñez",
+  "license": "ISC",
+  "dependencies": {
+    "cowsay": "^1.4.0",
+    "dotenv": "^8.2.0",
+    "minimist": "^1.2.5",
+    "sharp": "^0.25.2"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0"
+  }
+}
