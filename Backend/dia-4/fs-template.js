@@ -1,7 +1,7 @@
 const fs = require("fs").promises;
 const path = require("path");
 
-async function fileInfo(pathName) {
+async function fileInfo(path) {
   try {
   } catch (error) {
     console.error(error);

@@ -25,7 +25,7 @@ async function listDirectoryInfo(pathName) {
 
       //Imprimo tamaño si es un fichero y si no indico que es un directorio
       if (routeInfo.isFile()) {
-        console.log(`El tamaño de ${name} es de ${routeInfo.size} bytes`);
+        console.log(`El tamaño de name ${name} es de ${routeInfo.size} bytes`);
       } else {
         console.log(`${name} es un directorio`);
       }
@@ -39,5 +39,3 @@ async function listDirectoryInfo(pathName) {
 const arguments = argParser(process.argv.slice(2));
 
 listDirectoryInfo(path.resolve(__dirname, arguments.directory));
-
-//node readdir-fs.js --directory=../dia-2

@@ -5,7 +5,7 @@ console.log("Normalize");
 console.log(path.normalize("/home/berto/Documents/../Temp"));
 console.log(path.normalize("/home/berto/Documents/../Temp"));
 
-const path1 = "/home//berto/";
+const path1 = "/home////berto/";
 const path2 = "//../documents/./Temp";
 
 const pathunido = path1 + path2;

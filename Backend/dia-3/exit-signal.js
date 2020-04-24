@@ -1,4 +1,5 @@
 let count = 0;
+
 setInterval(() => console.log(++count), 500);
 
 process.on("SIGINT", function () {
