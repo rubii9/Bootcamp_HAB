@@ -1,8 +1,7 @@
 const fs = require("fs-extra");
-const path = require("path");
 const minimist = require("minimist");
-const dateFns = require("date-fns");
 const { format } = require("date-fns");
+const { es } = require("date-fns/locale");
 const chalk = require("chalk");
 
 const todoPath = "./.tasks.json";
@@ -28,10 +27,13 @@ async function comprobarLista() {
 
 //Crear el mensaje
 async function buildMessage() {
-  let text = _.join(" ");
-  let added = new Date();
-  let done = false;
-  let message = { text, added, priority, done };
+  const text = _.join(" ");
+  const date = new Date();
+  const added = format(date, "d 'de' MMMM 'del' yyyy 'a las' H:mm", {
+    locale: es,
+  });
+  const done = false;
+  const message = { text, added, priority, done };
 
   await buildArray(message);
 }
@@ -41,28 +43,19 @@ async function buildArray(message) {
   let listaTareas = await comprobarLista();
   listaTareas.tasks.push(message);
   fs.writeFile(todoPath, JSON.stringify(listaTareas));
-  for (const tarea of listaTareas.tasks) {
-    console.log(chalk`
-    {blue.bold Nombre:} ${chalk.yellow.bold(tarea.text)}
-    {blue.bold Prioridad:} {magenta ${
-      tarea.priority === undefined
-        ? chalk.greenBright("normal")
-        : chalk.bold.redBright.underline("alta")
-    }}
-    {blue.bold Estado:}  ${
-      tarea.done === true
-        ? chalk.greenBright("completada")
-        : chalk.bold.magentaBright("pendiente")
-    }
-    {blue.bold Añadida:} {magenta ${tarea.added}}
-    `);
-  }
+  console.log(chalk`
+    {blue.bold Tarea añadida correctamente} `);
 }
 
 //Mostrar las tareas
 async function showList() {
   let listaTareas = await comprobarLista();
 
+  if (listaTareas.tasks.length < 1) {
+    console.log(chalk`
+    {blue.bold No hay ninguna tarea} `);
+  }
+
   for (const tarea of listaTareas.tasks) {
     console.log(chalk`
     {blue.bold Nombre:} ${chalk.yellow.bold(tarea.text)}
@@ -73,7 +66,7 @@ async function showList() {
     }}
     {blue.bold Estado:}  ${
       tarea.done === true
-        ? chalk.greenBright("completada")
+        ? chalk.greenBright("completada ✔️")
         : chalk.bold.magentaBright("pendiente")
     }
     {blue.bold Añadida:} {magenta ${tarea.added}}
@@ -88,30 +81,25 @@ async function makeDone(index, value) {
   fs.writeFile(todoPath, JSON.stringify(listaActualizada));
   console.log(chalk`
     {blue.bold Nombre:} ${chalk.yellow.bold(listaActualizada.tasks[index].text)}
-    {blue.bold Prioridad:} {magenta ${
-      listaActualizada.tasks[index].priority === undefined
-        ? chalk.greenBright("normal")
-        : chalk.bold.redBright.underline("alta")
-    }}
     {blue.bold Estado:}  ${
       listaActualizada.tasks[index].done === true
-        ? chalk.greenBright("completada")
+        ? chalk.greenBright("completada ✔️")
         : chalk.bold.magentaBright("pendiente")
     }
-    {blue.bold Añadida:} {magenta ${listaActualizada.tasks[index].added}}
     `);
 }
 
 //Borrar tareas completadas
 async function cleanDoneList() {
   let listaActualizada = await comprobarLista();
-  for (let i = 0; i < listaActualizada.tasks.length; i++) {
+  for (let i = listaActualizada.tasks.length - 1; i > -1; i--) {
     if (listaActualizada.tasks[i].done) {
       listaActualizada.tasks.splice(i, 1);
     }
   }
   fs.writeFile(todoPath, JSON.stringify(listaActualizada));
-  console.log("Borradas las tareas completadas!");
+  console.log(chalk`
+    {blue.bold Se han eliminado las tareas completadas} `);
 }
 
 if (list) {
@@ -122,6 +110,6 @@ if (list) {
   makeDone(undone, false);
 } else if (clean) {
   cleanDoneList();
-} else {
+} else if (_.length > 1) {
   buildMessage();
 }
