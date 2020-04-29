@@ -26,7 +26,7 @@ server.on("request", async function (request, response) {
       if (method.toUpperCase() === "GET" && url === "/freedom") {
         let distance = formatDistance(
           new Date(),
-          new Date(2020, 5, 31, 0, 0, 0, 0),
+          new Date(2020, 5, 30, 0, 0, 0, 0),
           {
             locale: es,
           }
