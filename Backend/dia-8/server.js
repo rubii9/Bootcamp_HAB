@@ -35,12 +35,6 @@ server.on("request", async function (request, response) {
 
       const query = urlParser.parse(url, true).query;
 
-      // Devolvemos toda la información que recogimos: url, method, headers, query, body
-      // response.statusCode = 200;
-      // response.setHeader("Content-Type", "application/json");
-
-      // response.end(JSON.stringify({ url, method, headers, query, body }));
-
       /*
         / y /index.html - devuelve un html
         /js/main.js - devuelve un script
@@ -81,13 +75,36 @@ server.on("request", async function (request, response) {
 
         response.end(data);
       } else if (method.toUpperCase() === "POST" && url === "/data") {
-        //guarda el body de la request en la lista de mensajes
-        /*
-          {
-            email: "email@server.com",
-            message: "lorem ipsum dolor sit amet"
-          }
-        */
+        //en la variable body está el body de la petición que parseamos
+        //en las líneas 25 a 33
+        const newMessage = JSON.parse(body);
+
+        //Leo la lista actual de mensajes (devuelve un string)
+        const currentMessagesData = await fs.readFile(
+          path.join(__dirname, "guestbook.json"),
+          "utf-8"
+        );
+
+        //convierto el string anterior a un objeto con JSON.parse
+        const currentMessagesList = JSON.parse(currentMessagesData);
+
+        //creo un nuevo objeto similar pero que contiene el mensaje recibido al principio de la lista
+        const updatedMessageList = {
+          messages: [newMessage, ...currentMessagesList.messages],
+        };
+
+        //escribo ese objeto a disco en el fichero guestbook.json
+        await fs.writeFile(
+          path.join(__dirname, "guestbook.json"),
+          JSON.stringify(updatedMessageList)
+        );
+
+        //Inicio la respuesta
+        response.statusCode = 200;
+        response.setHeader("Content-type", "application/json");
+
+        //En la respuesta muestro todos los mensajes que hay en el fichero
+        response.end(JSON.stringify(updatedMessageList));
       } else {
         //responde con un error 404
         response.statusCode = 404;
