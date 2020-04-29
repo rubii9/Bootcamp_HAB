@@ -13,19 +13,31 @@
     <h1>Formulario de visitas</h1>
   </header>
 
-  <form action="http://localhost:3000/data" method="POST" enctype="multipart/form-data">
-    <fieldset>
-      <label for="message">Mensaje</label>
-      <input type="text" name="message" id="message" />
-    </fieldset>
+  <section>
+    <h2>Envía tu mensaje</h2>
+    <form id="newmessage" action="http://localhost:3000/data">
+      <fieldset>
+        <label for="message">Mensaje</label>
+        <input type="text" name="message" id="message" required />
+      </fieldset>
 
-    <fieldset>
-      <label for="email">Email</label>
-      <input type="email" name="email" id="email" />
-    </fieldset>
+      <fieldset>
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" required />
+      </fieldset>
 
-    <button>Enviar</button>
-  </form>
+      <button>Enviar</button>
+    </form>
+  </section>
+
+  <section>
+    <h2>Lista de mensajes</h2>
+
+    <ul id="messagelist">
+
+    </ul>
+  </section>
+
 
   <script type="module" src="/js/main.js"></script>
 

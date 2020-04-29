@@ -79,6 +79,13 @@ server.on("request", async function (request, response) {
         //en las líneas 25 a 33
         const newMessage = JSON.parse(body);
 
+        //En caso de que la petición no tenga el formato adecuado
+        //mando de vuelta un error y retorno para que no se siga ejecutando.
+        if (!newMessage.email || !newMessage.message) {
+          response.statusCode = 400;
+          return response.end("La peticion es incorrecta");
+        }
+
         //Leo la lista actual de mensajes (devuelve un string)
         const currentMessagesData = await fs.readFile(
           path.join(__dirname, "guestbook.json"),
