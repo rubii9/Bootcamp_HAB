@@ -14,14 +14,14 @@ app.get("/names", (req, res) => {
         hombres.push(name);
       }
     }
-    res.send(hombres);
+    return res.send(hombres);
   } else if (gender === "F") {
     for (const name of names) {
       if (name.gender === "F") {
         mujeres.push(name);
       }
     }
-    res.send(mujeres);
+    return res.send(mujeres);
   }
 
   res.send(names);
