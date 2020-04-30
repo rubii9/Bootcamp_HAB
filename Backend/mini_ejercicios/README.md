@@ -16,3 +16,19 @@ Hacer un servidor web usando el módulo http de node de forma que cuando pongái
 }
 
 (asumimos arbitrariamente que el final de la cuarentena es el martes 30 de junio de 2020)
+
+
+## Ejercicio 3
+
+aquí tenéis un json grande con una lista de nombre de persona gallegos: https://raw.githubusercontent.com/bertez/corpora/master/names/names.json
+teneis que hacer un servidor web en express que responda a las seguintes urls:
+
+a) http://localhost:3000/names -> devuelve al navegador una respuesta tipo json con la lista completa de nombres
+b) http://localhost:3000/names?gender=F -> devuelve al navegador sólo los nombres de mujer
+c) http://localhost:3000/names?gender=M -> devuelve al nav sólo los nombres de hombre
+d) http://localhost:3000/random -> devuelve un nombre aleatorio de la lista
+
+
+Podéis usar require para cargar el json: const names = require('./names.json');
+
+
