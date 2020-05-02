@@ -41,7 +41,7 @@ Crear un programa de node que muestre en la consola el contenido de los ficheros
 Medidor de memoria
 Hacer un programa en node que cuando lo ejecutes te ponga el % de memoria RAM libre que tienes disponible en el ordenador.
 
-##Ejercicio 6
+## Ejercicio 6
 
 Servidor web regular
 Hacer un servidor web que responda a la url / con un texto que ponga "Hola" pero sólo por la mañana, el resto del día debería devolver una página de error 404.
