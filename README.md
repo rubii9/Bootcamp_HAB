@@ -1,5 +1,5 @@
 # Bootcamp_HAB
-Ejercicos como programador Full-Stack
+Ejercicios como programador Full-Stack
 
 ## Modulos
 
