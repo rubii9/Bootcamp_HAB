@@ -31,4 +31,17 @@ d) http://localhost:3000/random -> devuelve un nombre aleatorio de la lista
 
 Podéis usar require para cargar el json: const names = require('./names.json');
 
+## Ejercicio 4
 
+Show me the files!!
+Crear un programa de node que muestre en la consola el contenido de los ficheros que se pasen por línea de comandos pero sólo si son menos de 10Kb. node showfiles.js fichero1.txt ../files/fichero2.css
+
+## Ejercicio 5
+
+Medidor de memoria
+Hacer un programa en node que cuando lo ejecutes te ponga el % de memoria RAM libre que tienes disponible en el ordenador.
+
+##Ejercicio 6
+
+Servidor web regular
+Hacer un servidor web que responda a la url / con un texto que ponga "Hola" pero sólo por la mañana, el resto del día debería devolver una página de error 404.
