@@ -1,6 +1,11 @@
 const { getDB } = require('../db');
-const { formatDateToDB, processAndSavePhoto } = require('../helpers');
+const {
+  formatDateToDB,
+  processAndSavePhoto,
+  deletePhoto
+} = require('../helpers');
 
+// GET - /entries
 async function listEntries(req, res, next) {
   try {
     const db = await getDB();
@@ -18,6 +23,7 @@ async function listEntries(req, res, next) {
   }
 }
 
+// POST - /entries
 async function newEntry(req, res, next) {
   //Meterlos en la base de datos
   try {
@@ -34,7 +40,15 @@ async function newEntry(req, res, next) {
     let savedFileName;
 
     if (req.files && req.files.photo) {
-      savedFileName = await processAndSavePhoto(req.files.photo);
+      try {
+        savedFileName = await processAndSavePhoto(req.files.photo);
+      } catch (error) {
+        const imageError = new Error(
+          'Can not process upload image. Try again.'
+        );
+        imageError.httpCode = 400;
+        throw imageError;
+      }
     }
 
     const db = await getDB();
@@ -66,6 +80,71 @@ async function newEntry(req, res, next) {
   }
 }
 
+// PUT - /entries/:id
+async function editEntry(req, res, next) {
+  try {
+    const { place, description } = req.body;
+    const { id } = req.params;
+
+    if (!place || !description) {
+      const error = new Error(
+        'Required fields place or description are missing'
+      );
+      error.httpCode = 400;
+      throw error;
+    }
+
+    const db = await getDB();
+
+    const current = await db.get('SELECT image FROM diary WHERE id=:id', {
+      ':id': id
+    });
+
+    let savedFileName;
+
+    if (req.files && req.files.photo) {
+      try {
+        savedFileName = await processAndSavePhoto(req.files.photo);
+
+        if (current && current.image) {
+          await deletePhoto(current.image);
+        }
+      } catch (error) {
+        const imageError = new Error(
+          'Can not process upload image. Try again.'
+        );
+        imageError.httpCode = 400;
+        throw imageError;
+      }
+    } else {
+      savedFileName = current.image;
+    }
+
+    await db.run(
+      'UPDATE diary SET place=:place, description=:description, image=:image WHERE id=:id',
+      {
+        ':place': place,
+        ':description': description,
+        ':image': savedFileName,
+        ':id': id
+      }
+    );
+
+    res.send({
+      status: 'ok',
+      data: {
+        id,
+        place,
+        description,
+        image: savedFileName
+      }
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+// GET - /entries/:id
 async function getEntry(req, res, next) {
   try {
     const { id } = req.params;
@@ -91,11 +170,21 @@ async function getEntry(req, res, next) {
   }
 }
 
+// DELETE - /entries/:id
 async function deleteEntry(req, res, next) {
   try {
     const { id } = req.params;
 
     const db = await getDB();
+
+    // Delete image if exists!
+    const current = await db.get('SELECT image from diary where id=:id', {
+      ':id': id
+    });
+
+    if (current && current.image) {
+      await deletePhoto(current.image);
+    }
 
     const result = await db.run('DELETE from diary WHERE id=:id', {
       ':id': id
@@ -120,5 +209,6 @@ module.exports = {
   listEntries,
   newEntry,
   getEntry,
-  deleteEntry
+  deleteEntry,
+  editEntry
 };

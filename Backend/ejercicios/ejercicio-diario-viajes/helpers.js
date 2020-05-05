@@ -36,7 +36,12 @@ async function processAndSavePhoto(uploadedImage) {
   return savedFileName;
 }
 
+async function deletePhoto(imagePath) {
+  await fs.unlink(path.join(imageUploadPath, imagePath));
+}
+
 module.exports = {
   formatDateToDB,
-  processAndSavePhoto
+  processAndSavePhoto,
+  deletePhoto
 };

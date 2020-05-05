@@ -14,8 +14,9 @@ const {
   listEntries,
   newEntry,
   getEntry,
-  deleteEntry
-} = require('./controllers');
+  deleteEntry,
+  editEntry
+} = require('./controllers/diary');
 
 // Console logger middleware
 app.use(morgan('dev'));
@@ -31,6 +32,7 @@ app.get('/entries', listEntries);
 app.post('/entries', newEntry);
 
 app.get('/entries/:id', getEntry);
+app.put('/entries/:id', editEntry);
 app.delete('/entries/:id', deleteEntry);
 
 // Error middleware

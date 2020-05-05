@@ -1,5 +1,4 @@
 const { getDB, resetDB } = require('./db');
-const { formatDateToDB } = require('./helpers');
 
 async function main() {
   // Delete db if exists
@@ -24,20 +23,7 @@ async function main() {
     )
   `);
 
-  // Add example initial data
-  await db.exec(`
-    INSERT INTO diary (date, description, place, image) 
-    VALUES ("${formatDateToDB(
-      new Date()
-    )}", "Bonito sitio", "A Coruña", "coruna.jpg")
-  `);
-
-  await db.exec(`
-    INSERT INTO diary (date, description, place) 
-    VALUES ("${formatDateToDB(new Date())}", "Otra visita muy guai", "O Vicedo")
-  `);
-
-  console.log('Initial data created');
+  console.log('Initial structure created');
 
   await db.close();
 }
