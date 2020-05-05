@@ -4,12 +4,18 @@ const express = require('express');
 
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const fileUpload = require('express-fileupload');
 
 const app = express();
 const port = process.env.PORT;
 
 // Controllers
-const { listEntries, newEntry, deleteEntry } = require('./controllers');
+const {
+  listEntries,
+  newEntry,
+  getEntry,
+  deleteEntry
+} = require('./controllers');
 
 // Console logger middleware
 app.use(morgan('dev'));
@@ -17,9 +23,14 @@ app.use(morgan('dev'));
 // Body parsing middleware
 app.use(bodyParser.json());
 
+// Multipart parsing middleware
+app.use(fileUpload());
+
 // Routes
 app.get('/entries', listEntries);
 app.post('/entries', newEntry);
+
+app.get('/entries/:id', getEntry);
 app.delete('/entries/:id', deleteEntry);
 
 // Error middleware

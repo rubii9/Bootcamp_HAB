@@ -17,9 +17,9 @@ async function main() {
   await db.exec(`
     CREATE TABLE diary (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      date DATETIME,
-      description TEXT,
-      place TEXT,
+      date DATETIME NOT NULL,
+      description TEXT NOT NULL,
+      place TEXT NOT NULL,
       image TEXT
     )
   `);
@@ -33,10 +33,8 @@ async function main() {
   `);
 
   await db.exec(`
-    INSERT INTO diary (date, description, place, image) 
-    VALUES ("${formatDateToDB(
-      new Date()
-    )}", "Otra visita muy guai", "O Vicedo", "vicedo.png")
+    INSERT INTO diary (date, description, place) 
+    VALUES ("${formatDateToDB(new Date())}", "Otra visita muy guai", "O Vicedo")
   `);
 
   console.log('Initial data created');
