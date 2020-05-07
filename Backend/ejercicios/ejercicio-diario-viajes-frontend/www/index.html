@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diario de viajes</title>
+
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+
+<body>
+
+  <header>
+    <h1>Diario de viajes</h1>
+    <form id="entry-new">
+      <fieldset>
+        <label for="description">Description</label>
+        <textarea name="description" id="description" required></textarea>
+        <p>Requerido</p>
+      </fieldset>
+      <fieldset>
+        <label for="place">Place</label>
+        <input type="text" name="place" id="place" required />
+        <p>Requerido</p>
+      </fieldset>
+      <fieldset>
+        <label for="photo">Photo</label>
+        <input type="file" name="photo" id="photo" />
+      </fieldset>
+
+      <button>Enviar</button>
+    </form>
+  </header>
+
+  <section>
+    <h2>Entradas</h2>
+
+    <form>
+      <fieldset>
+        <label for="search">Buscar</label>
+        <input type="search" name="search" id="entry-search">
+      </fieldset>
+
+      <ul id="entry-list">
+
+      </ul>
+    </form>
+
+  </section>
+
+  <script type="module" src="/js/main.js"></script>
+
+</body>
+
+</html>
