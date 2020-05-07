@@ -5,7 +5,6 @@ const sharp = require('sharp');
 const path = require('path');
 const fs = require('fs-extra');
 const uuid = require('uuid');
-const { getDB } = require('./db');
 
 const imageUploadPath = path.join(__dirname, process.env.UPLOADS_DIR);
 

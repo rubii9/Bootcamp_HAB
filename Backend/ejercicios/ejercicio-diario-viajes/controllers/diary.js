@@ -14,9 +14,10 @@ async function listEntries(req, res, next) {
     const db = await getDB();
 
     const entries = await db.all(
-      `SELECT diary.*, v.voteAverage FROM diary, 
-      (SELECT entry_id, AVG(vote) as voteAverage FROM diary_votes GROUP BY entry_id) AS v
-      WHERE diary.id=v.entry_id ORDER BY date DESC`
+      `SELECT diary.*, 
+      (SELECT AVG(vote) FROM diary_votes WHERE entry_id=diary.id) AS voteAverage
+      FROM diary
+      ORDER BY diary.date DESC`
     );
 
     res.send({
