@@ -9,13 +9,13 @@
 
 ## Módulos externos de node útiles
 
-Como vimos estos últimos días, aparte de las características nativas de JavaScript, Node dispone de unos _core modules_ que son potentes pero bastante limitados. Esto está complementado con un ecosistema de módulos de terceros muy amplio y diverso. En la gran mayoría de nuestros proyectos usaremos estes módulos externos instalables mediante _npm_. Usar estos módulos externos no es obligatorio y practicamente cualquier proyecto podrémos realizarlo usando sólo JavaScript puro y los _core modules_ pero veremos como muchos de estos módulos nos ayudan nucho en nuestras tareas.
+Como vimos estos últimos días, aparte de las características nativas de JavaScript, Node dispone de unos _core modules_ que son potentes pero bastante limitados. Esto está complementado con un ecosistema de módulos de terceros muy amplio y diverso. En la gran mayoría de nuestros proyectos usaremos estes módulos externos instalables mediante _npm_. Usar estos módulos externos no es obligatorio y prácticamente cualquier proyecto podremos realizarlo usando sólo JavaScript puro y los _core modules_ pero veremos como muchos de estos módulos nos ayudan mucho en nuestras tareas.
 
-Ya vimos algún módulo exteno útil como _dotenv_, _minimist_ o _nodemon_. En este documento veremos algun módulo exerno especialmente útil que nos ayudará en futuros proyectos.
+Ya vimos algún módulo externo útil como _dotenv_, _minimist_ o _nodemon_. En este documento veremos algún módulo externo especialmente útil que nos ayudará en futuros proyectos.
 
 ## Fechas en JavaScript
 
-Manejar fechas es una de las tareas más habituales en el desarrollo de backend. JavaScript soporta un manejo básico de fechas que aúnque bastante potente es limitado a la hora de hacer determinados cálculos.
+Manejar fechas es una de las tareas más habituales en el desarrollo de backend. JavaScript soporta un manejo básico de fechas que aún que bastante potente es limitado a la hora de hacer determinados cálculos.
 
 Para conseguir la fecha actual en JS usamos el constructor de la clase `Date`:
 
@@ -297,7 +297,7 @@ async function process(image) {
 process("./foto.jpg");
 ```
 
-Este ejemplo colocará la imágen _logo.png_ sobre _foto.jpg_ y guardará el resultado como _foto.png_.
+Este ejemplo colocará la imagen _logo.png_ sobre _foto.jpg_ y guardará el resultado como _foto.png_.
 
 ### Otras modificaciones
 

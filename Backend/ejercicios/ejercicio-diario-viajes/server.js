@@ -15,7 +15,9 @@ const {
   newEntry,
   getEntry,
   deleteEntry,
-  editEntry
+  editEntry,
+  voteEntry,
+  getEntryVotes
 } = require('./controllers/diary');
 
 // Console logger middleware
@@ -32,6 +34,8 @@ app.get('/entries', listEntries);
 app.post('/entries', newEntry);
 
 app.get('/entries/:id', getEntry);
+app.get('/entries/:id/votes', getEntryVotes);
+app.post('/entries/:id/votes', voteEntry);
 app.put('/entries/:id', editEntry);
 app.delete('/entries/:id', deleteEntry);
 

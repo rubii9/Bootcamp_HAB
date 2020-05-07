@@ -155,7 +155,7 @@ Normalmente se usan querystrings para crear URLs que sean facilmente compartible
 
 El texto que se manda en los querystrings está formateado con [URL encoding](https://en.wikipedia.org/wiki/Percent-encoding) que transforma determinados caracteres en otros para hacerlos seguros para urls (por ejemplo, los espacios).
 
-En node procesaremos estos querystrings con el core module `querystring`.
+En node procesaremos estos querystrings con el core module `querystringwww`.
 
 ### POST
 
@@ -260,7 +260,7 @@ server.listen(3000);
 Basicamente cada vez que una petición HTTP llegue al servidor se va a ejecutar la función indicada a la que automáticamente Node le va a pasar dos parámetros con los que tenemos que trabajar:
 
 - `request`: objeto con información sobre la **request**
-- `response`: objeto con información sobre la **response** que vamos a envíar (incialmente vacía, pero la llenaremos de cosas antes de enviarla)
+- `response`: objeto con información sobre la **response** que vamos a enviar (incialmente vacía, pero la llenaremos de cosas antes de enviarla)
 
 Del objeto request vamos a sacar toda la información de la petición. Como vimos antes las partes más importantes de una petición definen los siguientes aspectos:
 

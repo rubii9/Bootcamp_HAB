@@ -184,7 +184,7 @@ Cada vez que lanzamos un proceso de node podemos acceder a información y otras 
 
 ### Eventos
 
-Podemos usar `process` para asignar eventos al proceso que se está ejecutando, por ejemplo, si queremos hacer algo antes de que el proceso de node se pare (mediante Control+X, usando `kill` o de cualquier otro modo) podemos asignar una función que se ejecute justo antes de parar:
+Podemos usar `process` para asignar eventos al proceso que se está ejecutando, por ejemplo, si queremos hacer algo antes de que el proceso de node se pare (mediante Control+C, usando `kill` o de cualquier otro modo) podemos asignar una función que se ejecute justo antes de parar:
 
 ```js
 process.on('exit', function () {

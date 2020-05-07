@@ -1,9 +1,12 @@
 const { getDB } = require('../db');
+
 const {
   formatDateToDB,
   processAndSavePhoto,
   deletePhoto
 } = require('../helpers');
+
+const { entrySchema, voteSchema } = require('../validations');
 
 // GET - /entries
 async function listEntries(req, res, next) {
@@ -11,7 +14,9 @@ async function listEntries(req, res, next) {
     const db = await getDB();
 
     const entries = await db.all(
-      `SELECT id, date, description, place, image from diary ORDER BY date DESC`
+      `SELECT diary.*, v.voteAverage FROM diary, 
+      (SELECT entry_id, AVG(vote) as voteAverage FROM diary_votes GROUP BY entry_id) AS v
+      WHERE diary.id=v.entry_id ORDER BY date DESC`
     );
 
     res.send({
@@ -27,6 +32,8 @@ async function listEntries(req, res, next) {
 async function newEntry(req, res, next) {
   //Meterlos en la base de datos
   try {
+    await entrySchema.validateAsync(req.body);
+
     const { place, description } = req.body;
 
     if (!place || !description) {
@@ -85,6 +92,8 @@ async function editEntry(req, res, next) {
   try {
     const { place, description } = req.body;
     const { id } = req.params;
+
+    await entrySchema.validateAsync(req.body);
 
     if (!place || !description) {
       const error = new Error(
@@ -151,9 +160,15 @@ async function getEntry(req, res, next) {
 
     const db = await getDB();
 
-    const result = await db.get('SELECT * FROM diary WHERE id=:id', {
-      ':id': id
-    });
+    const result = await db.get(
+      `SELECT entries.*, AVG(votes.vote) AS voteAverage 
+      FROM diary AS entries, diary_votes AS votes 
+      WHERE entries.id=:id 
+      AND votes.entry_id=:id`,
+      {
+        ':id': id
+      }
+    );
 
     if (!result) {
       const error = new Error(`The entry with id ${id} does not exist`);
@@ -182,23 +197,103 @@ async function deleteEntry(req, res, next) {
       ':id': id
     });
 
-    if (current && current.image) {
-      await deletePhoto(current.image);
-    }
-
-    const result = await db.run('DELETE from diary WHERE id=:id', {
-      ':id': id
-    });
-
-    if (result.changes === 0) {
+    if (!current) {
       const error = new Error(`There is no entry with id ${id}`);
       error.httpCode = 400;
       throw error;
     }
 
+    if (current.image) {
+      await deletePhoto(current.image);
+    }
+
+    await db.run('DELETE from diary WHERE id=:id', {
+      ':id': id
+    });
+
     res.send({
       status: 'ok',
       message: `The entry with id ${id} has been deleted`
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+async function voteEntry(req, res, next) {
+  try {
+    const { id } = req.params;
+
+    // Validate payload
+    await voteSchema.validateAsync(req.body);
+
+    const { vote } = req.body;
+
+    const db = await getDB();
+
+    // Check if the entry actually exists
+    const entry = await db.get('SELECT id from diary where id=:id', {
+      ':id': id
+    });
+
+    if (!entry) {
+      const error = new Error('La entrada con la id específicada no existe');
+      error.httpCode = 404;
+      throw error;
+    }
+
+    // Check if the user with the current ip already voted for this entry
+    const existingVote = await db.get(
+      'SELECT id from diary_votes where entry_id=:id AND ip=:ip',
+      {
+        ':ip': req.ip,
+        ':id': id
+      }
+    );
+
+    if (existingVote) {
+      const error = new Error('Ya se votó a esta entrada con tu ip');
+      error.httpCode = 403;
+      throw error;
+    }
+
+    //Vote
+    await db.run(
+      `
+      INSERT INTO diary_votes(entry_id, vote, date, ip) 
+      VALUES(:entry_id, :vote, :date, :ip)`,
+      {
+        ':entry_id': id,
+        ':vote': vote,
+        ':date': formatDateToDB(new Date()),
+        ':ip': req.ip
+      }
+    );
+
+    res.send({
+      status: 'ok',
+      message: `The vote (${vote} points) to the entry with id ${id} was successful`
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+async function getEntryVotes(req, res, next) {
+  try {
+    const { id } = req.params;
+    const db = await getDB();
+
+    const votes = await db.all(
+      'SELECT * from diary_votes WHERE entry_id=:entry_id',
+      {
+        ':entry_id': id
+      }
+    );
+
+    res.send({
+      status: 'ok',
+      data: votes
     });
   } catch (error) {
     next(error);
@@ -210,5 +305,7 @@ module.exports = {
   newEntry,
   getEntry,
   deleteEntry,
-  editEntry
+  editEntry,
+  voteEntry,
+  getEntryVotes
 };

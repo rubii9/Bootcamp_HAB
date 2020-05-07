@@ -23,6 +23,16 @@ async function main() {
     )
   `);
 
+  await db.exec(`
+    CREATE TABLE diary_votes (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      entry_id INTEGER NOT NULL,
+      vote INTEGER NOT NULL,
+      date DATETIME NOT NULL,
+      ip TEXT NOT NULL
+    )
+  `);
+
   console.log('Initial structure created');
 
   await db.close();

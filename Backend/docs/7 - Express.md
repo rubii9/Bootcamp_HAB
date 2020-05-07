@@ -149,11 +149,46 @@ app.use(function(request, response) {
 app.listen(3000);
 ```
 
-Veremos más sobre rutas en las siguientes lecciones.
+#### Parámetros de rutas
+
+Otra característica importante de las rutas es que se pueden definir rutas variables definiendo parte de las mismas como parámetros, por ejemplo en express se puede definir una ruta así:
+
+`app.get('/news/:year/:month', routeHandlerFunction)`
+
+vemos que dentro de la ruta definimos dos palabras con `:` antes que les vamos a llamar parámetros de ruta: 
+
+- `:year`
+- `:month`
+
+En esta ruta entrarán las peticiones a las urls del tipo (entre otras):
+
+- /news/2020/3
+- /news/2020/abril
+
+En general en cada uno de eses parámetros puede ser sustituído por cualquier cadena.
+
+Para que sirven estos parámetros? Pues son como una querystring más integrada dentro de la ruta y podemos usarlos en la función que maneja la ruta de esta forma:
+
+```js
+app.get('/users/:userId/fotos/:category', (req, res) => {
+	console.log(req.params);
+});
+```
+
+ese `req.params` será un objeto que contendrá los parámetros reales de la url, por ejemplo en ese caso si hacemos una llamada a la url `/users/34/fotos/naturaleza`, el objeto `req.params` será así:
+
+```js
+{
+	userId: '3',
+	category: 'naturaleza'
+}
+```
+
+y podremos usar eses parámetros para dar una respuesta.
 
 ### Request y response
 
-Como dijimos al principio express trabaja sobre el módulo nativo de node http extendiendolo con funcionalidades como middlewares o rutas. En los dos casos nos permite ejecutar una o varias funciones que procesan las peticiones y pueden enviar una respuesta. A todas esas funciones se le pasan dos argumentos que ya conocemos del módulo http: request y response que son dos objetos que representan la petición y la respuesta HTTP.
+Como dijimos al principio express trabaja sobre el módulo nativo de node http extendiéndolo con funcionalidades como middlewares o rutas. En los dos casos nos permite ejecutar una o varias funciones que procesan las peticiones y pueden enviar una respuesta. A todas esas funciones se le pasan dos argumentos que ya conocemos del módulo http: request y response que son dos objetos que representan la petición y la respuesta HTTP.
 
 En los ejemplos anteriores usamos unas propiedades y métodos de eses objetos que ya conocíamos del módulo http: `request.url, request.headers, response.statusCode, response.end, ...`. 
 
