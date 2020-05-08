@@ -17,7 +17,8 @@ async function main() {
       registrationDate DATETIME NOT NULL,
       email VARCHAR(100) UNIQUE NOT NULL,
       password VARCHAR(255) NOT NULL,
-      role ENUM("normal", "admin") DEFAULT "normal" NOT NULL
+      role ENUM("normal", "admin") DEFAULT "normal" NOT NULL,
+      active BOOLEAN DEFAULT true NOT NULL
     )
   `);
 
