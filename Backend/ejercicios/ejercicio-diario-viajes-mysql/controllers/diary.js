@@ -29,10 +29,12 @@ async function listEntries(req, res, next) {
       );
     } else {
       result = await connection.query(
-        `SELECT diary.*, 
-        (SELECT AVG(vote) FROM diary_votes WHERE entry_id=diary.id) AS voteAverage
-        FROM diary
-        ORDER BY diary.date DESC`
+        `SELECT d.*, avg(v.vote)
+        FROM diary d
+        LEFT JOIN diary_votes v
+        ON d.id=v.entry_id
+        GROUP BY id
+        ORDER BY d.date DESC;`
       );
     }
 
