@@ -8,6 +8,10 @@ const fileUpload = require('express-fileupload');
 const cors = require('cors');
 const path = require('path');
 
+const { register, login, info } = require('./controllers/users');
+//const { onlyAdmin, onlyUsers } = require('./controllers/protected');
+const { userAuthenticated, userIsAdmin } = require('./middlewares/auth');
+
 const app = express();
 const port = process.env.PORT;
 
@@ -39,13 +43,26 @@ app.use(express.static(path.join(__dirname, 'static')));
 
 // Routes
 app.get('/entries', listEntries);
-app.post('/entries', newEntry);
 
 app.get('/entries/:id', getEntry);
 app.get('/entries/:id/votes', getEntryVotes);
-app.post('/entries/:id/votes', voteEntry);
-app.put('/entries/:id', editEntry);
-app.delete('/entries/:id', deleteEntry);
+
+app.post('/users', register);
+app.post('/users/login', login);
+
+//need login
+app.post('/entries/:id/votes', userAuthenticated, voteEntry);
+app.get('/users/:id', userAuthenticated, info);
+app.post('/entries', userAuthenticated, newEntry);
+
+//only admin
+app.put('/entries/:id', userAuthenticated, userIsAdmin, editEntry);
+app.delete('/entries/:id', userAuthenticated, userIsAdmin, deleteEntry);
+
+//public
+
+/* app.get('/only-users', userAuthenticated, onlyUsers);
+app.get('/only-admin', userAuthenticated, userIsAdmin, onlyAdmin); */
 
 // Error middleware
 app.use((error, req, res, next) => {

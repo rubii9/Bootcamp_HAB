@@ -1,4 +1,5 @@
 const { getConnection } = require('../db');
+const jwt = require('jsonwebtoken');
 
 const {
   formatDateToDB,
@@ -243,6 +244,15 @@ async function voteEntry(req, res, next) {
 
     const connection = await getConnection();
 
+    // Get authorization header
+    const { authorization } = req.headers;
+
+    // Check if token is valid
+    const decoded = jwt.verify(authorization, process.env.SECRET);
+
+    // Add token payload to request
+    req.auth = decoded;
+
     // Check if the entry actually exists
     const [entry] = await connection.query('SELECT id from diary where id=?', [
       id
@@ -258,8 +268,8 @@ async function voteEntry(req, res, next) {
     const [
       existingVote
     ] = await connection.query(
-      'SELECT id from diary_votes where entry_id=? AND ip=?',
-      [id, req.ip]
+      'SELECT id from diary_votes where entry_id=? AND user_id=?',
+      [id, req.auth.id]
     );
 
     if (existingVote.length) {
@@ -271,9 +281,9 @@ async function voteEntry(req, res, next) {
     //Vote
     await connection.query(
       `
-      INSERT INTO diary_votes(entry_id, vote, date, ip) 
-      VALUES(?, ?, ?, ?)`,
-      [id, vote, formatDateToDB(new Date()), req.ip]
+      INSERT INTO diary_votes(entry_id, vote, date, ip,user_id) 
+      VALUES(?, ?, ?, ?,?)`,
+      [id, vote, formatDateToDB(new Date()), req.ip, req.auth.id]
     );
 
     connection.release();

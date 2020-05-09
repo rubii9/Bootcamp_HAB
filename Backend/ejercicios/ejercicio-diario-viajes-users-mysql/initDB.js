@@ -1,8 +1,9 @@
 const { getConnection } = require('./db');
 const { formatDateToDB } = require('./helpers');
 const faker = require('faker/locale/es');
-
-const { random } = require('lodash');
+require('dotenv').config();
+const bcrypt = require('bcrypt');
+//const { random } = require('lodash');
 
 const args = process.argv;
 
@@ -31,12 +32,30 @@ async function main() {
     CREATE TABLE diary_votes (
       id INTEGER PRIMARY KEY AUTO_INCREMENT,
       entry_id INTEGER NOT NULL,
+      user_id INTEGER NOT NULL,
       vote INTEGER NOT NULL,
       date DATETIME NOT NULL,
       ip TEXT NOT NULL
     )
   `);
+  console.log('Dropping users table');
+  await connection.query(`DROP TABLE IF EXISTS users`);
 
+  console.log('Creating users table');
+
+  await connection.query(`
+    CREATE TABLE users (
+      id INTEGER PRIMARY KEY AUTO_INCREMENT,
+      registrationDate DATETIME NOT NULL,
+      email VARCHAR(100) UNIQUE NOT NULL,
+      password VARCHAR(255) NOT NULL,
+      role ENUM("normal", "admin") DEFAULT "normal" NOT NULL,
+      active BOOLEAN DEFAULT true NOT NULL
+    )
+  `);
+
+  //Hash password before adding to DB <- IMPORTANT!!!!!!!!!111
+  const password = await bcrypt.hash(process.env.DEFAULT_ADMIN_PASSWORD, 10);
   if (addData) {
     console.log('Adding initial data');
     const entries = 10;
@@ -50,7 +69,7 @@ async function main() {
     `);
     }
 
-    const votes = 100;
+    /* const votes = 100;
 
     for (let index = 0; index < votes; index++) {
       await connection.query(`
@@ -59,7 +78,13 @@ async function main() {
         faker.date.recent()
       )}", "${faker.internet.ip()}")
       `);
-    }
+    } */
+
+    console.log('Adding admin user');
+    await connection.query(`
+      INSERT INTO users(registrationDate, email, password, role)
+      VALUES(NOW(), "ruben@gmail.com", "${password}", "admin")
+  `);
   }
 
   console.log('Initial structure created');
