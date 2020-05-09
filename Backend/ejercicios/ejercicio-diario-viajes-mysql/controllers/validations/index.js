@@ -38,17 +38,28 @@ const userSchema = Joi.object().keys({
   email: Joi.string()
     .email()
     .required()
-    .error(new Error('The provided email is not well formed.')),
+    .error(new Error('El campo email debe ser un email bien formado')),
   password: Joi.string()
     .min(6)
     .max(100)
     .required()
-    .error(new Error('The password must have 6 characters or more.'))
+    .error(new Error('La password debe de tener entre 6 y 100 carateres'))
+});
+
+const editUserSchema = Joi.object().keys({
+  email: Joi.string()
+    .email()
+    .required()
+    .error(new Error('El campo email debe ser un email bien formado')),
+  realName: Joi.string()
+    .max(255)
+    .error(new Error('El nombre real no puede pasar de 255 caracteres'))
 });
 
 module.exports = {
   entrySchema,
   voteSchema,
   searchSchema,
-  userSchema
+  userSchema,
+  editUserSchema
 };

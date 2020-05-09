@@ -1,5 +1,4 @@
 const { getConnection } = require('../db');
-const jwt = require('jsonwebtoken');
 
 const {
   formatDateToDB,
@@ -30,12 +29,10 @@ async function listEntries(req, res, next) {
       );
     } else {
       result = await connection.query(
-        `SELECT d.*, avg(v.vote)
-        FROM diary d
-        LEFT JOIN diary_votes v
-        ON d.id=v.entry_id
-        GROUP BY id
-        ORDER BY d.date DESC;`
+        `SELECT diary.*, 
+        (SELECT AVG(vote) FROM diary_votes WHERE entry_id=diary.id) AS voteAverage
+        FROM diary
+        ORDER BY diary.date DESC`
       );
     }
 
@@ -81,8 +78,8 @@ async function newEntry(req, res, next) {
     const [
       result
     ] = await connection.query(
-      'INSERT INTO diary(date, place, description, image) VALUES(?, ?, ?, ?)',
-      [date, place, description, savedFileName]
+      'INSERT INTO diary(date, place, description, image, user_id) VALUES(?, ?, ?, ?, ?)',
+      [date, place, description, savedFileName, req.auth.id]
     );
 
     connection.release();
@@ -94,7 +91,8 @@ async function newEntry(req, res, next) {
         date,
         place,
         description,
-        image: savedFileName
+        image: savedFileName,
+        user_id: req.auth.id
       }
     });
   } catch (error) {
@@ -114,11 +112,20 @@ async function editEntry(req, res, next) {
 
     const [
       current
-    ] = await connection.query('SELECT image FROM diary WHERE id=?', [id]);
+    ] = await connection.query('SELECT image, user_id FROM diary WHERE id=?', [
+      id
+    ]);
 
     if (!current.length) {
       const error = new Error(`The entry with id ${id} does not exist`);
       error.httpCode = 404;
+      throw error;
+    }
+
+    // Check if the authenticated user is the entry author or admin
+    if (current[0].user_id !== req.auth.id && req.auth.role !== 'admin') {
+      const error = new Error('No tienes permisos para editar esta entrada');
+      error.httpCode = 401;
       throw error;
     }
 
@@ -244,15 +251,6 @@ async function voteEntry(req, res, next) {
 
     const connection = await getConnection();
 
-    // Get authorization header
-    const { authorization } = req.headers;
-
-    // Check if token is valid
-    const decoded = jwt.verify(authorization, process.env.SECRET);
-
-    // Add token payload to request
-    req.auth = decoded;
-
     // Check if the entry actually exists
     const [entry] = await connection.query('SELECT id from diary where id=?', [
       id
@@ -264,7 +262,7 @@ async function voteEntry(req, res, next) {
       throw error;
     }
 
-    // Check if the user with the current ip already voted for this entry
+    // Check if the user with the current ID already voted for this entry
     const [
       existingVote
     ] = await connection.query(
@@ -273,7 +271,7 @@ async function voteEntry(req, res, next) {
     );
 
     if (existingVote.length) {
-      const error = new Error('Ya se votó a esta entrada con tu ip');
+      const error = new Error('Ya se votó a esta entrada tu usuario');
       error.httpCode = 403;
       throw error;
     }
@@ -281,9 +279,9 @@ async function voteEntry(req, res, next) {
     //Vote
     await connection.query(
       `
-      INSERT INTO diary_votes(entry_id, vote, date, ip,user_id) 
-      VALUES(?, ?, ?, ?,?)`,
-      [id, vote, formatDateToDB(new Date()), req.ip, req.auth.id]
+      INSERT INTO diary_votes(entry_id, vote, date, user_id) 
+      VALUES(?, ?, ?, ?)`,
+      [id, vote, formatDateToDB(new Date()), req.auth.id]
     );
 
     connection.release();

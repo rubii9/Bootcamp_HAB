@@ -8,14 +8,19 @@ const fileUpload = require('express-fileupload');
 const cors = require('cors');
 const path = require('path');
 
-const { register, login, info } = require('./controllers/users');
-//const { onlyAdmin, onlyUsers } = require('./controllers/protected');
-const { userAuthenticated, userIsAdmin } = require('./middlewares/auth');
-
 const app = express();
 const port = process.env.PORT;
 
-// Controllers
+// User Controllers
+
+const {
+  newUser,
+  getUser,
+  editUser,
+  loginUser
+} = require('./controllers/users');
+
+// Entry Controllers
 const {
   listEntries,
   newEntry,
@@ -25,6 +30,9 @@ const {
   voteEntry,
   getEntryVotes
 } = require('./controllers/diary');
+
+// Auth middlewares
+const { userIsAuthenticated, userIsAdmin } = require('./middlewares/auth');
 
 // Console logger middleware
 app.use(morgan('dev'));
@@ -41,32 +49,24 @@ app.use(cors());
 // Serve static
 app.use(express.static(path.join(__dirname, 'static')));
 
-// Routes
-app.get('/entries', listEntries);
+// User Routes
+app.post('/users', newUser);
+app.post('/users/login', loginUser);
+app.get('/users/:id', userIsAuthenticated, getUser);
+app.put('/users/:id', userIsAuthenticated, editUser);
 
+// Diary Routes
+app.get('/entries', listEntries);
+app.post('/entries', userIsAuthenticated, newEntry); // Solo usuarios
 app.get('/entries/:id', getEntry);
 app.get('/entries/:id/votes', getEntryVotes);
-
-app.post('/users', register);
-app.post('/users/login', login);
-
-//need login
-app.post('/entries/:id/votes', userAuthenticated, voteEntry);
-app.get('/users/:id', userAuthenticated, info);
-app.post('/entries', userAuthenticated, newEntry);
-
-//only admin
-app.put('/entries/:id', userAuthenticated, userIsAdmin, editEntry);
-app.delete('/entries/:id', userAuthenticated, userIsAdmin, deleteEntry);
-
-//public
-
-/* app.get('/only-users', userAuthenticated, onlyUsers);
-app.get('/only-admin', userAuthenticated, userIsAdmin, onlyAdmin); */
+app.post('/entries/:id/votes', userIsAuthenticated, voteEntry); // Solo usuarios
+app.put('/entries/:id', userIsAuthenticated, editEntry); // Solo usuarios (que crearon esa entrada) o admin
+app.delete('/entries/:id', userIsAuthenticated, userIsAdmin, deleteEntry); // Solo admin
 
 // Error middleware
 app.use((error, req, res, next) => {
-  console.log(error);
+  // console.error(error);
   res.status(error.httpCode || 500).send({
     status: 'error',
     message: error.message
