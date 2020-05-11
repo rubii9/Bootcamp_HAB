@@ -66,7 +66,7 @@ async function main() {
 
   await connection.query(`
         INSERT INTO users(registrationDate, lastPasswordUpdate, email, password, role, realName, active)
-        VALUES(NOW(), NOW(), "berto@ber.to", "${password}", "admin", "Berto Yáñez", true)
+        VALUES(NOW(), NOW(), "rubenpo167@gmail.com", "${password}", "admin", "Rubén Pérez", true)
       `);
 
   if (addData) {

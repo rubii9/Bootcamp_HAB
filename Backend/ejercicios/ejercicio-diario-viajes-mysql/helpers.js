@@ -57,7 +57,7 @@ async function sendEmail({ email, title, content }) {
 
   const msg = {
     to: email,
-    from: 'berto@ber.to',
+    from: 'rubenpo167@gmail.com',
     subject: title,
     text: content,
     html: `<div>
