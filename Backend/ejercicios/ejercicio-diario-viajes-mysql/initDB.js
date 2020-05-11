@@ -24,12 +24,14 @@ async function main() {
     CREATE TABLE users (
       id INTEGER PRIMARY KEY AUTO_INCREMENT,
       registrationDate DATETIME NOT NULL,
+      lastPasswordUpdate DATETIME NOT NULL,
       email VARCHAR(100) UNIQUE NOT NULL,
       password VARCHAR(255) UNIQUE NOT NULL,
       role ENUM("normal", "admin") DEFAULT "normal" NOT NULL,
-      active BOOLEAN DEFAULT true NOT NULL,
+      active BOOLEAN DEFAULT false NOT NULL,
       realName VARCHAR(255),
-      avatar VARCHAR(255)
+      avatar VARCHAR(255),
+      registrationCode VARCHAR(255)
     )
 `);
 
@@ -63,8 +65,8 @@ async function main() {
   const password = await bcrypt.hash(process.env.DEFAULT_ADMIN_PASSWORD, 10);
 
   await connection.query(`
-        INSERT INTO users(registrationDate, email, password, role, realName)
-        VALUES(NOW(), "berto@ber.to", "${password}", "admin", "Berto Yáñez")
+        INSERT INTO users(registrationDate, lastPasswordUpdate, email, password, role, realName, active)
+        VALUES(NOW(), NOW(), "berto@ber.to", "${password}", "admin", "Berto Yáñez", true)
       `);
 
   if (addData) {
@@ -78,8 +80,8 @@ async function main() {
       const password = await bcrypt.hash(faker.internet.password(), 10);
 
       await connection.query(`
-        INSERT INTO users(registrationDate, email, password, role, realName)
-        VALUES(NOW(), "${email}", "${password}", "normal", "${faker.name.findName()}")
+        INSERT INTO users(registrationDate, lastPasswordUpdate, email, password, role, realName, active)
+        VALUES(NOW(), NOW(), "${email}", "${password}", "normal", "${faker.name.findName()}", true)
       `);
     }
 

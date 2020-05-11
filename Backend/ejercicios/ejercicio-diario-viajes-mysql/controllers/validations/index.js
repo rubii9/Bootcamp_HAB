@@ -56,10 +56,28 @@ const editUserSchema = Joi.object().keys({
     .error(new Error('El nombre real no puede pasar de 255 caracteres'))
 });
 
+const editPasswordUserSchema = Joi.object().keys({
+  oldPassword: Joi.string()
+    .min(6)
+    .max(100)
+    .required()
+    .error(new Error('La password debe de tener entre 6 y 100 carateres')),
+  newPassword: Joi.string()
+    .min(6)
+    .max(100)
+    .required()
+    .error(new Error('La password debe de tener entre 6 y 100 carateres')),
+  newPasswordRepeat: Joi.string()
+    .min(6)
+    .max(100)
+    .error(new Error('La password debe de tener entre 6 y 100 carateres'))
+});
+
 module.exports = {
   entrySchema,
   voteSchema,
   searchSchema,
   userSchema,
-  editUserSchema
+  editUserSchema,
+  editPasswordUserSchema
 };

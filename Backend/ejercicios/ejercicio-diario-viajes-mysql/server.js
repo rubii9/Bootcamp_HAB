@@ -17,7 +17,9 @@ const {
   newUser,
   getUser,
   editUser,
-  loginUser
+  loginUser,
+  updatePasswordUser,
+  validateUser
 } = require('./controllers/users');
 
 // Entry Controllers
@@ -52,13 +54,15 @@ app.use(express.static(path.join(__dirname, 'static')));
 // User Routes
 app.post('/users', newUser);
 app.post('/users/login', loginUser);
+app.post('/users/:id/password', userIsAuthenticated, updatePasswordUser);
 app.get('/users/:id', userIsAuthenticated, getUser);
 app.put('/users/:id', userIsAuthenticated, editUser);
+app.get('/users/:id/validate', validateUser);
 
 // Diary Routes
 app.get('/entries', listEntries);
-app.post('/entries', userIsAuthenticated, newEntry); // Solo usuarios
 app.get('/entries/:id', getEntry);
+app.post('/entries', userIsAuthenticated, newEntry); // Solo usuarios
 app.get('/entries/:id/votes', getEntryVotes);
 app.post('/entries/:id/votes', userIsAuthenticated, voteEntry); // Solo usuarios
 app.put('/entries/:id', userIsAuthenticated, editEntry); // Solo usuarios (que crearon esa entrada) o admin

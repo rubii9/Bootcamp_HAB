@@ -178,7 +178,7 @@ async function getEntry(req, res, next) {
     const connection = await getConnection();
 
     const [result] = await connection.query(
-      `select d.id, d.date, description, place, image, avg(v.vote) as vote
+      `select d.id, d.date, description, place, d.user_id, image, avg(v.vote) as vote
       from diary d
       left join diary_votes v
       on d.id = v.entry_id

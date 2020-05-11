@@ -5,6 +5,8 @@ const sharp = require('sharp');
 const path = require('path');
 const fs = require('fs-extra');
 const uuid = require('uuid');
+const crypto = require('crypto');
+const sgMail = require('@sendgrid/mail');
 
 const imageUploadPath = path.join(__dirname, process.env.UPLOADS_DIR);
 
@@ -43,8 +45,34 @@ async function deletePhoto(imagePath) {
   await fs.unlink(path.join(imageUploadPath, imagePath));
 }
 
+// Random string
+
+function randomString(size = 20) {
+  return crypto.randomBytes(size).toString('hex').slice(0, size);
+}
+
+// Send email
+async function sendEmail({ email, title, content }) {
+  sgMail.setApiKey(process.env.SENDGRID_KEY);
+
+  const msg = {
+    to: email,
+    from: 'berto@ber.to',
+    subject: title,
+    text: content,
+    html: `<div>
+      <h1>Validate your email</h1>
+      <p>${content}</p>  
+    </div>`
+  };
+
+  await sgMail.send(msg);
+}
+
 module.exports = {
   formatDateToDB,
   processAndSavePhoto,
-  deletePhoto
+  deletePhoto,
+  randomString,
+  sendEmail
 };
