@@ -57,7 +57,7 @@ async function sendEmail({ email, title, content }) {
 
   const msg = {
     to: email,
-    from: 'rubenpo167@gmail.com',
+    from: 'berto@ber.to',
     subject: title,
     text: content,
     html: `<div>
@@ -69,10 +69,17 @@ async function sendEmail({ email, title, content }) {
   await sgMail.send(msg);
 }
 
+function generateError(message, code) {
+  const error = new Error(message);
+  if (code) error.httpCode = code;
+  return error;
+}
+
 module.exports = {
   formatDateToDB,
   processAndSavePhoto,
   deletePhoto,
   randomString,
-  sendEmail
+  sendEmail,
+  generateError
 };

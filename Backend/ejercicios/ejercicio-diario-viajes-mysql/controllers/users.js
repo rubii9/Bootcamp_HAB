@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const { getConnection } = require('../db');
+
 const {
   userSchema,
   editUserSchema,
@@ -13,7 +14,8 @@ const {
   processAndSavePhoto,
   deletePhoto,
   randomString,
-  sendEmail
+  sendEmail,
+  generateError
 } = require('../helpers');
 
 // POST - /user
@@ -32,24 +34,14 @@ async function newUser(req, res, next) {
     ] = await connection.query('SELECT id from users where email=?', [email]);
 
     if (existing.length) {
-      const error = new Error('El email ya existe en la base de datos');
-      error.httpCode = 409;
-      throw error;
+      throw generateError('El email ya existe en la base de datos', 409);
     }
 
     // hash password
     const dbPassword = await bcrypt.hash(password, 10);
     const registrationCode = randomString(40);
 
-    const [result] = await connection.query(
-      `
-      INSERT INTO users (registrationDate, lastPasswordUpdate, email, password, role, registrationCode)
-      VALUES(NOW(), NOW(), ?, ?, "normal", ?)
-    `,
-      [email, dbPassword, registrationCode]
-    );
-
-    const validationURL = `${process.env.PUBLIC_HOST}/users/${result.insertId}/validate?code=${registrationCode}`;
+    const validationURL = `${process.env.PUBLIC_HOST}/users/validate?code=${registrationCode}`;
 
     try {
       await sendEmail({
@@ -59,8 +51,18 @@ async function newUser(req, res, next) {
       });
     } catch (error) {
       console.error(error.response.body);
-      throw new Error('Error sending email');
+      throw new Error(
+        'Error en el envío de mail. Inténtalo de nuevo más tarde.'
+      );
     }
+
+    await connection.query(
+      `
+      INSERT INTO users (registrationDate, lastPasswordUpdate, email, password, role, registrationCode)
+      VALUES(NOW(), NOW(), ?, ?, "normal", ?)
+    `,
+      [email, dbPassword, registrationCode]
+    );
 
     res.send({
       staus: 'ok',
@@ -78,7 +80,6 @@ async function validateUser(req, res, next) {
   let connection;
 
   try {
-    const { id } = req.params;
     const { code } = req.query;
 
     connection = await getConnection();
@@ -87,14 +88,12 @@ async function validateUser(req, res, next) {
     const [
       result
     ] = await connection.query(
-      'UPDATE users SET active=1,registrationCode=NULL WHERE id=? AND registrationCode=?',
-      [id, code]
+      'UPDATE users SET active=1,registrationCode=NULL WHERE registrationCode=?',
+      [code]
     );
 
     if (result.affectedRows === 0) {
-      const error = new Error('Validación incorrecta');
-      error.httpCode = 400;
-      throw error;
+      throw generateError('Validación incorrecta', 400);
     }
 
     // // Si queremos dar el token descomentar las siguientes líneas
@@ -140,9 +139,7 @@ async function getUser(req, res, next) {
 
     // Throw 404 if no results
     if (!result.length) {
-      const error = new Error(`There is no user with the id ${id}`);
-      error.httpCode = 404;
-      throw error;
+      throw generateError(`There is no user with the id ${id}`, 404);
     }
 
     const [userData] = result;
@@ -189,11 +186,10 @@ async function loginUser(req, res, next) {
     );
 
     if (!dbUser.length) {
-      const error = new Error(
-        'No hay ningún usuario activo con ese email en la base de datos. Si te acabas de registrar valida el email'
+      throw generateError(
+        'No hay ningún usuario activo con ese email en la base de datos. Si te acabas de registrar valida el email',
+        404
       );
-      error.httpCode = 404;
-      throw error;
     }
 
     const [user] = dbUser;
@@ -201,9 +197,7 @@ async function loginUser(req, res, next) {
     const passwordsMath = await bcrypt.compare(password, user.password);
 
     if (!passwordsMath) {
-      const error = new Error('Password incorrecta');
-      error.httpCode = 401;
-      throw error;
+      throw generateError('Password incorrecta', 401);
     }
 
     // Build jsonwebtoken
@@ -247,16 +241,12 @@ async function editUser(req, res, next) {
     );
 
     if (!current.length) {
-      const error = new Error(`The user with id ${id} does not exist`);
-      error.httpCode = 404;
-      throw error;
+      throw generateError(`The user with id ${id} does not exist`, 404);
     }
 
     // Check if auth user is the same as :id or is admin
     if (current[0].id !== req.auth.id && req.auth.role !== 'admin') {
-      const error = new Error('No tienes permisos para editar este usuario');
-      error.httpCode = 401;
-      throw error;
+      throw generateError('No tienes permisos para editar este usuario', 401);
     }
 
     // Check if there is a uploaded avatar and process it
@@ -271,11 +261,7 @@ async function editUser(req, res, next) {
           await deletePhoto(current.avatar);
         }
       } catch (error) {
-        const imageError = new Error(
-          'Can not process upload image. Try again.'
-        );
-        imageError.httpCode = 400;
-        throw imageError;
+        throw generateError('Can not process upload image. Try again.', 400);
       }
     } else {
       savedFileName = current.avatar;
@@ -309,33 +295,22 @@ async function updatePasswordUser(req, res, next) {
 
     await editPasswordUserSchema.validateAsync(req.body);
 
-    const { oldPassword, newPassword, newPasswordRepeat } = req.body;
+    const { oldPassword, newPassword } = req.body;
 
     // Comprobar que el usuario del token es el mismo que el que vamos a cambiar la pass
 
     if (Number(id) !== req.auth.id) {
-      const error = new Error(
-        `No tienes permisos para cambiar la password del usuario con id ${id}`
+      throw generateError(
+        `No tienes permisos para cambiar la password del usuario con id ${id}`,
+        401
       );
-      error.httpCode = 401;
-      throw error;
-    }
-
-    // Comprobar que newPassword y si se envía newPasswordRepeat las dos sean iguales
-    if (newPasswordRepeat && newPassword !== newPasswordRepeat) {
-      const error = new Error(
-        'La nueva password no coincide con su repetición'
-      );
-      error.httpCode = 400;
-      throw error;
     }
 
     if (oldPassword === newPassword) {
-      const error = new Error(
-        'La nueva password no puede ser la misma que la antigua'
+      throw generateError(
+        'La nueva password no puede ser la misma que la antigua',
+        400
       );
-      error.httpCode = 400;
-      throw error;
     }
 
     // Sacar la info del usuario de la base de datos
@@ -348,9 +323,7 @@ async function updatePasswordUser(req, res, next) {
 
     // Código un poco redundante
     if (!currentUser.length) {
-      const error = new Error(`El usuario con id ${id} no existe`);
-      error.httpCode = 404;
-      throw error;
+      throw generateError(`El usuario con id ${id} no existe`, 404);
     }
 
     const [dbUser] = currentUser;
@@ -360,9 +333,7 @@ async function updatePasswordUser(req, res, next) {
     const passwordsMath = await bcrypt.compare(oldPassword, dbUser.password);
 
     if (!passwordsMath) {
-      const error = new Error('Tu password antigua es incorrecta');
-      error.httpCode = 401;
-      throw error;
+      throw generateError('Tu password antigua es incorrecta', 401);
     }
 
     // generar hash de la password

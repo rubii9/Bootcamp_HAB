@@ -1,21 +1,49 @@
 const Joi = require('@hapi/joi');
 
-// New entry
+const { generateError } = require('../../helpers');
+
+// Basic Schemas
+const searchSchema = Joi.string()
+  .min(2)
+  .required()
+  .error(
+    generateError(
+      'El campo de búsqueda debe de ser de máis de 2 caracteres',
+      400
+    )
+  );
+
+const emailSchema = Joi.string()
+  .email()
+  .required()
+  .error(generateError('El campo email debe ser un email bien formado', 400));
+
+const passwordSchema = Joi.string()
+  .min(6)
+  .max(100)
+  .required()
+  .error(
+    generateError('La password debe de tener entre 6 y 100 carateres', 400)
+  );
+
+// Object Schemas
 const entrySchema = Joi.object().keys({
   place: Joi.string()
     .max(100)
     .required()
     .error(
-      new Error(
-        'El campo place es obligatorio y no puede tener más de 100 caracteres'
+      generateError(
+        'El campo place es obligatorio y no puede tener más de 100 caracteres',
+        400
       )
     ),
   description: Joi.string()
     .max(1000)
     .required()
     .error(
-      new Error(
-        'El campo description es obligatorio y non puede tener más de 1000 caracteres'
+      generateError(
+        'El campo description es obligatorio y non puede tener más de 1000 caracteres',
+        400
       )
     )
 });
@@ -26,51 +54,34 @@ const voteSchema = Joi.object().keys({
     .max(5)
     .integer()
     .required()
-    .error(new Error('El campo voto debe existir y ser un número entre 1 y 5'))
+    .error(
+      generateError(
+        'El campo voto debe existir y ser un número entre 1 y 5',
+        400
+      )
+    )
 });
 
-const searchSchema = Joi.string()
-  .min(2)
-  .required()
-  .error(new Error('El campo de búsqueda debe de ser de máis de 2 caracteres'));
-
 const userSchema = Joi.object().keys({
-  email: Joi.string()
-    .email()
-    .required()
-    .error(new Error('El campo email debe ser un email bien formado')),
-  password: Joi.string()
-    .min(6)
-    .max(100)
-    .required()
-    .error(new Error('La password debe de tener entre 6 y 100 carateres'))
+  email: emailSchema,
+  password: passwordSchema
 });
 
 const editUserSchema = Joi.object().keys({
-  email: Joi.string()
-    .email()
-    .required()
-    .error(new Error('El campo email debe ser un email bien formado')),
+  email: emailSchema,
   realName: Joi.string()
     .max(255)
-    .error(new Error('El nombre real no puede pasar de 255 caracteres'))
+    .error(
+      generateError('El nombre real no puede pasar de 255 caracteres', 400)
+    )
 });
 
 const editPasswordUserSchema = Joi.object().keys({
-  oldPassword: Joi.string()
-    .min(6)
-    .max(100)
-    .required()
-    .error(new Error('La password debe de tener entre 6 y 100 carateres')),
-  newPassword: Joi.string()
-    .min(6)
-    .max(100)
-    .required()
-    .error(new Error('La password debe de tener entre 6 y 100 carateres')),
-  newPasswordRepeat: Joi.string()
-    .min(6)
-    .max(100)
-    .error(new Error('La password debe de tener entre 6 y 100 carateres'))
+  oldPassword: passwordSchema,
+  newPassword: passwordSchema,
+  newPasswordRepeat: Joi.any()
+    .valid(Joi.ref('newPassword'))
+    .error(generateError('Las passwords debe ser iguales', 400))
 });
 
 module.exports = {

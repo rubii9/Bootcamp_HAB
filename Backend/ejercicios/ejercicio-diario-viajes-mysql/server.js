@@ -54,10 +54,10 @@ app.use(express.static(path.join(__dirname, 'static')));
 // User Routes
 app.post('/users', newUser);
 app.post('/users/login', loginUser);
+app.get('/users/validate', validateUser);
 app.post('/users/:id/password', userIsAuthenticated, updatePasswordUser);
 app.get('/users/:id', userIsAuthenticated, getUser);
 app.put('/users/:id', userIsAuthenticated, editUser);
-app.get('/users/:id/validate', validateUser);
 
 // Diary Routes
 app.get('/entries', listEntries);
