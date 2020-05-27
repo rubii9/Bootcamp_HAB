@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Importando Vuejs</title>
+    <style>
+      .red {
+        color: red;
+      }
+
+      .green {
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Área de trabajo de vue-->
+    <div id="app">
+      <table border="1">
+        <tr>
+          <th>Nombre del alumno</th>
+          <th>Estado</th>
+        </tr>
+        <tr v-for="alumno in alumnos" :key="alumno.id">
+          <td>
+            {{alumno.name}}
+          </td>
+          <td
+            :class="{green: alumno.estado==='Aprobado',red: alumno.estado==='Suspenso' }"
+          >
+            {{alumno.estado}}
+          </td>
+        </tr>
+      </table>
+    </div>
+    <!-- SCRIPT VUEJS-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+      const app = new Vue({
+        el: "#app", //Lugar donde trabaja Vue
+        data() {
+          //Lugar donde están las variables de Vue
+          return {
+            alumnos: [
+              {
+                name: "María",
+                estado: "Aprobado",
+              },
+              {
+                name: "Nestor",
+                estado: "Suspenso",
+              },
+              {
+                name: "Alejandra",
+                estado: "Aprobado",
+              },
+              {
+                name: "Susana",
+                estado: "Suspenso",
+              },
+              {
+                name: "Alberto",
+                estado: "Aprobado",
+              },
+            ],
+          };
+        },
+      });
+    </script>
+  </body>
+</html>

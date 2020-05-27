@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Importando Vuejs</title>
+    <style>
+      .purple {
+        color: purple;
+      }
+
+      .red {
+        color: red;
+      }
+
+      .green {
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Área de trabajo de vue-->
+    <div id="app">
+      <!--Clases dinámicas-->
+      <h1 :class="{ purple: isPurple }">
+        Soy un titulo estiloso que guay
+      </h1>
+
+      <ul>
+        <li
+          v-for="nota in notas"
+          :key="nota.id"
+          :class="{green: nota >= notaMedia,red: nota < notaMedia }"
+        >
+          {{nota}}
+        </li>
+      </ul>
+    </div>
+    <!-- SCRIPT VUEJS-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+      const app = new Vue({
+        el: "#app", //Lugar donde trabaja Vue
+        data() {
+          //Lugar donde están las variables de Vue
+          return {
+            isPurple: true,
+            notas: [5, 2, 10, 7, 3, 4, 9],
+            notaMedia: 5,
+          };
+        },
+      });
+    </script>
+  </body>
+</html>

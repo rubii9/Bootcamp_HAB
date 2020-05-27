@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Importando Vuejs</title>
+  </head>
+  <body>
+    <!-- Área de trabajo de vue-->
+    <div id="app">
+      <!--Directiva V-IF-->
+      <h1 v-if="seeTitle">
+        ¡Titulo de la página
+      </h1>
+
+      <!--Directiva V-SHOW-->
+      <h2 v-show="seeSubtitle">
+        Subtitulo de la página
+      </h2>
+
+      <!--Directiva V-ON:CLICK || @click-->
+      <button @click="seeTitle =! seeTitle">
+        Esconder
+      </button>
+
+      <p>
+        {{counter}}
+      </p>
+
+      <button @click="counter++">
+        Sumar
+      </button>
+
+      <button @click="counter--">
+        Restar
+      </button>
+
+      <!--Directiva V-BIN || : -->
+      <figure>
+        <img :src="urlImagen" v-bind:title="title" :alt="alt" />
+      </figure>
+
+      <!--Directiva V-FOR-->
+      <!-- 
+        <p v-for="day in days" :key="day.id">
+        {{day}}
+        </p>
+         -->
+      <!--  
+          <ul>
+        <li v-for="(day,index) in days" :key="day.id">
+          {{day}} {{index}}
+        </li>
+      </ul>
+     -->
+      <!-- <ul>
+        <li v-for="day in daysObj" :key="day.id">
+          El día {{day.day}}, tengo clase a las: {{day.hour}}
+        </li>
+      </ul> -->
+
+      <ul>
+        <li v-for="img in imgArray" :key="img.id">
+          <img :src="img.urlImg" alt="imagen random" />
+        </li>
+      </ul>
+
+      <!-- Directiva v-model-->
+      <p>¡Bienvenido, {{ username }}</p>
+      <input type="text" v-model="username" />
+    </div>
+
+    <!-- SCRIPT VUEJS-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+      const app = new Vue({
+        el: "#app", //Lugar donde trabaja Vue
+        data() {
+          //Lugar donde están las variables de Vue
+          return {
+            username: "",
+            seeTitle: true,
+            seeSubtitle: true,
+            counter: 0,
+            urlImagen:
+              "https://images.unsplash.com/flagged/photo-1588612005960-a382b1eca714?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+            title: "esto es un titulo",
+            alt: "esto es un alt",
+            days: ["lunes", "martes", "miercoles"],
+            daysObj: [
+              { day: "Lunes", hour: "10AM" },
+              { day: "Martes", hour: "11AM" },
+              { day: "Miercoles", hour: "12AM" },
+            ],
+            imgArray: [
+              {
+                urlImg:
+                  "https://images.unsplash.com/photo-1590517785334-cc5851a8b864?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              },
+              {
+                urlImg:
+                  "https://images.unsplash.com/photo-1590523814792-4bbd9d7ddde4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              },
+              {
+                urlImg:
+                  "https://images.unsplash.com/photo-1590521799020-56e26013ef39?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+              },
+            ],
+          };
+        },
+      });
+    </script>
+  </body>
+</html>

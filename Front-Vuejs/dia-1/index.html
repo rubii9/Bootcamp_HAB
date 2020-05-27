@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Importando Vuejs</title>
+  </head>
+  <body>
+    <!-- Área de trabajo de vue-->
+    <div id="app">
+      <!--Interpolando variable-->
+      <p>¡Hola mi nombre es {{name}} {{surname}},</p>
+      <p>nacido y residente en {{location}}.</p>
+      <p>Tengo {{age}} años, como pequeña biografía puedo decir que:</p>
+      <p>{{bio}},</p>
+      <p>y mi comida favorita es {{fav_food}}</p>
+
+      <!--EXPRESIÓN NUMÉRICA-->
+      <p>{{1+1+1+1}}</p>
+
+      <!--EXPRESIÓN DE TEXTO-->
+      <p>
+        {{'Rubén'+' '+'Pérez'}}
+      </p>
+      <p>
+        {{'Rubén Pérez'}}
+      </p>
+
+      <!--EXPRESIÓN CON OPERACIÓN SIMPLE-->
+      <p>
+        {{'ruben'.toUpperCase()}}
+      </p>
+      <p>
+        {{'RUBEN'.toLowerCase()}}
+      </p>
+
+      <!--EXPRESIONES TERNARIAS-->
+      <p>
+        {{ butaca ? 'Butaca vacia' : 'Butaca ocupada'}}
+      </p>
+    </div>
+    <!-- SCRIPT VUEJS-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+      const app = new Vue({
+        el: "#app", //Lugar donde trabaja Vue
+        data() {
+          //Lugar donde están las variables de Vue
+          return {
+            name: "Rubén", //Variable de texto
+            surname: "Pérez",
+            age: 22, //Varibale numerica
+            location: "Noia",
+            bio: "Me gusta jugar al tenis y salir con los amigos",
+            fav_food: "la pizza",
+            butaca: true,
+          };
+        },
+      });
+    </script>
+  </body>
+</html>
