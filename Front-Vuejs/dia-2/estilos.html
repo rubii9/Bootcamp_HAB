@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Estilos dinamicos</title>
+    <style>
+      #app {
+        width: 400px;
+        height: 400px;
+        border: 1px solid black;
+      }
+
+      .anchoDinamico {
+        background-color: lawngreen;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Área de trabajo de vue-->
+    <div id="app" :style="{ background: colorFondo }">
+      <button @click="colorFondo = '#010a43'">
+        Dark mode
+      </button>
+
+      <div class="anchoDinamico" :style="{width: ancho +'px'}">
+        <p>Mi ancho es dinámico</p>
+      </div>
+
+      <div class="anchoDinamico" :style="{width: ancho +'%'}">
+        <p>Mi ancho es dinámico</p>
+      </div>
+    </div>
+    <!-- SCRIPT VUEJS-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+      const app = new Vue({
+        el: "#app", //Lugar donde trabaja Vue
+        data() {
+          //Lugar donde están las variables de Vue
+          return {
+            colorFondo: "#f4f4f4",
+            ancho: 80,
+          };
+        },
+      });
+    </script>
+  </body>
+</html>

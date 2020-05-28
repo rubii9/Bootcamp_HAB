@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Metodos y funciones</title>
+    <style></style>
+  </head>
+  <body>
+    <!-- Área de trabajo de vue-->
+    <div id="app">
+      <p>{{counter}}</p>
+
+      <button @click="increase()">Sumar</button>
+
+      <button @click="decrease()">Restar</button>
+    </div>
+    <!-- SCRIPT VUEJS-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+      const app = new Vue({
+        el: "#app", //Lugar donde trabaja Vue
+        data() {
+          //Lugar donde están las variables de Vue
+          return {
+            counter: 0,
+          };
+        },
+        //AQUÍ VA LA LÓGICA DE VUE
+        methods: {
+          increase() {
+            this.counter++;
+          },
+          decrease() {
+            if (this.counter > 0) {
+              this.counter--;
+            }
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

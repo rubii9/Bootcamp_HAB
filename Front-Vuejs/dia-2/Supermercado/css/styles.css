@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap");
+
+* {
+  box-sizing: border-box;
+  font-family: "Roboto";
+}
+
+body {
+  text-align: center;
+}
+
+header img {
+  height: 400px;
+}
+
+table,
+tr,
+td {
+  border: 2px solid black;
+  padding: 1rem;
+  margin: auto;
+}
+
+td img {
+  width: 100px;
+  height: 100px;
+}
+
+.green {
+  color: green;
+}
+
+.red {
+  color: red;
+}
+
+a:hover {
+  color: green;
+}
+
+nav a {
+  font-size: 1.5rem;
+}

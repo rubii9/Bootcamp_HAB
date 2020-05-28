@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <title>Home</title>
+  </head>
+  <body>
+    <header>
+      <img
+        src="https://www.65ymas.com/uploads/s1/10/56/31/bigstock-abstract-blurred-supermarket-a-243586474.jpeg"
+        alt="imagen portada"
+      />
+      <h1>Supermercado</h1>
+    </header>
+    <div id="app">
+      <h2>¡Bienvenido, {{ username }}</h2>
+      <label for="user">Nombre de usuario:</label>
+      <input
+        type="text"
+        v-model="username"
+        name="user"
+        placeholder="Usuario/a"
+      />
+      <button><a href="pages/productos.html">Entrar</a></button>
+    </div>
+
+    <!-- SCRIPT VUEJS-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+      const app = new Vue({
+        el: "#app", //Lugar donde trabaja Vue
+        data() {
+          //Lugar donde están las variables de Vue
+          return {
+            username: "",
+          };
+        },
+      });
+    </script>
+  </body>
+</html>

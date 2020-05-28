@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <title>Sección Productos</title>
+  </head>
+  <body>
+    <header>
+      <img
+        src="https://www.65ymas.com/uploads/s1/10/56/31/bigstock-abstract-blurred-supermarket-a-243586474.jpeg"
+        alt="imagen portada"
+      />
+      <h1>Sección de Productos</h1>
+      <nav>
+        <a href="../index.html">Home</a>
+        ||
+        <a href="productos.html">Productos</a>
+      </nav>
+    </header>
+    <div id="app">
+      <h3>Productos en carrito: {{counter}}</h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre del producto</th>
+            <th>Imagen</th>
+            <th>Estado</th>
+            <th>Añadir</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="producto in productos" :key="producto.id">
+            <td>
+              {{producto.name}}
+            </td>
+            <td>
+              <img :src="producto.imagen" alt="imagen producto" />
+            </td>
+            <td
+              :class="{green: producto.estado ==='Disponible',red: producto.estado === 'No disponible' }"
+            >
+              {{producto.estado}}
+            </td>
+            <td>
+              <button @click="increase(producto.estado)">
+                Añadir al carrito
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SCRIPT VUEJS-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+      const app = new Vue({
+        el: "#app", //Lugar donde trabaja Vue
+        data() {
+          //Lugar donde están las variables de Vue
+          return {
+            counter: 0,
+            productos: [
+              {
+                name: "Judias",
+                imagen:
+                  "https://conservalia.com/1096-large_default/helios-judias-verdes-tarro-con-660-gramos-netos.jpg",
+                estado: "Disponible",
+              },
+              {
+                name: "Espaguetti",
+                imagen:
+                  "https://cdn.grupoelcorteingles.es/SGFM/dctm/MEDIA03/201709/14/00118003501170____6__600x600.jpg",
+                estado: "No disponible",
+              },
+              {
+                name: "Pipas",
+                imagen:
+                  "https://images-na.ssl-images-amazon.com/images/I/91Hc0bUx7UL._AC_SL1500_.jpg",
+                estado: "Disponible",
+              },
+              {
+                name: "Limon",
+                imagen:
+                  "https://www.naranjamania.com/media/catalog/product/cache/2/image/872x/9df78eab33525d08d6e5fb8d27136e95/1/_/1_1.jpg",
+                estado: "No disponible",
+              },
+            ],
+          };
+        },
+        methods: {
+          increase(estado) {
+            if (estado === "Disponible") this.counter++;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
