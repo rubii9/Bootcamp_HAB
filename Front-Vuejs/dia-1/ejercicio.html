@@ -5,33 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Importando Vuejs</title>
     <style>
+      .green {
+        color: green;
+      }
       .red {
         color: red;
       }
-
-      .green {
-        color: green;
+      table,
+      tr,
+      td {
+        border: 2px solid black;
+        padding: 1rem;
       }
     </style>
   </head>
   <body>
     <!-- Área de trabajo de vue-->
     <div id="app">
-      <table border="1">
-        <tr>
-          <th>Nombre del alumno</th>
-          <th>Estado</th>
-        </tr>
-        <tr v-for="alumno in alumnos" :key="alumno.id">
-          <td>
-            {{alumno.name}}
-          </td>
-          <td
-            :class="{green: alumno.estado==='Aprobado',red: alumno.estado==='Suspenso' }"
-          >
-            {{alumno.estado}}
-          </td>
-        </tr>
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre del alumno</th>
+            <th>Nota</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="alumno in alumnos" :key="alumno.id">
+            <td>
+              {{alumno.name}}
+            </td>
+            <td>
+              {{alumno.nota }}
+            </td>
+            <td
+              :class="{green: alumno.nota >= notaMedia,red: alumno.nota < notaMedia }"
+            >
+              {{alumno.nota >= notaMedia ? "Aprobado" : "Suspenso"}}
+            </td>
+          </tr>
+        </tbody>
       </table>
     </div>
     <!-- SCRIPT VUEJS-->
@@ -46,25 +59,26 @@
             alumnos: [
               {
                 name: "María",
-                estado: "Aprobado",
+                nota: 7,
               },
               {
                 name: "Nestor",
-                estado: "Suspenso",
+                nota: 4,
               },
               {
                 name: "Alejandra",
-                estado: "Aprobado",
+                nota: 9,
               },
               {
                 name: "Susana",
-                estado: "Suspenso",
+                nota: 3,
               },
               {
                 name: "Alberto",
-                estado: "Aprobado",
+                nota: 8,
               },
             ],
+            notaMedia: 5,
           };
         },
       });
