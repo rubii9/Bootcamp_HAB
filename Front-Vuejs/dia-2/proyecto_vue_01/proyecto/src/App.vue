@@ -1,21 +1,14 @@
 <template>
-  <div>
+  <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/gallery">Gallery</router-link>
+      <router-link to="/about">About me</router-link>
     </div>
+    <router-view />
   </div>
 </template>
 
-<script>
-export default {
-  name: "MenuCustom",
-};
-</script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
