@@ -14,9 +14,9 @@
       />
       <h1>Sección de Productos</h1>
       <nav>
-        <a href="../index.html">Home</a>
+        <a class="borderLeftRight" href="../index.html">Home</a>
         ||
-        <a href="productos.html">Productos</a>
+        <a class="borderLeftRight" href="productos.html">Productos</a>
       </nav>
     </header>
     <div id="app">
@@ -45,7 +45,10 @@
               {{producto.estado}}
             </td>
             <td>
-              <button @click="increase(producto.estado)">
+              <button
+                class="borderMaker buttonOverlay"
+                @click="increase(producto.estado)"
+              >
                 Añadir al carrito
               </button>
             </td>

@@ -34,10 +34,98 @@ td img {
   color: red;
 }
 
-a:hover {
-  color: green;
-}
-
 nav a {
   font-size: 1.5rem;
+  text-decoration: none;
+  color: black;
+}
+
+input {
+  margin: 0.5rem;
+}
+
+button {
+  cursor: pointer;
+}
+button a {
+  text-decoration: none;
+  color: white;
+  font-weight: 300;
+}
+.borderMaker {
+  position: relative;
+  border: none;
+}
+
+.borderMaker::after {
+  content: "";
+  position: absolute;
+  left: -0.1px;
+  top: 70%;
+  right: -0.1px;
+  bottom: 0;
+  background-color: rgba(87, 120, 243, 0.5);
+  z-index: -1;
+  transition: top 0.1s ease-in-out;
+}
+
+.borderMaker:hover::after {
+  top: 0;
+}
+
+.buttonOverlay {
+  padding: 10px 25px;
+  position: relative;
+  color: #fff;
+  z-index: 0;
+}
+
+.buttonOverlay::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 5px;
+  right: 5px;
+  background-color: #5778f3;
+  z-index: -1;
+  transition: transform 0.2s ease-in-out;
+}
+
+.buttonOverlay::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border: 1px solid #474e51;
+}
+
+.buttonOverlay:hover::before {
+  transform: translate(6px, -4px);
+}
+
+.borderLeftRight {
+  display: inline-block;
+  position: relative;
+  color: #474e51;
+}
+
+.borderLeftRight::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #5878f3;
+  transform-origin: bottom right;
+  transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+.borderLeftRight:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
 }
