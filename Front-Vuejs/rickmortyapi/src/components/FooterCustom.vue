@@ -30,6 +30,10 @@ export default {
 <style scoped>
 .footer {
   margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
 }
 .footer p {
   text-align: center;
@@ -46,26 +50,29 @@ img {
 nav p {
   display: flex;
   flex-direction: column;
-  align-content: center;
+  align-self: center;
   justify-content: center;
-  margin: 0 0.5rem;
+  margin: 0.5rem;
 }
 nav p a {
   font-weight: bold;
   color: #2c3e50;
   display: inline-block;
-  align-self: center;
+
+  margin: 0;
 }
 
 nav {
   display: flex;
   justify-content: center;
   text-align: center;
+  margin: 0 auto;
 }
 
 footer > p {
   margin: 1rem;
   font-weight: bold;
+  text-align: center;
 }
 
 @media (max-width: 700px) {
