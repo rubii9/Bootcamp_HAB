@@ -53,6 +53,7 @@ nav p {
   align-self: center;
   justify-content: center;
   margin: 0.5rem;
+  width: 100px;
 }
 nav p a {
   font-weight: bold;
