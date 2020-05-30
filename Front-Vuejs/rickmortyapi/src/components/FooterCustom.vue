@@ -86,6 +86,10 @@ footer > p {
     font-size: 0.75rem;
   }
 
+  nav p {
+    width: auto;
+  }
+
   footer > p {
     font-size: 0.75rem;
   }
