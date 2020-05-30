@@ -1,68 +1,83 @@
 <template>
   <div class="home">
+    <!-- BARRA DE BUSQUEDA -->
     <header>
-      <h1>
-        Rick & Morty
-      </h1>
+      <img class="logo" src="../assets/img/logo.svg" alt="logo" />
+      <div class="search">
+        <label for="bySearch">Search a character 👽:</label>
+        <input v-model="search" id="search" name="bySearch" type="search" placeholder="Búsqueda..." />
+      </div>
     </header>
 
-    <CharCard
-      v-for="char in chars"
-      :key="char.id"
-      :charName="char.name"
-      :charStatus="char.status"
-      :charGender="char.gender"
-      :charImage="char.image"
-      :charOrigin="char.origin.name"
-      :charSpecie="char.species"
-      :charId="char.id"
-    ></CharCard>
+    <!-- TARJETAS -->
+    <CharCard :chars="filteredChars" class="tarjetas"></CharCard>
+    <FooterCustom></FooterCustom>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import CharCard from "@/components/CharCard.vue";
-//IMPORTANDO LA CONFIG API
+import FooterCustom from "@/components/FooterCustom.vue";
+
 import api from "@/api/api.js";
 
 export default {
   name: "Home",
   components: {
     CharCard,
+    FooterCustom
   },
   data() {
     return {
       chars: [],
+      search: ""
     };
   },
-  created() {
-    api
-      .getAll()
-      .then(
-        (response) => (
-          (this.chars = response.data.results),
-          console.log(response.data.results)
-        )
+  computed: {
+    filteredChars() {
+      //SI NO ESCRIBIMOS NADA
+      if (!this.search) {
+        return this.chars;
+      }
+      //  FILTER PARA FILTRAR LAS BUSQUEDAS DEL ARRAY
+      return this.chars.filter(
+        char =>
+          char.name.toLowerCase().includes(this.search.toLowerCase()) ||
+          char.gender.toLowerCase().includes(this.search.toLowerCase()) ||
+          char.status.toLowerCase().includes(this.search.toLowerCase())
       );
+    }
   },
+  created() {
+    api.getAll().then(response => (this.chars = response.data.results));
+    document.title = "Home|Rick&MortyApi";
+  }
 };
 </script>
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap");
-.home {
+.tarjetas {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
+
+.logo {
+  display: block;
+}
+
+.search {
+  font-size: 1.25rem;
+}
 header {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  font-family: "Gloria Hallelujah", Arial, Helvetica, sans-serif;
 }
-h1 {
-  font-family: "Gloria Hallelujah";
-  margin: 1rem auto;
-  width: 30%;
-  font-size: 5rem;
-  color: #339966;
+
+input {
+  margin: 1rem;
 }
 </style>

@@ -1,5 +1,52 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <h1>¡Hey!👋</h1>
+    <img src="../assets/img/ruben.jpg" alt />
+    <p>
+      This proyect has been created by
+      <a
+        href="https://www.linkedin.com/in/rub%C3%A9n-p%C3%A9rez-outeiral-8b4b041a0/"
+        alt="link a mi linkedin"
+      >Rubén Pérez</a>
+    </p>
+    <p>
+      with
+      <a
+        href="https://rickandmortyapi.com/api"
+        alt="Link de la Api de Rick & Morty"
+      >Rick & Morty Api.</a>
+    </p>
+    <p>
+      You can see the code on my github
+      <a
+        href="https://github.com/rubii9/Bootcamp_HAB/tree/master/Front-Vuejs/rickmortyapi"
+      >Code</a>
+    </p>
+    <FooterCustom></FooterCustom>
   </div>
 </template>
+
+<script>
+import FooterCustom from "@/components/FooterCustom.vue";
+export default {
+  name: "About",
+  components: { FooterCustom },
+  created() {
+    document.title = "About|Rick&MortyApi";
+  }
+};
+</script>
+
+<style scoped>
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap");
+.about {
+  min-height: 100vh;
+  font-family: "Roboto";
+}
+
+img {
+  border-radius: 50%;
+  max-width: 200px;
+  max-height: 200px;
+}
+</style>

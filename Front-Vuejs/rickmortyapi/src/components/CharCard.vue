@@ -1,18 +1,32 @@
 <template>
-  <div class="card">
-    <ul>
-      <li>
-        <h2>{{ charName }}</h2>
-      </li>
-      <li>
-        <img :src="charImage" alt="imagen de personaje" />
-      </li>
-      <li>ID: {{ charId }}</li>
-      <li>Status: {{ charStatus }}</li>
-      <li>Gender: {{ charGender }}</li>
-      <li>Origin: {{ charOrigin }}</li>
-      <li>Specie: {{ charSpecie }}</li>
-    </ul>
+  <div>
+    <!-- TARJETA DE PERSONAJE -->
+    <div class="card" v-for="char in chars" :key="char.id">
+      <h2>{{ char.name }}</h2>
+      <img :src="char.image" alt />
+      <p>
+        <strong>id:</strong>
+        {{char.id}}
+      </p>
+      <p
+        :class="{ green: char.status === 'Alive', red: char.status === 'Dead', orange: char.status === 'unknown' }"
+      >
+        <strong>Status:</strong>
+        {{char.status}}
+      </p>
+      <p>
+        <strong>Specie:</strong>
+        {{char.species}}
+      </p>
+      <p>
+        <strong>Gender:</strong>
+        {{char.gender}}
+      </p>
+      <p>
+        <strong>Origin:</strong>
+        {{char.origin.name}}
+      </p>
+    </div>
   </div>
 </template>
 
@@ -20,45 +34,52 @@
 export default {
   name: "CharCard",
   props: {
-    charName: String,
-    charId: Number,
-    charStatus: String,
-    charGender: String,
-    charImage: String,
-    charOrigin: String,
-    charSpecie: String,
-  },
+    chars: Array
+  }
 };
 </script>
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap");
 .card {
-  width: 30%;
-  border: 1px solid black;
-  border-radius: 10%;
+  border: 1px solid aqua;
+  border-radius: 5%;
   margin: 1rem;
+  padding: 1rem;
   background-color: #666666;
-  color: white;
+  color: aqua;
+  min-width: 400px;
+  max-width: 400px;
+  font-family: "Gloria Hallelujah", Arial, Helvetica, sans-serif;
+}
+.green {
+  color: greenyellow;
+}
+.red {
+  color: red;
+}
+.orange {
+  color: orange;
 }
 h2 {
   font-size: 2.5rem;
-  color: white;
+  color: aqua;
 }
-ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-ul > li {
-  margin: 1rem;
+
+p {
+  margin: 0 1rem;
   font-size: 1.25rem;
-  font-weight: 700;
+  font-weight: 800;
   color: white;
-  font-family: "Gloria Hallelujah";
 }
-ul > li > img {
+
+strong {
+  color: aqua;
+}
+img {
   border-radius: 50%;
   border: 2px solid white;
+  height: 200px;
+  width: 200px;
 }
 </style>
