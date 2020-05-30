@@ -28,9 +28,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.footer {
+  margin: 1rem;
+}
 .footer p {
   text-align: center;
-  padding: 1rem;
 }
 
 img {
@@ -46,7 +48,7 @@ nav p {
   flex-direction: column;
   align-content: center;
   justify-content: center;
-  min-width: 130px;
+  margin: 0 0.5rem;
 }
 nav p a {
   font-weight: bold;
@@ -57,8 +59,27 @@ nav p a {
 
 nav {
   display: flex;
-  align-content: center;
   justify-content: center;
   text-align: center;
+}
+
+footer > p {
+  margin: 1rem;
+  font-weight: bold;
+}
+
+@media (max-width: 700px) {
+  img {
+    height: 20px;
+    width: 20px;
+    margin: 0.5rem;
+  }
+  nav p a {
+    font-size: 0.75rem;
+  }
+
+  footer > p {
+    font-size: 0.75rem;
+  }
 }
 </style>

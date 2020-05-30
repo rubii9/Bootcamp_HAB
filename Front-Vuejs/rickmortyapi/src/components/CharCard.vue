@@ -82,4 +82,27 @@ img {
   height: 200px;
   width: 200px;
 }
+
+@media (max-width: 700px) {
+  .card {
+    min-width: 200px;
+    max-width: 200px;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+  p {
+    margin: 0 1rem;
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: white;
+  }
+
+  img {
+    border-radius: 50%;
+    border: 2px solid white;
+    height: 80px;
+    width: 80px;
+  }
+}
 </style>
