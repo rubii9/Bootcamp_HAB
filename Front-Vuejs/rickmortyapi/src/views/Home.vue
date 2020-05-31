@@ -5,12 +5,25 @@
       <img class="logo" src="../assets/img/logo.svg" alt="logo" />
       <div class="search">
         <label for="bySearch">Search a character 👽:</label>
-        <input v-model="search" id="search" name="bySearch" type="search" placeholder="Búsqueda..." />
+        <input v-model="search" id="search" name="bySearch" type="search" placeholder="Search..." />
+
+        <input
+          v-model="id"
+          id="searchChar"
+          name="bySearchId"
+          type="search"
+          placeholder="Write charcater id"
+        />
+        <button @click="searchChar(id),seeAll=!seeAll,seeID=true">Search by ID</button>
+        <button @click="seeID=!seeID,seeAll=true">See all</button>
       </div>
     </header>
 
+    <!-- TARJETA ID -->
+    <CharCardID :char="char" class="tajetaID" v-show="seeID"></CharCardID>
     <!-- TARJETAS -->
-    <CharCard :chars="filteredChars" class="tarjetas"></CharCard>
+    <CharCard :chars="filteredChars" class="tarjetas" v-show="seeAll"></CharCard>
+
     <FooterCustom></FooterCustom>
   </div>
 </template>
@@ -18,6 +31,8 @@
 <script>
 // @ is an alias to /src
 import CharCard from "@/components/CharCard.vue";
+import CharCardID from "@/components/CharCardID.vue";
+
 import FooterCustom from "@/components/FooterCustom.vue";
 
 import api from "@/api/api.js";
@@ -26,12 +41,17 @@ export default {
   name: "Home",
   components: {
     CharCard,
-    FooterCustom
+    FooterCustom,
+    CharCardID
   },
   data() {
     return {
       chars: [],
-      search: ""
+      search: "",
+      char: {},
+      id: null,
+      seeAll: true,
+      seeID: true
     };
   },
   computed: {
@@ -47,6 +67,11 @@ export default {
           char.gender.toLowerCase().includes(this.search.toLowerCase()) ||
           char.status.toLowerCase().includes(this.search.toLowerCase())
       );
+    }
+  },
+  methods: {
+    searchChar(id) {
+      api.getChar(id).then(response => (this.char = response.data));
     }
   },
   created() {
@@ -69,9 +94,9 @@ export default {
 
 .search {
   font-size: 1.25rem;
+  margin: 2rem;
 }
 header {
-  width: 100%;
   display: flex;
   flex-direction: column;
   font-family: "Gloria Hallelujah", Arial, Helvetica, sans-serif;
@@ -79,5 +104,23 @@ header {
 
 input {
   margin: 1rem;
+}
+
+button {
+  margin: 0 0.5rem;
+}
+@media (max-width: 700px) {
+  header {
+    padding: 0.5rem;
+  }
+  input {
+    margin: 0 auto;
+    padding: 0;
+    font-size: 0.75rem;
+  }
+
+  button {
+    font-size: 0.75rem;
+  }
 }
 </style>

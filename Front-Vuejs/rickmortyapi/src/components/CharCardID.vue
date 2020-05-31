@@ -1,7 +1,9 @@
 <template>
   <div>
     <!-- TARJETA DE PERSONAJE -->
-    <div class="card" v-for="char in chars" :key="char.id">
+    <h1>Character with id: {{char.id}}</h1>
+
+    <div class="cardID">
       <h2>{{ char.name }}</h2>
       <img :src="char.image" alt />
       <p>
@@ -32,24 +34,24 @@
 
 <script>
 export default {
-  name: "CharCard",
+  name: "CharCardID",
   props: {
-    chars: Array
+    char: Object
   }
 };
 </script>
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap");
-.card {
+.cardID {
   border: 1px solid aqua;
   border-radius: 5%;
-  margin: 1rem;
+  margin: 0 auto;
   padding: 1rem;
   background-color: #666666;
   color: aqua;
-  min-width: 350px;
-  max-width: 350px;
+  min-width: 400px;
+  max-width: 400px;
   font-family: "Gloria Hallelujah", Arial, Helvetica, sans-serif;
 }
 .green {
@@ -84,7 +86,7 @@ img {
 }
 
 @media (max-width: 700px) {
-  .card {
+  .cardID {
     min-width: 200px;
     max-width: 200px;
   }
