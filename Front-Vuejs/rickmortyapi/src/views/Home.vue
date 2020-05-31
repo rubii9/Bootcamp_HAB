@@ -14,8 +14,8 @@
           type="search"
           placeholder="Write charcater id"
         />
-        <button @click="searchChar(id),seeAll=!seeAll,seeID=true">Search by ID</button>
-        <button @click="seeID=!seeID,seeAll=true">See all</button>
+        <button @click="searchChar(id),seeAll=false, seeID=true">Search by ID</button>
+        <button @click="seeID=false,seeAll=true">See all</button>
       </div>
     </header>
 
