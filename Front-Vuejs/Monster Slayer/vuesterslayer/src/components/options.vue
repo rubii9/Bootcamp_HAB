@@ -58,10 +58,6 @@ export default {
   margin: 0.3rem 0;
 }
 .options button {
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  justify-content: center;
   width: 150px;
   cursor: pointer;
   text-align: center;
