@@ -5,11 +5,13 @@ const apiUrl = "https://rickandmortyapi.com/api";
 
 //FUNCIÓN PARA COGER TODOS LOS CHARS
 function getAll() {
-  return axios.get(`${apiUrl}/character`);
+  return axios.get(`${apiUrl}/character`).catch((Error) => console.log(Error));
 }
 
 function getChar(id) {
-  return axios.get(`${apiUrl}/character/` + id);
+  return axios
+    .get(`${apiUrl}/character/` + id)
+    .catch((Error) => console.log(Error));
 }
 export default {
   getAll,
