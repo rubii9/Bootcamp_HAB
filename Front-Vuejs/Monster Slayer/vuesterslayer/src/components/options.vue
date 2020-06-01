@@ -3,11 +3,11 @@
     <div class="options">
       <button @click="attackEvent">ATTACK ⚔️</button>
       <button @click="specialAttackEvent">
-        SPECIAL ATTACK 🗡
+        SPECIAL 🗡🔝
         <p>Remaining: {{specials}}</p>
       </button>
       <button @click="healEvent">
-        HEAL 🔮
+        HEAL ❤️
         <p>Remaining: {{heals}}</p>
       </button>
       <button @click="giveUpEvent">GIVE UP 🕳</button>
@@ -40,11 +40,17 @@ export default {
 </script>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap");
 .options {
   width: 80%;
   padding: 1rem;
   margin: auto;
   margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+  font-family: "Roboto", serif, sans-serif;
 }
 
 .options button p {
@@ -52,6 +58,13 @@ export default {
   margin: 0.3rem 0;
 }
 .options button {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  width: 150px;
+  cursor: pointer;
+  text-align: center;
   font-size: 1rem;
   color: white;
   border: 1px solid white;
