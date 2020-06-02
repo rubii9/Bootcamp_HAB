@@ -94,7 +94,8 @@ export default {
 
 .search {
   font-size: 1.25rem;
-  margin: 2rem;
+  margin: 1.5rem;
+  padding: 2rem;
 }
 header {
   display: flex;
@@ -121,6 +122,10 @@ button {
 
   button {
     font-size: 0.75rem;
+  }
+
+  img {
+    height: 100px;
   }
 }
 </style>

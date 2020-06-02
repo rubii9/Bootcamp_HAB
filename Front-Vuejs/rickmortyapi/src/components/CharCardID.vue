@@ -4,8 +4,10 @@
     <h1>Character with id: {{char.id}}</h1>
 
     <div class="cardID">
-      <h2>{{ char.name }}</h2>
-      <img :src="char.image" alt />
+      <header>
+        <img :src="char.image" alt />
+        <h2>{{ char.name }}</h2>
+      </header>
       <p>
         <strong>id:</strong>
         {{char.id}}
@@ -63,14 +65,22 @@ export default {
 .orange {
   color: orange;
 }
-h2 {
-  font-size: 2.5rem;
-  color: aqua;
-}
 
+header {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding: 0;
+  margin: 0;
+}
+header h2 {
+  color: aqua;
+  font-size: 1.75rem;
+  padding: 0;
+}
 p {
   margin: 0 1rem;
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: 800;
   color: white;
 }
@@ -83,6 +93,7 @@ img {
   border: 2px solid white;
   height: 200px;
   width: 200px;
+  align-self: center;
 }
 
 @media (max-width: 700px) {
@@ -90,8 +101,14 @@ img {
     min-width: 200px;
     max-width: 200px;
   }
-  h2 {
-    font-size: 1.5rem;
+  h1 {
+    font-size: 1.25rem;
+    font-family: "Gloria Hallelujah", Arial, Helvetica, sans-serif;
+  }
+  header h2 {
+    color: aqua;
+    font-size: 1.2rem;
+    padding: 0;
   }
   p {
     margin: 0 1rem;
