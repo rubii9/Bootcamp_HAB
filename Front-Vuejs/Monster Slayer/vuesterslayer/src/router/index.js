@@ -2,6 +2,8 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Game from "../views/Game.vue";
+import Error from "../views/Error.vue";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -14,6 +16,11 @@ const routes = [
     path: "/game",
     name: "Game",
     component: Game,
+  },
+  {
+    path: "*",
+    name: "Error",
+    component: Error,
   },
   {
     path: "/about",

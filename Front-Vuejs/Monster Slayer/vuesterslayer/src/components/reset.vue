@@ -1,30 +1,17 @@
 <template>
   <div class="message">
-    <div class="winner" v-show="seewinner">
-      <p>Congratulations!🏆</p>
-      <p>You win</p>
-      <button @click="giveUpEvent">Reset</button>
-    </div>
-    <div class="looser" v-show="seelooser">
-      <p>Oh... Sorry</p>
-      <p>You lost, try again 👇</p>
-      <button @click="giveUpEvent">Reset</button>
-    </div>
+    <button @click="resetEvent">Reset</button>
   </div>
 </template>
 
 <script>
 export default {
-  name: "message",
-  props: {
-    seewinner: Boolean,
-    seelooser: Boolean
-  },
+  name: "reset",
   methods: {
-    giveUpEvent() {
-      this.$emit("giveUp");
-    }
-  }
+    resetEvent() {
+      this.$emit("reset");
+    },
+  },
 };
 </script>
 

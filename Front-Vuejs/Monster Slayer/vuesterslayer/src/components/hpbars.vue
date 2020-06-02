@@ -5,9 +5,11 @@
         <p>PLAYER</p>
         <div
           class="bar"
-          :style="{ width: playerHp + '%'}"
-          :class="{red: playerHp <20,orange: playerHp<50, }"
-        >{{ playerHp }}</div>
+          :style="{ width: playerHp + '%' }"
+          :class="{ red: playerHp < 20, orange: playerHp < 50 }"
+        >
+          {{ playerHp }}
+        </div>
         <img src="../assets/img/heroe.png" alt />
       </div>
 
@@ -15,9 +17,11 @@
         <p>ENEMY</p>
         <div
           class="bar"
-          :style="{ width: enemyHp + '%'}"
-          :class="{red: enemyHp <20,orange: enemyHp<60, }"
-        >{{ enemyHp }}</div>
+          :style="{ width: enemyHp + '%' }"
+          :class="{ red: enemyHp < 20, orange: enemyHp < 60 }"
+        >
+          {{ enemyHp }}
+        </div>
         <img src="../assets/img/drake.svg" alt />
       </div>
     </div>
@@ -29,8 +33,8 @@ export default {
   name: "hpbars",
   props: {
     playerHp: Number,
-    enemyHp: Number
-  }
+    enemyHp: Number,
+  },
 };
 </script>
 
@@ -46,6 +50,8 @@ export default {
   align-content: center;
   justify-content: center;
   font-family: "Roboto", serif, sans-serif;
+  margin: 0 auto;
+  padding: 1rem;
 }
 .bar {
   color: green;
@@ -90,8 +96,8 @@ p {
 }
 
 img {
-  width: 500px;
-  height: 500px;
+  width: 200px;
+  height: 200px;
   display: block;
   align-self: center;
 }
