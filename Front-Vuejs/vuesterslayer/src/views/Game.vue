@@ -36,7 +36,7 @@ export default {
     hpbars,
     options,
     reset,
-    logs,
+    logs
   },
   data() {
     return {
@@ -47,21 +47,22 @@ export default {
       specialTimes: 2,
 
       end: true,
-      logs: [],
+      logs: []
     };
   },
   methods: {
     attack() {
       let damage = this.calculateDamage(3, 10);
       this.enemyHp -= damage;
-      this.enemyAttack();
+
       this.logs.unshift({
-        text: "Player hits " + damage + "Hp",
+        text: "Player hits " + damage + "Hp"
       });
       if (this.logs[2]) {
         this.logs.length = 1;
       }
       this.hpcontroll();
+      this.enemyAttack();
     },
     calculateDamage(min, max) {
       return Math.max(Math.floor(Math.random() * max) + 1, min);
@@ -70,7 +71,7 @@ export default {
       let damage = this.calculateDamage(10, 15);
       this.playerHp -= damage;
       this.logs.unshift({
-        text: "Enemy hits " + damage + "Hp",
+        text: "Enemy hits " + damage + "Hp"
       });
       if (this.logs[2]) {
         this.logs.length = 1;
@@ -81,14 +82,14 @@ export default {
       if (this.playerHp < 50 && this.healTimes > 0) {
         this.playerHp += this.healHp;
         this.healTimes--;
-        this.enemyAttack();
         this.logs.unshift({
-          text: "Player heals " + this.healHp + "Hp",
+          text: "Player heals " + this.healHp + "Hp"
         });
         if (this.logs[2]) {
           this.logs.length = 1;
         }
         this.hpcontroll();
+        this.enemyAttack();
       }
     },
     specialAttack() {
@@ -96,14 +97,14 @@ export default {
         let damage = this.calculateDamage(15, 25);
         this.enemyHp -= damage;
         this.specialTimes--;
-        this.enemyAttack();
         this.logs.unshift({
-          text: "Player hits " + damage + "Hp" + " with speacial attack",
+          text: "Player hits " + damage + "Hp" + " with speacial attack"
         });
         if (this.logs[2]) {
           this.logs.length = 1;
         }
         this.hpcontroll();
+        this.enemyAttack();
       }
     },
     giveUp() {
@@ -116,7 +117,7 @@ export default {
       Swal.fire({
         title: "Surrender :(",
         text: "Not lucky this time",
-        confirmButtonText: "Go Home",
+        confirmButtonText: "Go Home"
       });
       this.goHome();
     },
@@ -136,7 +137,7 @@ export default {
         Swal.fire({
           title: "Ops",
           text: "Something was wrong",
-          confirmButtonText: "Try again",
+          confirmButtonText: "Try again"
         });
       }
       if (this.playerHp <= 0) {
@@ -145,7 +146,7 @@ export default {
         Swal.fire({
           title: "You lost",
           text: "Not lucky this time",
-          confirmButtonText: "Try again",
+          confirmButtonText: "Try again"
         });
       }
       if (this.enemyHp <= 0) {
@@ -154,14 +155,14 @@ export default {
         Swal.fire({
           title: "You win",
           text: "Congrats!🏆",
-          confirmButtonText: "ok",
+          confirmButtonText: "ok"
         });
       }
     },
     goHome() {
       this.$router.push("/");
-    },
-  },
+    }
+  }
 };
 </script>
 

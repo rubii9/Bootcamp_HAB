@@ -7,16 +7,14 @@
       <a
         href="https://www.linkedin.com/in/rub%C3%A9n-p%C3%A9rez-outeiral-8b4b041a0/"
         alt="link a mi linkedin"
-        >Rubén Pérez</a
-      >
+      >Rubén Pérez</a>
     </p>
 
     <p>
       You can see the code on my github
       <a
-        href="https://github.com/rubii9/Bootcamp_HAB/tree/master/Front-Vuejs/Monster%20Slayer/vuesterslayer"
-        >Code</a
-      >
+        href="https://github.com/rubii9/Bootcamp_HAB/tree/master/Front-Vuejs/vuesterslayer"
+      >Code</a>
     </p>
     <FooterCustom></FooterCustom>
   </div>
@@ -26,7 +24,7 @@
 import FooterCustom from "@/components/FooterCustom.vue";
 export default {
   name: "About",
-  components: { FooterCustom },
+  components: { FooterCustom }
 };
 </script>
 
