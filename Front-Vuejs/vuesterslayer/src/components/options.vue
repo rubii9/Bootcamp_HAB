@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="buttons">
     <div class="options">
       <button @click="attackEvent">ATTACK ⚔️</button>
       <button @click="specialAttackEvent">
@@ -63,17 +63,52 @@ export default {
   text-align: center;
   font-size: 1rem;
   color: white;
-  border: 1px solid white;
+  border: 2px solid #d6cdb6;
   border-radius: 6px;
   background: gray;
   padding: 1rem;
   margin: 0.667rem;
   font-weight: bold;
   box-shadow: 10px 10px 5px -2px rgba(0, 0, 0, 0.5);
+  text-shadow: 1px 1px black;
 }
 .options button:hover {
   background-color: #008cba;
   color: white;
-  border: 1px solid gray;
+  border: 2px solid gray;
+}
+
+@media (max-width: 700px) {
+  .options button p {
+    font-size: 0.6rem;
+  }
+  .options button {
+    width: 90px;
+    height: 90px;
+    display: block;
+    font-size: 0.85rem;
+  }
+
+  .options {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 370px) {
+  .options button p {
+    font-size: 0.6rem;
+  }
+  .options button {
+    width: 80px;
+    height: 80px;
+    display: block;
+    font-size: 0.85rem;
+  }
+
+  .options {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
 </style>

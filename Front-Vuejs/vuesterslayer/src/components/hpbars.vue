@@ -2,26 +2,22 @@
   <div>
     <div class="hpbars">
       <div class="player">
-        <p>PLAYER</p>
+        <p>⚔️ PLAYER 🏹</p>
         <div
           class="bar"
           :style="{ width: playerHp + '%' }"
           :class="{ red: playerHp < 20, orange: playerHp < 50 }"
-        >
-          {{ playerHp }}
-        </div>
+        >{{ playerHp }}</div>
         <img src="../assets/img/heroe.png" alt />
       </div>
 
       <div class="enemy">
-        <p>ENEMY</p>
+        <p>🔥 ENEMY 🐉</p>
         <div
           class="bar"
           :style="{ width: enemyHp + '%' }"
           :class="{ red: enemyHp < 20, orange: enemyHp < 60 }"
-        >
-          {{ enemyHp }}
-        </div>
+        >{{ enemyHp }}</div>
         <img src="../assets/img/drake.svg" alt />
       </div>
     </div>
@@ -33,8 +29,8 @@ export default {
   name: "hpbars",
   props: {
     playerHp: Number,
-    enemyHp: Number,
-  },
+    enemyHp: Number
+  }
 };
 </script>
 
@@ -44,7 +40,7 @@ export default {
 
 .hpbars {
   text-align: center;
-  color: white;
+  color: #cbcdcd;
   display: flex;
   flex-direction: row;
   align-content: center;
@@ -85,6 +81,7 @@ p {
   font-weight: bold;
   margin: 0.5rem auto;
   font-family: "Acme", serif, sans-serif;
+  text-shadow: 2px 2px black;
 }
 
 .enemy {
@@ -100,5 +97,15 @@ img {
   height: 200px;
   display: block;
   align-self: center;
+}
+
+@media (max-width: 700px) {
+  img {
+    width: 120px;
+    height: 120px;
+  }
+  p {
+    font-size: 1rem;
+  }
 }
 </style>

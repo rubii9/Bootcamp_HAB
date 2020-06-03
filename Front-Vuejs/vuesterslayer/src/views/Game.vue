@@ -3,12 +3,16 @@
     <!--BARRAS DE VIDA -->
     <hpbars :playerHp="playerHp" :enemyHp="enemyHp"></hpbars>
 
-    <!--  REGISTRO DE JUEGO -->
-    <logs :logs="logs"></logs>
-
     <!--  RESET GAME -->
     <reset v-show="!end" v-on:reset="reset"></reset>
 
+    <div v-show="healMsg" class="msg">
+      <p>You are not too bad... Keep fighting</p>
+    </div>
+
+    <div v-show="specialMsg" class="msg">
+      <p>You have no speacial moves... Try something different</p>
+    </div>
     <!--OPCIONES DE JUEGO -->
     <options
       v-on:attack="attack"
@@ -19,6 +23,9 @@
       :specials="specialTimes"
       v-show="end"
     ></options>
+
+    <!--  REGISTRO DE JUEGO -->
+    <logs :logs="logs"></logs>
   </div>
 </template>
 
@@ -45,7 +52,8 @@ export default {
       healHp: 35,
       healTimes: 2,
       specialTimes: 2,
-
+      healMsg: false,
+      specialMsg: false,
       end: true,
       logs: []
     };
@@ -56,13 +64,15 @@ export default {
       this.enemyHp -= damage;
 
       this.logs.unshift({
-        text: "Player hits " + damage + "Hp"
+        text: "⚔️ Player hits " + damage + "Hp" + " ⚔️"
       });
-      if (this.logs[2]) {
-        this.logs.length = 1;
+      if (this.logs[4]) {
+        this.logs.length = 3;
       }
       this.hpcontroll();
       this.enemyAttack();
+      this.healMsg = false;
+      this.specialMsg = false;
     },
     calculateDamage(min, max) {
       return Math.max(Math.floor(Math.random() * max) + 1, min);
@@ -71,25 +81,31 @@ export default {
       let damage = this.calculateDamage(10, 15);
       this.playerHp -= damage;
       this.logs.unshift({
-        text: "Enemy hits " + damage + "Hp"
+        text: "🐉 Enemy hits " + damage + "Hp" + " 🐉"
       });
-      if (this.logs[2]) {
-        this.logs.length = 1;
+      if (this.logs[4]) {
+        this.logs.length = 3;
       }
       this.hpcontroll();
+      this.healMsg = false;
+      this.specialMsg = false;
     },
     heal() {
       if (this.playerHp < 50 && this.healTimes > 0) {
         this.playerHp += this.healHp;
         this.healTimes--;
         this.logs.unshift({
-          text: "Player heals " + this.healHp + "Hp"
+          text: "❤️ Player heals " + this.healHp + "Hp" + "❤️"
         });
-        if (this.logs[2]) {
-          this.logs.length = 1;
+        if (this.logs[4]) {
+          this.logs.length = 3;
         }
         this.hpcontroll();
         this.enemyAttack();
+        this.healMsg = false;
+        this.specialMsg = false;
+      } else {
+        this.healMsg = true;
       }
     },
     specialAttack() {
@@ -98,13 +114,17 @@ export default {
         this.enemyHp -= damage;
         this.specialTimes--;
         this.logs.unshift({
-          text: "Player hits " + damage + "Hp" + " with speacial attack"
+          text: "💥Player hits " + damage + "Hp" + " with speacial move💥"
         });
-        if (this.logs[2]) {
-          this.logs.length = 1;
+        if (this.logs[4]) {
+          this.logs.length = 3;
         }
         this.hpcontroll();
         this.enemyAttack();
+        this.healMsg = false;
+        this.specialMsg = false;
+      } else {
+        this.specialMsg = true;
       }
     },
     giveUp() {
@@ -113,6 +133,8 @@ export default {
       this.specialTimes = 2;
       this.healTimes = 2;
       this.end = true;
+      this.healMsg = false;
+      this.specialMsg = false;
       this.logs = [];
       Swal.fire({
         title: "Surrender :(",
@@ -127,6 +149,8 @@ export default {
       this.specialTimes = 2;
       this.healTimes = 2;
       this.end = true;
+      this.healMsg = false;
+      this.specialMsg = false;
       this.logs = [];
     },
     hpcontroll() {
@@ -166,4 +190,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.msg {
+  color: white;
+}
+</style>
