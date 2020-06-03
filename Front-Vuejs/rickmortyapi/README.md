@@ -1,5 +1,6 @@
 # rickmortyapi
 
+Here u can see the web [webapp](https://rickmortyrubii.netlify.app)
 ## Project setup
 ```
 npm install
@@ -17,3 +18,5 @@ npm run build
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
