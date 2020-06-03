@@ -1,11 +1,7 @@
 <template>
   <div class="home">
-    <p>
-      {{ speak }}
-    </p>
-    <button @click="changeDialog()" v-show="this.dialogs[this.dialog].game">
-      NEXT
-    </button>
+    <p>{{ speak }}</p>
+    <button @click="changeDialog()" v-show="this.dialogs[this.dialog].game">NEXT</button>
     <button v-show="!this.dialogs[this.dialog].game">
       <router-link :to="{ name: 'Game' }">FIGHT!</router-link>
     </button>
@@ -25,31 +21,34 @@ export default {
         {
           text: "Hi, how are you?",
           dialog: 0,
-          game: true,
+          game: true
         },
         {
           text: "In this game you will fight vs a enemy, could you beat him?",
           dialog: 1,
-          game: true,
+          game: true
         },
         {
           text: "Lets go... Are you ready?",
           dialog: 2,
-          game: false,
-        },
-      ],
+          game: false
+        }
+      ]
     };
   },
   computed: {
     speak() {
       return this.dialogs[this.dialog].text;
-    },
+    }
   },
   methods: {
     changeDialog() {
       this.dialog++;
-    },
+    }
   },
+  created() {
+    document.title = "Home|DefeatEnemy";
+  }
 };
 </script>
 

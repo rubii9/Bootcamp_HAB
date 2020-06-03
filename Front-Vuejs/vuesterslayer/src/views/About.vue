@@ -24,7 +24,10 @@
 import FooterCustom from "@/components/FooterCustom.vue";
 export default {
   name: "About",
-  components: { FooterCustom }
+  components: { FooterCustom },
+  created() {
+    document.title = "About|DefeatEnemy";
+  }
 };
 </script>
 

@@ -186,6 +186,9 @@ export default {
     goHome() {
       this.$router.push("/");
     }
+  },
+  created() {
+    document.title = "Game|DefeatEnemy";
   }
 };
 </script>
