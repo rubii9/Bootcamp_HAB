@@ -10,13 +10,13 @@
 
 <script>
 export default {
-  name: "MenuCustom",
+  name: "MenuCustom"
 };
 </script>
 
 <style scoped>
 #nav {
-  padding: 30px;
+  padding: 20px;
   display: flex;
   flex-direction: row;
   align-content: center;

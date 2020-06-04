@@ -2,8 +2,8 @@
   <div class="roman">
     <vue-headful title="RomanGallery" description="Roman Gallery page of museum" />
     <!-- MENU -->
-    <menucustom></menucustom>
-
+    <menucustom class="menu"></menucustom>
+    <navgallerys class="nav"></navgallerys>
     <!-- ROMAN COLLECTION -->
     <titlegallery :title="title"></titlegallery>
     <statues :statues="romanStatues"></statues>
@@ -22,6 +22,8 @@ import footercustom from "@/components/FooterCustom.vue";
 import statues from "@/components/Statues.vue";
 // IMPORTANDO TITLE COLLECTION
 import titlegallery from "@/components/TitleGallery.vue";
+// IMPORTANDO LINKS GALLERY
+import navgallerys from "@/components/NavGallerys.vue";
 
 export default {
   name: "RomanGallery",
@@ -29,11 +31,12 @@ export default {
     menucustom,
     footercustom,
     statues,
-    titlegallery
+    titlegallery,
+    navgallerys
   },
   data() {
     return {
-      title: "⚜️ ROMAN COLLECTION 🎭",
+      title: "ROMAN COLLECTION 🎭",
       romanStatues: [
         {
           name: "Statue 1",
@@ -69,5 +72,10 @@ export default {
 .roman {
   background: #404040;
   color: white;
+  display: flex;
+  flex-direction: column;
+}
+.menu {
+  align-self: flex-end;
 }
 </style>

@@ -11,8 +11,7 @@
         href="https://www.linkedin.com/in/rub%C3%A9n-p%C3%A9rez-outeiral-8b4b041a0/"
         target="_blank"
         alt="link a mi linkedin"
-        >Rubén Pérez</a
-      >
+      >Rubén Pérez</a>
     </p>
 
     <p>
@@ -20,8 +19,7 @@
       <a
         href="https://github.com/rubii9/Bootcamp_HAB/tree/master/Front-Vuejs/repaso/hackamuseum"
         target="_blank"
-        >Code</a
-      >
+      >Code</a>
     </p>
     <!-- FOOTER -->
     <footercustom></footercustom>
@@ -37,17 +35,17 @@ export default {
   name: "Home",
   components: {
     menucustom,
-    footercustom,
-  },
+    footercustom
+  }
 };
 </script>
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap");
 .about {
-  min-height: 100vh;
-  font-family: "Roboto";
   background: #404040;
+  height: 100vh;
+  margin: 0rem auto;
   color: white;
 }
 a {
@@ -57,5 +55,6 @@ img {
   border-radius: 50%;
   max-width: 200px;
   max-height: 200px;
+  align-self: center;
 }
 </style>

@@ -21,14 +21,7 @@
     <p v-html="desc"></p>
 
     <!-- GALLERY LINKS -->
-    <div id="nav">
-      <router-link :to="{ name: 'GreekGallery' }">⚜️ Greek Gallery</router-link>
-      <router-link :to="{ name: 'OrientalGallery' }"
-        >⚜️ Oriental Gallery</router-link
-      >
-      <router-link :to="{ name: 'RomanGallery' }">⚜️ Roman Gallery</router-link>
-    </div>
-
+    <navgallerys></navgallerys>
     <!-- FOOTER -->
     <footercustom></footercustom>
   </div>
@@ -40,43 +33,38 @@
 import menucustom from "@/components/MenuCustom.vue";
 // IMPORTANDO EL FOOTER
 import footercustom from "@/components/FooterCustom.vue";
+// IMPORTANDO LINKS GALLERY
+import navgallerys from "@/components/NavGallerys.vue";
 export default {
   name: "Home",
   components: {
     menucustom,
     footercustom,
+    navgallerys
   },
   data() {
     return {
       title: "Welcome to <br> HACK A MUSEUM",
       desc:
-        "You can see some collections about statues on this museum. <br> We are searching for collabs.",
+        "You can see some collections about statues on this museum. <br> We are searching for collabs."
     };
-  },
+  }
 };
 </script>
 <style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap");
 .home {
   background: #404040;
+  margin: 0 auto;
+  height: 100vh;
 }
 h2 {
   color: white;
+  font-size: 3rem;
+  margin: 0.5rem auto;
+  font-family: "Dancing Script", cursive;
 }
 p {
   color: white;
-}
-#nav {
-  padding: 30px;
-  display: flex;
-  flex-direction: row;
-  align-content: center;
-  justify-content: center;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #42b983;
-  margin: 0 0.25rem;
-  text-decoration: none;
 }
 </style>

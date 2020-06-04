@@ -4,9 +4,9 @@
 
     <!-- MENU -->
     <menucustom></menucustom>
-
+    <p>Contact us 👇</p>
     <!-- FORMULARIO -->
-    <contacform v-on:send="send" v-on:cancel="cancel"></contacform>
+    <contacform class="form" v-on:send="send" v-on:cancel="cancel"></contacform>
 
     <!-- FOOTER -->
     <footercustom></footercustom>
@@ -27,30 +27,37 @@ export default {
   components: {
     menucustom,
     footercustom,
-    contacform,
+    contacform
   },
   methods: {
     send() {
       Swal.fire({
         title: "Your message was sent",
         text: "Thanks for your support",
-        confirmButtonText: "ok",
+        confirmButtonText: "ok"
       });
     },
     cancel() {
       Swal.fire({
         title: "Your message was cancelled",
         text: "You can try it later",
-        confirmButtonText: "ok",
+        confirmButtonText: "ok"
       });
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style scoped>
 .contact {
   background: #404040;
+  margin: 0 auto;
+  height: 100vh;
   color: white;
+  display: flex;
+  flex-direction: column;
+}
+.form {
+  margin-bottom: 5rem;
 }
 </style>

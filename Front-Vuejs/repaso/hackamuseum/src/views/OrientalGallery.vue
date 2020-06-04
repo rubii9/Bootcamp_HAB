@@ -2,7 +2,8 @@
   <div class="oriental">
     <vue-headful title="OrientalGallery" description="Oriental Gallery page of museum" />
     <!-- MENU -->
-    <menucustom></menucustom>
+    <menucustom class="menu"></menucustom>
+    <navgallerys class="nav"></navgallerys>
 
     <!-- ORIENTAL COLLECTION -->
     <titlegallery :title="title"></titlegallery>
@@ -22,6 +23,8 @@ import footercustom from "@/components/FooterCustom.vue";
 import statues from "@/components/Statues.vue";
 // IMPORTANDO TITLE COLLECTION
 import titlegallery from "@/components/TitleGallery.vue";
+// IMPORTANDO LINKS GALLERY
+import navgallerys from "@/components/NavGallerys.vue";
 
 export default {
   name: "RomanGallery",
@@ -29,11 +32,12 @@ export default {
     menucustom,
     footercustom,
     statues,
-    titlegallery
+    titlegallery,
+    navgallerys
   },
   data() {
     return {
-      title: "⚜️ ORIENTAL COLLECTION 🎭",
+      title: "ORIENTAL COLLECTION 🎭",
       orientalStatues: [
         {
           name: "Statue 1",
@@ -69,5 +73,10 @@ export default {
 .oriental {
   background: #404040;
   color: white;
+  display: flex;
+  flex-direction: column;
+}
+.menu {
+  align-self: flex-end;
 }
 </style>

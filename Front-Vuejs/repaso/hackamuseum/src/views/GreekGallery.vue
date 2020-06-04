@@ -3,8 +3,8 @@
     <vue-headful title="GreekGallery" description="Greek Gallery page of museum" />
 
     <!-- MENU -->
-    <menucustom></menucustom>
-
+    <menucustom class="menu"></menucustom>
+    <navgallerys class="nav"></navgallerys>
     <!-- GREEK COLLECTION -->
     <titlegallery :title="title"></titlegallery>
     <statues :statues="greekStatues"></statues>
@@ -23,18 +23,20 @@ import footercustom from "@/components/FooterCustom.vue";
 import statues from "@/components/Statues.vue";
 // IMPORTANDO TITLE COLLECTION
 import titlegallery from "@/components/TitleGallery.vue";
-
+// IMPORTANDO LINKS GALLERY
+import navgallerys from "@/components/NavGallerys.vue";
 export default {
   name: "GreekGallery",
   components: {
     menucustom,
     footercustom,
     statues,
-    titlegallery
+    titlegallery,
+    navgallerys
   },
   data() {
     return {
-      title: "⚜️ GREEK COLLECTION 🎭",
+      title: "GREEK COLLECTION 🎭",
       greekStatues: [
         {
           name: "Statue 1",
@@ -58,7 +60,7 @@ export default {
           name: "Statue 4",
           photographer: "Deisy Malone 📷",
           urlImage:
-            "https://images.unsplash.com/photo-1554533899-787ef890e98f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=60"
+            "https://images.unsplash.com/photo-1570620764320-c92b8facb70c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
         }
       ]
     };
@@ -70,5 +72,10 @@ export default {
 .greek {
   background: #404040;
   color: white;
+  display: flex;
+  flex-direction: column;
+}
+.menu {
+  align-self: flex-end;
 }
 </style>
