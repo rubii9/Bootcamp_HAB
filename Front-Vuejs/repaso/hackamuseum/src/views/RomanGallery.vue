@@ -1,9 +1,6 @@
 <template>
-  <div>
-    <vue-headful
-      title="RomanGallery"
-      description="Roman Gallery page of museum"
-    />
+  <div class="roman">
+    <vue-headful title="RomanGallery" description="Roman Gallery page of museum" />
     <!-- MENU -->
     <menucustom></menucustom>
 
@@ -32,7 +29,7 @@ export default {
     menucustom,
     footercustom,
     statues,
-    titlegallery,
+    titlegallery
   },
   data() {
     return {
@@ -42,30 +39,35 @@ export default {
           name: "Statue 1",
           photographer: "Mary Shelly 📷",
           urlImage:
-            "https://images.unsplash.com/photo-1559672749-510941093805?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=60",
+            "https://images.unsplash.com/photo-1559672749-510941093805?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=60"
         },
         {
           name: "Statue 2",
           photographer: "Peter Pan 📷",
           urlImage:
-            "https://images.unsplash.com/photo-1550798486-f63ffaec5760?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=60",
+            "https://images.unsplash.com/photo-1550798486-f63ffaec5760?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=60"
         },
         {
           name: "Statue 3",
           photographer: "Joe Macfly 📷",
           urlImage:
-            "https://images.unsplash.com/photo-1589882168956-18c3a3a45c7d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=60",
+            "https://images.unsplash.com/photo-1589882168956-18c3a3a45c7d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=60"
         },
         {
           name: "Statue 4",
           photographer: "Deisy Malone 📷",
           urlImage:
-            "https://images.unsplash.com/photo-1567494472396-879c8909a768?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=60",
-        },
-      ],
+            "https://images.unsplash.com/photo-1567494472396-879c8909a768?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=60"
+        }
+      ]
     };
-  },
+  }
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.roman {
+  background: #404040;
+  color: white;
+}
+</style>

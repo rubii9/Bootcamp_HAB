@@ -4,15 +4,21 @@
       <nav>
         <p>
           <img src="../assets/img/linkedin.png" alt="icono linkedin" />
-          <a href>Rubén Pérez</a>
+          <a
+            href="https://www.linkedin.com/in/rub%C3%A9n-p%C3%A9rez-outeiral-8b4b041a0/"
+            target="_blank"
+            >Rubén Pérez</a
+          >
         </p>
         <p>
           <img src="../assets/img/instagram.png" alt="icono instagram" />
-          <a href="https://www.instagram.com/rubii__9/">Rubii__9</a>
+          <a href="https://www.instagram.com/rubii__9/" target="_blank"
+            >Rubii__9</a
+          >
         </p>
         <p>
           <img src="../assets/img/github.png" alt="icono github" />
-          <a href="https://github.com/rubii9">Rubii9</a>
+          <a href="https://github.com/rubii9" target="_blank">Rubii9</a>
         </p>
       </nav>
       <p>@Hackaboss 2020</p>
@@ -25,9 +31,9 @@ export default {
   name: "FooterCustom",
   data() {
     return {
-      copyright: "Rubén Pérez, 2020-2021"
+      copyright: "Rubén Pérez, 2020-2021",
     };
-  }
+  },
 };
 </script>
 
@@ -98,5 +104,5 @@ footer > p {
   footer > p {
     font-size: 0.75rem;
   }
-}
-</style>>
+}</style
+>>

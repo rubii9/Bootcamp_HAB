@@ -3,7 +3,26 @@
     <vue-headful title="About" description="About page of museum" />
     <!-- MENU -->
     <menucustom></menucustom>
-    <h1>This is an about page</h1>
+    <h1>¡Hey!👋</h1>
+    <img src="../assets/img/ruben.jpg" alt />
+    <p>
+      This proyect has been created by
+      <a
+        href="https://www.linkedin.com/in/rub%C3%A9n-p%C3%A9rez-outeiral-8b4b041a0/"
+        target="_blank"
+        alt="link a mi linkedin"
+        >Rubén Pérez</a
+      >
+    </p>
+
+    <p>
+      You can see the code on my github
+      <a
+        href="https://github.com/rubii9/Bootcamp_HAB/tree/master/Front-Vuejs/repaso/hackamuseum"
+        target="_blank"
+        >Code</a
+      >
+    </p>
     <!-- FOOTER -->
     <footercustom></footercustom>
   </div>
@@ -22,3 +41,21 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap");
+.about {
+  min-height: 100vh;
+  font-family: "Roboto";
+  background: #404040;
+  color: white;
+}
+a {
+  color: #42b983;
+}
+img {
+  border-radius: 50%;
+  max-width: 200px;
+  max-height: 200px;
+}
+</style>

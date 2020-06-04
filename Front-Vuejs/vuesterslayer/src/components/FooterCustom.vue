@@ -4,7 +4,7 @@
       <nav>
         <p>
           <img src="../assets/img/linkedin.png" alt="icono linkedin" />
-          <a href>Rubén Pérez</a>
+          <a href="https://www.linkedin.com/in/rub%C3%A9n-p%C3%A9rez-outeiral-8b4b041a0/">Rubén Pérez</a>
         </p>
         <p>
           <img src="../assets/img/instagram.png" alt="icono instagram" />
