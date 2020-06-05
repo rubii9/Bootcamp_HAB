@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="tracks">
     <ul>
       <li v-for="(track, index) in tracks" :key="track.id">
         <section class="tracks">
@@ -8,19 +8,19 @@
           </p>
           <p>
             <strong>Rank:</strong>
-            {{index +1}}
+            {{ index + 1 }}
           </p>
           <p>
             <strong>Name:</strong>
-            <a :href="track.url">{{track.name}}</a>
+            <a :href="track.url">{{ track.name }}</a>
           </p>
           <p>
             <strong>Artist:</strong>
-            {{track.artist.name}}
+            {{ track.artist.name }}
           </p>
           <p>
             <strong>Listeners:</strong>
-            {{track.listeners}}
+            {{ track.listeners }}
           </p>
         </section>
       </li>
@@ -32,10 +32,9 @@
 export default {
   name: "ArtistList",
   props: {
-    tracks: Array
-  }
+    tracks: Array,
+  },
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

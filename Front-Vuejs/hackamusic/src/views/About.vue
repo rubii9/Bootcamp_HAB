@@ -16,7 +16,11 @@
 
     <p>
       You can see the code on my github
-      <a href="" target="_blank">Code</a>
+      <a
+        href="https://github.com/rubii9/Bootcamp_HAB/tree/master/Front-Vuejs/hackamusic"
+        target="_blank"
+        >Code</a
+      >
     </p>
     <footercustom></footercustom>
   </div>
