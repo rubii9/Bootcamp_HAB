@@ -5,16 +5,17 @@
       description="Top artists list page of web"
     />
     <menucustom></menucustom>
-    <h2>Top artists 🎤</h2>
-    <label for="bySearch">Search artist:</label>
-    <input
-      v-model="search"
-      id="search"
-      name="bySearch"
-      type="search"
-      placeholder="Búsqueda..."
-    />
-    <br />
+    <h2>#Top artists 🎤</h2>
+    <div class="searchArtist">
+      <label for="bySearch">Search artist:</label>
+      <input
+        v-model="search"
+        id="search"
+        name="bySearch"
+        type="search"
+        placeholder="Búsqueda..."
+      />
+    </div>
     <div v-show="loading" class="lds-roller">
       <div></div>
       <div></div>
@@ -54,6 +55,10 @@ export default {
     api.getArtists().then((response) => {
       this.artists = response.data.topartists.artist;
       this.loading = false;
+      //ORDENAR POR OYENTES
+      this.artists.sort(function(a, b) {
+        return b.listeners - a.listeners;
+      });
     });
   },
   computed: {
@@ -70,6 +75,39 @@ export default {
 </script>
 
 <style scoped>
+.topArtists {
+  background: url("https://resistencia.es/wp-content/uploads/2018/10/music.png")
+    no-repeat center top fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  padding: 1rem;
+}
+h2 {
+  font-size: 2rem;
+  color: #ff6666;
+  background-color: rgba(43, 39, 39, 0.5);
+  border-radius: 20px;
+  width: 250px;
+  margin: 1rem auto;
+}
+.searchArtist {
+  margin: 0 auto;
+  padding: 0.5rem;
+}
+
+label {
+  margin: 0.5rem;
+}
+
+input {
+  border-radius: 20px;
+  padding: 0.5rem;
+}
+input:focus {
+  outline: none;
+}
 .lds-roller {
   display: inline-block;
   position: relative;

@@ -7,14 +7,11 @@
           <a
             href="https://www.linkedin.com/in/rub%C3%A9n-p%C3%A9rez-outeiral-8b4b041a0/"
             target="_blank"
-            >Rubén Pérez</a
-          >
+          >Rubén Pérez</a>
         </p>
         <p>
           <img src="../assets/img/instagram.png" alt="icono instagram" />
-          <a href="https://www.instagram.com/rubii__9/" target="_blank"
-            >Rubii__9</a
-          >
+          <a href="https://www.instagram.com/rubii__9/" target="_blank">Rubii__9</a>
         </p>
         <p>
           <img src="../assets/img/github.png" alt="icono github" />
@@ -31,9 +28,9 @@ export default {
   name: "FooterCustom",
   data() {
     return {
-      copyright: "Rubén Pérez, 2020-2021",
+      copyright: "Rubén Pérez, 2020-2021"
     };
-  },
+  }
 };
 </script>
 
@@ -71,6 +68,7 @@ nav p a {
   text-decoration: none;
   display: inline-block;
   color: #42b983;
+  font-weight: bold;
   margin: 0;
 }
 
@@ -104,5 +102,6 @@ footer > p {
   footer > p {
     font-size: 0.75rem;
   }
-}</style
+}
+</style
 >>

@@ -3,7 +3,7 @@
     <vue-headful title="Home" description="Home page of web" />
 
     <menucustom></menucustom>
-    <h2>Top tags 🏷️</h2>
+    <h2>#Top tags 🏷️</h2>
     <div v-show="loading" class="lds-roller">
       <div></div>
       <div></div>
@@ -41,14 +41,38 @@ export default {
   },
   created() {
     api.getTopTags().then((response) => {
+      console.log(response);
       this.tags = response.data.tags.tag;
       this.loading = false;
+
+      //ORDENAR POR TAGGINS
+      this.tags.sort(function(a, b) {
+        return b.taggings - a.taggings;
+      });
     });
   },
 };
 </script>
 
 <style scoped>
+.home {
+  background: url("https://resistencia.es/wp-content/uploads/2018/10/music.png")
+    no-repeat center top fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  padding: 1rem;
+}
+h2 {
+  font-size: 2rem;
+  color: #ff6666;
+  background-color: rgba(43, 39, 39, 0.5);
+  border-radius: 20px;
+  width: 250px;
+  margin: 1rem auto;
+}
+
 .lds-roller {
   display: inline-block;
   position: relative;
