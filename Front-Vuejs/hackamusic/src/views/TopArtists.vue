@@ -11,7 +11,7 @@
     <!-- BUSQUEDA -->
     <div class="searchArtist">
       <label for="bySearch">Search artist:</label>
-      <input v-model="search" id="search" name="bySearch" type="search" placeholder="Búsqueda..." />
+      <input v-model="search" id="search" name="bySearch" type="search" placeholder="Search..." />
     </div>
 
     <!--  SIMBOLO DE CARGA  -->
