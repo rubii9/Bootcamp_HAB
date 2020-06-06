@@ -1,8 +1,14 @@
 <template>
   <div class="topTracks">
     <vue-headful title="Top Tracks" description="Top tracks list page of web" />
+
+    <!-- MENU -->
     <menucustom></menucustom>
+
+    <!-- TITULO -->
     <h2>#Top tracks 🎵</h2>
+
+    <!--  SIMBOLO DE CARGA  -->
     <div v-show="loading" class="lds-roller">
       <div></div>
       <div></div>
@@ -13,7 +19,11 @@
       <div></div>
       <div></div>
     </div>
+
+    <!--   LISTA DE TAGS ORDENADAS POR TAGGINGS -->
     <trackslist :tracks="tracks"></trackslist>
+
+    <!--  FOOTER -->
     <footercustom></footercustom>
   </div>
 </template>
@@ -21,7 +31,6 @@
 <script>
 //IMPORTANDO API
 import api from "@/api/index.js";
-
 //IMPORTANDO LISTA DE TRACKS
 import trackslist from "../components/TracksList.vue";
 //IMPORTANDO MENU
@@ -35,11 +44,11 @@ export default {
   data() {
     return {
       tracks: [],
-      loading: true,
+      loading: true
     };
   },
   created() {
-    api.getTopTracks().then((response) => {
+    api.getTopTracks().then(response => {
       console.log(response);
       this.tracks = response.data.tracks.track;
       this.loading = false;
@@ -49,7 +58,7 @@ export default {
         return b.listeners - a.listeners;
       });
     });
-  },
+  }
 };
 </script>
 <style scoped>

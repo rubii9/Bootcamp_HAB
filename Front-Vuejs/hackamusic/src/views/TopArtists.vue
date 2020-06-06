@@ -1,21 +1,20 @@
 <template>
   <div class="topArtists">
-    <vue-headful
-      title="Top Artists"
-      description="Top artists list page of web"
-    />
+    <vue-headful title="Top Artists" description="Top artists list page of web" />
+
+    <!-- MENU -->
     <menucustom></menucustom>
+
+    <!-- TITULO -->
     <h2>#Top artists 🎤</h2>
+
+    <!-- BUSQUEDA -->
     <div class="searchArtist">
       <label for="bySearch">Search artist:</label>
-      <input
-        v-model="search"
-        id="search"
-        name="bySearch"
-        type="search"
-        placeholder="Búsqueda..."
-      />
+      <input v-model="search" id="search" name="bySearch" type="search" placeholder="Búsqueda..." />
     </div>
+
+    <!--  SIMBOLO DE CARGA  -->
     <div v-show="loading" class="lds-roller">
       <div></div>
       <div></div>
@@ -26,7 +25,11 @@
       <div></div>
       <div></div>
     </div>
+
+    <!--   LISTA DE ARTISTAS ORDENADAS POR OYENTES -->
     <artistlist :artists="filteredArtists"></artistlist>
+
+    <!--  FOOTER -->
     <footercustom></footercustom>
   </div>
 </template>
@@ -48,11 +51,11 @@ export default {
     return {
       artists: [],
       search: "",
-      loading: true,
+      loading: true
     };
   },
   created() {
-    api.getArtists().then((response) => {
+    api.getArtists().then(response => {
       this.artists = response.data.topartists.artist;
       this.loading = false;
       //ORDENAR POR OYENTES
@@ -66,11 +69,11 @@ export default {
       if (!this.search) {
         return this.artists;
       }
-      return this.artists.filter((artist) =>
+      return this.artists.filter(artist =>
         artist.name.toLowerCase().includes(this.search.toLowerCase())
       );
-    },
-  },
+    }
+  }
 };
 </script>
 

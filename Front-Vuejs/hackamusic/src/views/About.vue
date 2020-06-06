@@ -11,16 +11,12 @@
           href="https://www.linkedin.com/in/rub%C3%A9n-p%C3%A9rez-outeiral-8b4b041a0/"
           target="_blank"
           alt="link a mi linkedin"
-          >Rubén Pérez</a
-        >
+        >Rubén Pérez</a>
       </p>
       <p>
         I made use of
-        <a href="https://sweetalert2.github.io/" target="_blank">SweetAlert2</a
-        >,
-        <a href="https://www.npmjs.com/package/vue-headful" target="_blank"
-          >Vue-Headful</a
-        >,
+        <a href="https://sweetalert2.github.io/" target="_blank">SweetAlert2</a>,
+        <a href="https://www.npmjs.com/package/vue-headful" target="_blank">Vue-Headful</a>,
         <a href="https://loading.io/css/" target="_blank">CSS Loader Spiner</a>
         and data Api
         <a href="https://www.last.fm/api/?lang=es&" target="_blank">Last.fm</a>
@@ -31,8 +27,7 @@
         <a
           href="https://github.com/rubii9/Bootcamp_HAB/tree/master/Front-Vuejs/hackamusic"
           target="_blank"
-          >Code</a
-        >
+        >Code</a>
       </p>
 
       <button @click="vote">Vote</button>
@@ -53,6 +48,7 @@ export default {
   name: "About",
   components: { menucustom, footercustom },
   methods: {
+    //MENSAJE ALERT DEL BOTÓN "VOTE"
     vote() {
       Swal.fire({
         title: "Do you like the web?",
@@ -61,10 +57,10 @@ export default {
         showCancelButton: true,
         focusConfirm: false,
         confirmButtonText: "👍  Great!",
-        cancelButtonText: "👎 Nah..",
+        cancelButtonText: "👎 Nah.."
       });
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>

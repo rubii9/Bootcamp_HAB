@@ -2,7 +2,6 @@
   <div>
     <div id="nav">
       <router-link :to="{ name: 'Home' }">Home</router-link>|
-
       <router-link :to="{ name: 'TopArtists' }">TopArtists</router-link>|
       <router-link :to="{ name: 'TopTracks' }">TopTracks</router-link>|
       <router-link :to="{ name: 'About' }">About</router-link>
@@ -12,7 +11,7 @@
 
 <script>
 export default {
-  name: "MenuCustom",
+  name: "MenuCustom"
 };
 </script>
 

@@ -2,8 +2,13 @@
   <div class="home">
     <vue-headful title="Home" description="Home page of web" />
 
+    <!-- MENU -->
     <menucustom></menucustom>
+
+    <!-- TITULO -->
     <h2>#Top tags 🏷️</h2>
+
+    <!--  SIMBOLO DE CARGA  -->
     <div v-show="loading" class="lds-roller">
       <div></div>
       <div></div>
@@ -14,7 +19,11 @@
       <div></div>
       <div></div>
     </div>
+
+    <!--   LISTA DE TAGS ORDENADAS POR TAGGINGS -->
     <tagslist :tags="tags"></tagslist>
+
+    <!--  FOOTER -->
     <footercustom></footercustom>
   </div>
 </template>
@@ -22,7 +31,6 @@
 <script>
 //IMPORTANDO API
 import api from "@/api/index.js";
-
 //IMPORTANDO LISTA DE TAGS
 import tagslist from "../components/TagsList.vue";
 //IMPORTANDO MENU
@@ -36,12 +44,11 @@ export default {
   data() {
     return {
       tags: [],
-      loading: true,
+      loading: true
     };
   },
   created() {
-    api.getTopTags().then((response) => {
-      console.log(response);
+    api.getTopTags().then(response => {
       this.tags = response.data.tags.tag;
       this.loading = false;
 
@@ -50,7 +57,7 @@ export default {
         return b.taggings - a.taggings;
       });
     });
-  },
+  }
 };
 </script>
 
