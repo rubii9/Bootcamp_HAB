@@ -21,8 +21,8 @@
 export default {
   name: "ArtistList",
   props: {
-    tags: Array,
-  },
+    tags: Array
+  }
 };
 </script>
 
@@ -33,15 +33,21 @@ export default {
 }
 .rank {
   font-size: 1.5rem;
-  padding: 0;
+  padding: 0.5rem;
   margin: 0;
 }
 ul {
-  list-style: none;
+  margin: 0 auto;
   padding: 1rem;
+  width: 800px;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
 }
 li {
-  width: 10%;
+  width: 20%;
   border: 1px solid wheat;
   border-radius: 20px;
   box-shadow: 3px 3px 10px #ff6666;
@@ -56,10 +62,13 @@ a {
   font-weight: bold;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 770px) {
   li {
     width: 60%;
     padding: 0.5rem;
+  }
+  ul {
+    display: inline;
   }
 }
 </style>
