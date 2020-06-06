@@ -1,7 +1,11 @@
 <template>
   <div class="tags">
     <ul>
-      <li v-for="(tag, index) in tags" :key="tag.id">
+      <li
+        v-for="(tag, index) in tags"
+        :key="tag.id"
+        :style="{ backgroundImage: `url('${urlImagen}${tag.name}')` }"
+      >
         <section class="tags">
           <p class="rank">#{{ index + 1 }}</p>
           <p>
@@ -22,6 +26,11 @@ export default {
   name: "ArtistList",
   props: {
     tags: Array
+  },
+  data() {
+    return {
+      urlImagen: "https://source.unsplash.com/random/400x400/?music,"
+    };
   }
 };
 </script>
@@ -52,7 +61,9 @@ li {
   border-radius: 20px;
   box-shadow: 3px 3px 10px #ff6666;
   margin: 1rem auto;
-  background-color: rgba(43, 39, 39, 0.5);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 }
 a {
   color: #42b983;
@@ -60,6 +71,12 @@ a {
   text-transform: capitalize;
   font-size: 1.5rem;
   font-weight: bold;
+}
+section {
+  background-color: rgba(43, 39, 39, 0.5);
+  border-radius: 20px;
+  height: 100%;
+  width: 100%;
 }
 
 @media (max-width: 770px) {
