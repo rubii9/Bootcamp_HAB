@@ -52,7 +52,13 @@ app.get("/notas", (req, res) => {
 
 // MODIFICAR NOTA
 app.put("/notas/update/:id", (req, res) => {
-  res.send("Mi nota x ha sido modificada");
+  const { texto, id } = req.body;
+  // QUERY SQL
+  const sql = `UPDATE list_notes SET texto='${texto}' WHERE id=${id}`;
+  connection.query(sql, (error) => {
+    if (error) throw error;
+    res.send("Note update");
+  });
 });
 
 // BORRAR NOTA

@@ -14,7 +14,10 @@
 
     <!-- NOTAS -->
     <h2>Notas 👇</h2>
-    <notas :notas="notas"></notas>
+    <p>Updating your note:</p>
+    <input v-model="newText" placeholder="Text appears here" />
+    <button>UPDATE</button>
+    <notas :notas="notas" v-on:edit="showEditText"></notas>
   </div>
 </template>
 
@@ -32,7 +35,9 @@ export default {
       // Variable donde guardo el texto de la nota
       texto: "",
       // Array de notas
-      notas: []
+      notas: [],
+      newText: "",
+      id: null
     };
   },
   methods: {
@@ -61,6 +66,10 @@ export default {
         .catch(function(error) {
           console.log(error);
         });
+    },
+    showEditText(data) {
+      this.newText = data.texto;
+      this.id = data.id;
     }
   },
   created() {
