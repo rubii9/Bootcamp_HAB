@@ -54,7 +54,7 @@ app.get("/notas", (req, res) => {
 app.put("/notas/update/:id", (req, res) => {
   const { texto, id } = req.body;
   // QUERY SQL
-  const sql = `UPDATE list_notes SET texto='${texto}' WHERE id=${id}`;
+  const sql = `UPDATE lista_notas SET texto='${texto}' WHERE id=${id}`;
   connection.query(sql, (error) => {
     if (error) throw error;
     res.send("Note update");
@@ -63,9 +63,18 @@ app.put("/notas/update/:id", (req, res) => {
 
 // BORRAR NOTA
 app.delete("/notas/del/:id", (req, res) => {
-  res.send("Mi nota x ha sido borrada");
+  // GUARDAMOS LA ID QUE NOS LLEGA
+  const id = req.params.id;
+  // SECUENCIA SQL A EJECUTAR
+  const sql = `DELETE FROM lista_notas WHERE id = ${id}`;
+  // Conexion
+  connection.query(sql, (error) => {
+    if (error) throw error;
+    res.send("Nota borrada");
+  });
 });
 
+// AÑADIR NUEVA NOTA
 app.post("/notas/add", (req, res) => {
   // SECUENCIA SQL
   const sql = "INSERT INTO lista_notas SET ?";
@@ -77,5 +86,18 @@ app.post("/notas/add", (req, res) => {
   connection.query(sql, newNote, (error) => {
     if (error) throw error;
     res.send("Nota creada");
+  });
+});
+
+app.get("/notas/:id", (req, res) => {
+  const id = req.params.id;
+  const sql = `SELECT * FROM lista_notas WHERE id = ${id}`;
+  connection.query(sql, (error, results) => {
+    if (error) throw error;
+    if (results.length > 0) {
+      res.json(results);
+    } else {
+      res.send("No encontrada");
+    }
   });
 });
