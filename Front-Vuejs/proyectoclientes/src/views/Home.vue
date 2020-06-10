@@ -1,12 +1,16 @@
 <template>
   <div class="home">
     <h2>Lista de clientes</h2>
-    <div class="clientes" v-for="(cliente,index) in clientes" :key="cliente.id">
-      <p>ID: {{cliente.id}}</p>
-      <p>Nombre: {{cliente.nombre}}</p>
-      <p>Apellido: {{cliente.apellido}}</p>
-      <p>Ciudad: {{cliente.ciudad}}</p>
-      <p>Empresa: {{cliente.empresa}}</p>
+    <div
+      class="clientes"
+      v-for="(cliente, index) in clientes"
+      :key="cliente.id"
+    >
+      <p>ID: {{ cliente.id }}</p>
+      <p>Nombre: {{ cliente.nombre }}</p>
+      <p>Apellido: {{ cliente.apellido }}</p>
+      <p>Ciudad: {{ cliente.ciudad }}</p>
+      <p>Empresa: {{ cliente.empresa }}</p>
       <button @click="deleteClients(index)">Borrar</button>
     </div>
   </div>
@@ -22,7 +26,7 @@ export default {
   components: {},
   data() {
     return {
-      clientes: []
+      clientes: [],
     };
   },
   methods: {
@@ -32,7 +36,6 @@ export default {
         .get("http://localhost:3050/clientes")
         .then(function(response) {
           self.clientes = response.data;
-          console.log(response);
         })
         .catch(function(error) {
           console.log(error);
@@ -44,15 +47,14 @@ export default {
         .delete("http://localhost:3050/clientes/del/" + data)
         .then(function(response) {
           location.reload();
-          console.log(response);
         })
         .catch(function(error) {
           console.log(error);
         });
-    }
+    },
   },
   created() {
     this.getClients();
-  }
+  },
 };
 </script>

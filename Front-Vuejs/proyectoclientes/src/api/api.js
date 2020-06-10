@@ -4,6 +4,10 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const mysql = require("mysql");
 
+//JSONWEBTOKEN DEPENDENCIAS
+const jwt = require("jsonwebtoken");
+const config = require("./config");
+
 // DECLARO LA "APP"
 const app = express();
 
@@ -11,6 +15,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.set("llave", config.llave);
 
 // DATOS DE CONEXIÓN
 const connection = mysql.createConnection({
@@ -82,5 +87,43 @@ app.delete("/clientes/del/:id", (req, res) => {
     // SI SALE MAL
     if (error) throw error;
     res.send("Cliente borrado");
+  });
+});
+
+// MÉTODO LOGIN QUE CREA EL TOKEN
+app.post("/auth", (req, res) => {
+  //DATOS QUE LLEGAN; USER Y PASS
+  const usuario = req.body.usuario;
+  const password = req.body.password;
+
+  // EL valor de usuario deberia ser un emeail o un nickname, es decir algo único
+
+  //SECUENCIA SQL
+  const sql = `SELECT * FROM usuarios WHERE usuario="${usuario}" AND password="${password}"`;
+
+  //CONEXION A LA BBDD
+  connection.query(sql, (error, results) => {
+    let admin = null;
+    if (error) throw error;
+    if (results.length > 0) {
+      const payload = {
+        check: true,
+      };
+      if (results[0].isAdmin === 1) {
+        admin = true;
+      } else {
+        admin = false;
+      }
+      const token = jwt.sign(payload, app.get("llave"), {
+        expiresIn: "1 day",
+      });
+      res.json({
+        mensaje: "Te has autenticado correctamente",
+        token: token,
+        isAdmin: admin,
+      });
+    } else {
+      console.log("Datos incorrectos");
+    }
   });
 });

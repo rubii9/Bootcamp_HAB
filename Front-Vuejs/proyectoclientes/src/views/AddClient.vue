@@ -3,18 +3,40 @@
     <div>
       <p v-show="required">Tienes datos sin completar</p>
       <label for="nombre">Nombre:</label>
-      <input type="text" name="nombre" placeholder="Nombre del cliente" v-model="nombre" />
+      <input
+        type="text"
+        name="nombre"
+        placeholder="Nombre del cliente"
+        v-model="nombre"
+      />
       <br />
       <label for="apellido">Apellido:</label>
-      <input type="text" name="apellido" placeholder="Apellido del cliente" v-model="apellido" />
+      <input
+        type="text"
+        name="apellido"
+        placeholder="Apellido del cliente"
+        v-model="apellido"
+      />
       <br />
       <label for="ciudad">Ciudad:</label>
-      <input type="text" name="ciudad" placeholder="Ciudad del cliente" v-model="ciudad" />
+      <input
+        type="text"
+        name="ciudad"
+        placeholder="Ciudad del cliente"
+        v-model="ciudad"
+      />
       <br />
       <label for="empresa">Empresa:</label>
-      <input type="text" name="empresa" placeholder="Empresa del cliente" v-model="empresa" />
+      <input
+        type="text"
+        name="empresa"
+        placeholder="Empresa del cliente"
+        v-model="empresa"
+      />
       <br />
-      <button @click="addClient(nombre, apellido, ciudad, empresa)">CREAR</button>
+      <button @click="addClient(nombre, apellido, ciudad, empresa)">
+        CREAR
+      </button>
     </div>
   </div>
 </template>
@@ -34,7 +56,7 @@ export default {
       ciudad: "",
       empresa: "",
       correctData: false,
-      required: false
+      required: false,
     };
   },
   methods: {
@@ -61,11 +83,10 @@ export default {
             nombre: self.nombre,
             apellido: self.apellido,
             ciudad: self.ciudad,
-            empresa: self.empresa
+            empresa: self.empresa,
           })
           .then(function(response) {
             self.emptyFields();
-            console.log(response);
           })
           .catch(function(error) {
             console.log(error);
@@ -79,7 +100,7 @@ export default {
         (this.apellido = ""),
         (this.ciudad = ""),
         (this.empresa = "");
-    }
-  }
+    },
+  },
 };
 </script>
