@@ -1,5 +1,7 @@
 <template>
   <div class="home">
+    <menucustom></menucustom>
+
     <h2>Lista de clientes</h2>
 
     <!-- COMPONENTE DE CLIENTES -->
@@ -15,6 +17,8 @@
         <button @click="closeModal()">Cerrar</button>
       </div>
     </div>
+
+    <footercustom></footercustom>
   </div>
 </template>
 
@@ -23,10 +27,13 @@
 //import HelloWorld from '@/components/HelloWorld.vue'
 import axios from "axios";
 import listaclientes from "@/components/listaClientes.vue";
+import menucustom from "@/components/MenuCustom.vue";
+//IMPORTANDO FOOTER
+import footercustom from "../components/FooterCustom.vue";
 
 export default {
   name: "Clientes",
-  components: { listaclientes },
+  components: { listaclientes, menucustom, footercustom },
   data() {
     return {
       clientes: [],
@@ -49,7 +56,7 @@ export default {
       //data es el valor del id que lo pasamos mediante el componente
       axios
         .delete("http://localhost:3050/clientes/del/" + data, {
-          id: this.id
+          id: data
         })
         .then(function(response) {
           console.log(response);

@@ -57,6 +57,16 @@ const routes = [
       allowAnonymous: true,
     },
   },
+  {
+    path: "/productos",
+    name: "Productos",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Productos.vue"),
+    //RUTA PUBLICA
+    meta: {
+      allowAnonymous: false,
+    },
+  },
 ];
 
 const router = new VueRouter({

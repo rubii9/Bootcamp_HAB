@@ -149,3 +149,24 @@ app.post("/user", (req, res) => {
     res.send("Cliente creado");
   });
 });
+
+// ========================= PRODUCTOS =====================
+
+// FUNCION PARA RECUPERAR TODOS LOS CLIENTES DE LA BBDD
+app.get("/productos", (req, res) => {
+  // SECUENCIA SQL
+  const sql = "SELECT * FROM productos";
+  // CONEXION
+  connection.query(sql, (error, results) => {
+    // SI SALE MAL
+    if (error) throw error;
+    // SI HAY RESULTADOS
+    if (results.length > 0) {
+      res.json(results);
+    }
+    // SI NO HAY NADA
+    else {
+      res.sendStatus("No hay productos");
+    }
+  });
+});

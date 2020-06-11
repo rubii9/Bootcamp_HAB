@@ -1,21 +1,46 @@
 <template>
   <div>
+    <menucustom></menucustom>
     <div>
       <p v-show="required">Tienes datos sin completar</p>
       <label for="nombre">Nombre:</label>
-      <input type="text" name="nombre" placeholder="Nombre del cliente" v-model="nombre" />
+      <input
+        type="text"
+        name="nombre"
+        placeholder="Nombre del cliente"
+        v-model="nombre"
+      />
       <br />
       <label for="apellido">Apellido:</label>
-      <input type="text" name="apellido" placeholder="Apellido del cliente" v-model="apellido" />
+      <input
+        type="text"
+        name="apellido"
+        placeholder="Apellido del cliente"
+        v-model="apellido"
+      />
       <br />
       <label for="ciudad">Ciudad:</label>
-      <input type="text" name="ciudad" placeholder="Ciudad del cliente" v-model="ciudad" />
+      <input
+        type="text"
+        name="ciudad"
+        placeholder="Ciudad del cliente"
+        v-model="ciudad"
+      />
       <br />
       <label for="empresa">Empresa:</label>
-      <input type="text" name="empresa" placeholder="Empresa del cliente" v-model="empresa" />
+      <input
+        type="text"
+        name="empresa"
+        placeholder="Empresa del cliente"
+        v-model="empresa"
+      />
       <br />
-      <button @click="addClient(nombre, apellido, ciudad, empresa)">CREAR</button>
+      <button @click="addClient">
+        CREAR
+      </button>
     </div>
+    <!-- <formulario></formulario> -->
+    <footercustom></footercustom>
   </div>
 </template>
 
@@ -23,10 +48,16 @@
 // @ is an alias to /src
 
 import axios from "axios"; // Importando AXIOS
+//IMPORTANDO MENU
+import menucustom from "@/components/MenuCustom.vue";
+//IMPORTANDO FOOTER
+import footercustom from "@/components/FooterCustom.vue";
+//IMPORTANDO FORMULARIO
+import formulario from "@/components/FormularioClientes.vue";
 
 export default {
   name: "AddClient",
-  components: {},
+  components: { menucustom, footercustom, formulario },
   data() {
     return {
       nombre: "",
@@ -34,7 +65,7 @@ export default {
       ciudad: "",
       empresa: "",
       correctData: false,
-      required: false
+      required: false,
     };
   },
   methods: {
@@ -52,7 +83,7 @@ export default {
         this.required = false;
       }
     },
-    addClient(nombre, apellido, ciudad, empresa) {
+    addClient() {
       this.validatingData();
       if (this.correctData == true) {
         let self = this;
@@ -61,7 +92,7 @@ export default {
             nombre: self.nombre,
             apellido: self.apellido,
             ciudad: self.ciudad,
-            empresa: self.empresa
+            empresa: self.empresa,
           })
           .then(function(response) {
             self.emptyFields();
@@ -78,7 +109,7 @@ export default {
         (this.apellido = ""),
         (this.ciudad = ""),
         (this.empresa = "");
-    }
-  }
+    },
+  },
 };
 </script>

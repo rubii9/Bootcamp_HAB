@@ -1,24 +1,11 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link :to="{name:'Clientes'}">Clientes</router-link>|
-      <router-link :to="{name:'About'}">About</router-link>|
-      <router-link :to="{name:'AddClient'}">Añadir Clientes</router-link>|
-      <button @click="logoutUser()">Logout</button>
-    </div>
     <router-view />
   </div>
 </template>
 <script>
-import { clearLogin } from "./api/utils";
 export default {
-  name: "App",
-  methods: {
-    logoutUser() {
-      this.$router.push("/");
-      return clearLogin();
-    }
-  }
+  name: "App"
 };
 </script>
 <style>
