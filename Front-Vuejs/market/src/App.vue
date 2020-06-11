@@ -1,10 +1,9 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/home">Home</router-link>|
-      <router-link to="/about">About</router-link>|
-      <router-link to="/add-client">Clientes</router-link>
-|
+      <router-link :to="{name:'Clientes'}">Clientes</router-link>|
+      <router-link :to="{name:'About'}">About</router-link>|
+      <router-link :to="{name:'AddClient'}">Añadir Clientes</router-link>|
       <button @click="logoutUser()">Logout</button>
     </div>
     <router-view />

@@ -1,20 +1,14 @@
 <template>
   <div class="home">
     <h2>Lista de clientes</h2>
-    <div class="clientes" v-for="(cliente, index) in clientes" :key="cliente.id">
-      <p>ID: {{ cliente.id }}</p>
-      <p>Nombre: {{ cliente.nombre }}</p>
-      <p>Apellido: {{ cliente.apellido }}</p>
-      <p>Ciudad: {{ cliente.ciudad }}</p>
-      <p>Empresa: {{ cliente.empresa }}</p>
-      <button @click="deleteClients(index)">Borrar</button>
-      <button @click="openModal()">Editar</button>
-    </div>
+
+    <!-- COMPONENTE DE CLIENTES -->
+    <listaclientes :clientes="clientes" v-on:edit="openModal" v-on:delete="deleteClients"></listaclientes>
 
     <!-- MODAL PARA EDITAR -->
     <div class="modal" v-show="modal">
       <div class="modalBox">
-        <h2>Modal para datos</h2>
+        <h2>Editar cliente</h2>
         <input type="text" placeholder />
         <br />
         <br />
@@ -28,10 +22,11 @@
 // @ is an alias to /src
 //import HelloWorld from '@/components/HelloWorld.vue'
 import axios from "axios";
+import listaclientes from "@/components/listaClientes.vue";
 
 export default {
-  name: "Home",
-  components: {},
+  name: "Clientes",
+  components: { listaclientes },
   data() {
     return {
       clientes: [],
@@ -50,11 +45,14 @@ export default {
           console.log(error);
         });
     },
-    deleteClients(index) {
-      let data = this.clientes[index].id;
+    deleteClients(data) {
+      //data es el valor del id que lo pasamos mediante el componente
       axios
-        .delete("http://localhost:3050/clientes/del/" + data)
+        .delete("http://localhost:3050/clientes/del/" + data, {
+          id: this.id
+        })
         .then(function(response) {
+          console.log(response);
           location.reload();
         })
         .catch(function(error) {
