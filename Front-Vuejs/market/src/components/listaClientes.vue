@@ -14,15 +14,15 @@
 
 <script>
 export default {
-  name: "ShowClients",
+  name: "listaClientes",
   props: {
     clientes: Array
   },
   methods: {
     editClientEvent(index) {
-      //SAVING INFO INTO SELECTED NOTE
+      // Guaradandno la info de la nota seleccionada
       let data = this.clientes[index];
-      //SENDING NOTE'S INFO TO VIEW
+      // Enviando la info de la nota a la vista
       this.$emit("edit", data);
     },
     deleteClientEvent(index) {

@@ -6,6 +6,7 @@
       <router-link :to="{name:'AddClient'}">Añadir Clientes</router-link>|
       <router-link :to="{name:'Productos'}">Productos</router-link>|
       <button @click="logoutUser()">Logout</button>
+      <p></p>
     </div>
   </div>
 </template>

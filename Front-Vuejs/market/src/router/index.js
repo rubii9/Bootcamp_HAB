@@ -3,6 +3,8 @@ import VueRouter from "vue-router";
 import Error from "../views/Error.vue";
 import { isLoggedIn } from "../api/utils";
 import { checkAdmin } from "../api/utils";
+//IMPORTANDO SWEETALERT
+import Swal from "sweetalert2";
 
 Vue.use(VueRouter);
 
@@ -15,6 +17,22 @@ const routes = [
     //RUTA PRIVADA
     meta: {
       allowAnonymous: false,
+      allowNoAdmin: false,
+    },
+    beforeEnter: (to, from, next) => {
+      if (to.meta.allowNoAdmin === false && !checkAdmin()) {
+        Swal.fire({
+          title: "Acceso denegado",
+          text: "Solo para admin",
+          confirmButtonText: "Ok",
+        });
+
+        next({
+          path: "/productos",
+        });
+      } else {
+        next();
+      }
     },
   },
   {
@@ -24,7 +42,7 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
     //RUTA PRIVADA
     meta: {
-      allowAnonymous: false,
+      allowAnonymous: true,
     },
   },
   {
@@ -36,6 +54,20 @@ const routes = [
     meta: {
       allowAnonymous: false,
       allowNoAdmin: false,
+    },
+    beforeEnter: (to, from, next) => {
+      if (to.meta.allowNoAdmin === false && !checkAdmin()) {
+        Swal.fire({
+          title: "Acceso denegado",
+          text: "Solo para admin",
+          confirmButtonText: "Ok",
+        });
+        next({
+          path: "/productos",
+        });
+      } else {
+        next();
+      }
     },
   },
   {
@@ -85,14 +117,6 @@ router.beforeEach((to, from, next) => {
   if (!to.meta.allowAnonymous && !isLoggedIn()) {
     next({
       path: "/",
-      query: {
-        redirect: to.fullPath,
-      },
-    });
-  }
-  if (to.meta.allowNoAdmin === false && !checkAdmin()) {
-    next({
-      path: "/home",
       query: {
         redirect: to.fullPath,
       },

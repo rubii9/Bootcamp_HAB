@@ -9,19 +9,25 @@
     <h2>Lista de clientes</h2>
 
     <!-- COMPONENTE DE CLIENTES -->
-    <listaclientes
-      :clientes="clientes"
-      v-on:edit="openModal"
-      v-on:delete="deleteClients"
-    ></listaclientes>
+    <listaclientes :clientes="clientes" v-on:edit="openModal" v-on:delete="deleteClients"></listaclientes>
 
     <!-- MODAL PARA EDITAR CLIENTE -->
     <div class="modal" v-show="modal">
-      <div class="modalBox">
+      <div class="modalBox" v-on:edit="showEditText">
         <h2>Editar cliente</h2>
-        <input type="text" placeholder />
+        <label for="newName">Nombre:</label>
+        <input v-model="newName" placeholder="Text appears here" />
         <br />
+        <label for="newSurname">Apellido:</label>
+        <input v-model="newSurname" placeholder="Text appears here" />
         <br />
+        <label for="newCity">Ciudad:</label>
+        <input v-model="newCity" placeholder="Text appears here" />
+        <br />
+        <label for="newCompany">Empresa:</label>
+        <input v-model="newCompany" placeholder="Text appears here" />
+        <br />
+        <button @click="updateClient()">UPDATE</button>
         <button @click="closeModal()">Cerrar</button>
       </div>
     </div>
@@ -41,6 +47,8 @@ import listaclientes from "@/components/listaClientes.vue";
 import menucustom from "@/components/MenuCustom.vue";
 //IMPORTANDO FOOTER
 import footercustom from "../components/FooterCustom.vue";
+//IMPORTANDO SWEETALERT
+import Swal from "sweetalert2";
 
 export default {
   name: "Clientes",
@@ -49,6 +57,11 @@ export default {
     return {
       clientes: [],
       modal: false,
+      newName: "",
+      newSurname: "",
+      newCity: "",
+      newCompany: "",
+      id: null
     };
   },
   methods: {
@@ -69,28 +82,63 @@ export default {
       //data es el valor del id que lo pasamos mediante el componente
       axios
         .delete("http://localhost:3050/clientes/del/" + data, {
-          id: data,
+          id: data
         })
         .then(function(response) {
-          console.log(response);
-          location.reload();
+          Swal.fire({
+            icon: "success",
+            title: "Your client has been deleted",
+            showConfirmButton: false,
+            timer: 1500
+          }).then(result => location.reload());
         })
         .catch(function(error) {
           console.log(error);
         });
     },
     //FUNCION QUE ABRE EL POP UP PARA EDITAR
-    openModal() {
+    openModal(data) {
       this.modal = true;
+      this.showEditText(data);
     },
     //FUNCION QUE CIERRA EL POP UP PARA EDITAR
     closeModal() {
       this.modal = false;
     },
+    showEditText(data) {
+      this.newName = data.nombre;
+      this.newSurname = data.apellido;
+      this.newCity = data.ciudad;
+      this.newCompany = data.empresa;
+      this.id = data.id;
+    },
+    // FUNCIÓN PARA ACTUALIZAR/EDITAR
+    updateClient() {
+      let self = this;
+      axios
+        .put("http://localhost:3050/clientes/update/" + self.id, {
+          id: self.id,
+          nombre: self.newName,
+          apellido: self.newSurname,
+          ciudad: self.newCity,
+          empresa: self.newCompany
+        })
+        .then(function(response) {
+          Swal.fire({
+            icon: "success",
+            title: "Your client has been edited",
+            showConfirmButton: false,
+            timer: 1500
+          }).then(result => location.reload());
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    }
   },
   created() {
     this.getClients();
-  },
+  }
 };
 </script>
 
