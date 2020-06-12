@@ -4,19 +4,9 @@
     <vue-headful title="Login" description="Login page" />
 
     <h2>Haz login</h2>
-    <input
-      type="text"
-      name="usuario"
-      v-model="usuario"
-      placeholder="Usuario..."
-    />
+    <input type="text" name="usuario" v-model="email" placeholder="Usuario..." />
     <br />
-    <input
-      type="password"
-      name="password"
-      v-model="password"
-      placeholder="Password..."
-    />
+    <input type="password" name="password" v-model="password" placeholder="Password..." />
 
     <br />
     <button @click="login()">Login</button>
@@ -30,20 +20,22 @@ export default {
   name: "Login",
   data() {
     return {
-      usuario: "",
-      password: "",
+      email: "",
+      password: ""
     };
   },
   methods: {
     async login() {
       try {
-        await loginUser(this.usuario, this.password);
-        this.$router.push("/home");
+        await loginUser(this.email, this.password);
+        //GUARDAR EL EMAIL EN LOCALSTORAGE
+        localStorage.setItem("Usuario", this.email);
+        this.$router.push("/productos");
       } catch (error) {
         alert(`Error: ${error}`);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

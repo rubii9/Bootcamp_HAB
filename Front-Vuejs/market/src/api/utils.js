@@ -6,14 +6,14 @@ const AUTH_TOKEN_KEY = "authToken";
 const ROLE = "role";
 
 //FUNCION LOGIN
-export function loginUser(usuario, password) {
+export function loginUser(email, password) {
   return new Promise(async (resolve, reject) => {
     try {
       let res = await axios({
         url: `${ENDPOINT}/auth`, //URL DE LA AUTENTICACIÓN
         method: "POST", //MÉTODO DE LA AUTENTIFICACIÓN
         data: {
-          usuario: usuario,
+          usuario: email,
           password: password,
           grand_type: "password",
         }, // DATOS DE LA AUTENTIFICACIÓN
@@ -32,6 +32,7 @@ export function loginUser(usuario, password) {
 export function clearLogin() {
   axios.defaults.headers.common["Authorization"] = "";
   localStorage.removeItem(AUTH_TOKEN_KEY);
+  localStorage.removeItem("Usuario");
   clearAdmin();
 }
 

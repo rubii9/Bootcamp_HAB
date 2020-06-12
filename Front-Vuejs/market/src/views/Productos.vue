@@ -4,7 +4,7 @@
     <vue-headful title="Prodcucts" description="Product page" />
 
     <!-- MENU -->
-    <menucustom></menucustom>
+    <menucustom class="menu"></menucustom>
 
     <!-- PRODUCTOS -->
     <listaproductos :productos="productos" v-on:pedir="pedir"></listaproductos>
@@ -30,7 +30,7 @@ export default {
   components: { menucustom, footercustom, listaproductos },
   data() {
     return {
-      productos: [],
+      productos: []
     };
   },
   methods: {
@@ -51,14 +51,15 @@ export default {
       Swal.fire({
         title: "Pedido en camino",
         text: "Gracias por tu compra",
-        confirmButtonText: "Ok",
+        confirmButtonText: "Ok"
       });
-    },
+    }
   },
   created() {
     this.getProducts();
-  },
+  }
 };
 </script>
 
-<style></style>
+<style scoped>
+</style>
