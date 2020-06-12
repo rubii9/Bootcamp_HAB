@@ -1,50 +1,12 @@
 <template>
   <div>
-    <!-- NOMBRE DE LA PAGINA -->
-    <vue-headful title="New client" description="Adding new clients page" />
-
-    <!--  MENU -->
+    <!-- MENU -->
     <menucustom></menucustom>
 
-    <div>
-      <p v-show="required">Tienes datos sin completar</p>
-      <label for="nombre">Nombre:</label>
-      <input
-        type="text"
-        name="nombre"
-        placeholder="Nombre del cliente"
-        v-model="nombre"
-      />
-      <br />
-      <label for="apellido">Apellido:</label>
-      <input
-        type="text"
-        name="apellido"
-        placeholder="Apellido del cliente"
-        v-model="apellido"
-      />
-      <br />
-      <label for="ciudad">Ciudad:</label>
-      <input
-        type="text"
-        name="ciudad"
-        placeholder="Ciudad del cliente"
-        v-model="ciudad"
-      />
-      <br />
-      <label for="empresa">Empresa:</label>
-      <input
-        type="text"
-        name="empresa"
-        placeholder="Empresa del cliente"
-        v-model="empresa"
-      />
-      <br />
-      <button @click="addClient">
-        CREAR
-      </button>
-    </div>
-    <!-- <formulario></formulario> -->
+    <!-- FORMULARIO PARA NUEVO CLIENTE -->
+    <formulario :required="required" v-on:add="addClient"></formulario>
+
+    <!--  FOOTER -->
     <footercustom></footercustom>
   </div>
 </template>
@@ -65,23 +27,13 @@ export default {
   components: { menucustom, footercustom, formulario },
   data() {
     return {
-      nombre: "",
-      apellido: "",
-      ciudad: "",
-      empresa: "",
       correctData: false,
       required: false,
     };
   },
   methods: {
-    //VALIDAR LOS CAMPOS DEL INPUT
-    validatingData() {
-      if (
-        this.nombre === "" ||
-        this.apellido === "" ||
-        this.ciudad === "" ||
-        this.empresa === ""
-      ) {
+    validatingData(nombre, apellido, ciudad, empresa) {
+      if (nombre === "" || apellido === "" || ciudad === "" || empresa === "") {
         this.correctData = false;
         this.required = true;
       } else {
@@ -89,20 +41,20 @@ export default {
         this.required = false;
       }
     },
-    //FUNCION PARA AÑADIR CLIENTES A LA BBDD
-    addClient() {
-      this.validatingData();
+    addClient(nombre, apellido, ciudad, empresa) {
+      this.validatingData(nombre, apellido, ciudad, empresa);
       if (this.correctData == true) {
         let self = this;
         axios
           .post("http://localhost:3050/add", {
-            nombre: self.nombre,
-            apellido: self.apellido,
-            ciudad: self.ciudad,
-            empresa: self.empresa,
+            nombre: nombre,
+            apellido: apellido,
+            ciudad: ciudad,
+            empresa: empresa,
           })
           .then(function(response) {
-            self.emptyFields();
+            location.reload();
+            //VACIAR CAMPOS
           })
           .catch(function(error) {
             console.log(error);
@@ -110,13 +62,6 @@ export default {
       } else {
         console.log("No has rellenado todos los campos");
       }
-    },
-    //LIMPIAR LOS INPUTS
-    emptyFields() {
-      (this.nombre = ""),
-        (this.apellido = ""),
-        (this.ciudad = ""),
-        (this.empresa = "");
     },
   },
 };
