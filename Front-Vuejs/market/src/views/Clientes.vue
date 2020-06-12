@@ -1,13 +1,21 @@
 <template>
   <div class="home">
+    <!-- NOMBRE DE LA PAGINA -->
+    <vue-headful title="Clients" description="Home page" />
+
+    <!-- MENU -->
     <menucustom></menucustom>
 
     <h2>Lista de clientes</h2>
 
     <!-- COMPONENTE DE CLIENTES -->
-    <listaclientes :clientes="clientes" v-on:edit="openModal" v-on:delete="deleteClients"></listaclientes>
+    <listaclientes
+      :clientes="clientes"
+      v-on:edit="openModal"
+      v-on:delete="deleteClients"
+    ></listaclientes>
 
-    <!-- MODAL PARA EDITAR -->
+    <!-- MODAL PARA EDITAR CLIENTE -->
     <div class="modal" v-show="modal">
       <div class="modalBox">
         <h2>Editar cliente</h2>
@@ -18,15 +26,18 @@
       </div>
     </div>
 
+    <!-- FOOTER -->
     <footercustom></footercustom>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-//import HelloWorld from '@/components/HelloWorld.vue'
+//IMPORTANDO AXIOS
 import axios from "axios";
+//IMPORTANDO CLIENTES
 import listaclientes from "@/components/listaClientes.vue";
+//IMPORTANDO MENU
 import menucustom from "@/components/MenuCustom.vue";
 //IMPORTANDO FOOTER
 import footercustom from "../components/FooterCustom.vue";
@@ -37,10 +48,11 @@ export default {
   data() {
     return {
       clientes: [],
-      modal: false
+      modal: false,
     };
   },
   methods: {
+    //OBTENER LOS CLIENTES DE LA BBDD
     getClients() {
       let self = this;
       axios
@@ -52,11 +64,12 @@ export default {
           console.log(error);
         });
     },
+    //ELIMINAR CLIENTES DE LA BBDD
     deleteClients(data) {
       //data es el valor del id que lo pasamos mediante el componente
       axios
         .delete("http://localhost:3050/clientes/del/" + data, {
-          id: data
+          id: data,
         })
         .then(function(response) {
           console.log(response);
@@ -66,16 +79,18 @@ export default {
           console.log(error);
         });
     },
+    //FUNCION QUE ABRE EL POP UP PARA EDITAR
     openModal() {
       this.modal = true;
     },
+    //FUNCION QUE CIERRA EL POP UP PARA EDITAR
     closeModal() {
       this.modal = false;
-    }
+    },
   },
   created() {
     this.getClients();
-  }
+  },
 };
 </script>
 

@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import Error from "../views/Error.vue";
 import { isLoggedIn } from "../api/utils";
 import { checkAdmin } from "../api/utils";
 
@@ -66,6 +67,11 @@ const routes = [
     meta: {
       allowAnonymous: false,
     },
+  },
+  {
+    path: "*",
+    name: Error,
+    component: Error,
   },
 ];
 

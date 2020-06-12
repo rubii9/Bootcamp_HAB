@@ -1,7 +1,11 @@
 <template>
   <div class="about">
+    <!-- NOMBRE DE LA PAGINA -->
     <vue-headful title="About" description="About page of me" />
+
+    <!-- MENU -->
     <menucustom></menucustom>
+
     <h1>¡Hey!👋</h1>
     <img src="../assets/img/ruben.jpg" alt />
     <div class="info">
@@ -40,10 +44,9 @@
           >Code</a
         >
       </p>
-
-      <button @click="vote">Vote</button>
     </div>
 
+    <!-- FOOTER -->
     <footercustom></footercustom>
   </div>
 </template>

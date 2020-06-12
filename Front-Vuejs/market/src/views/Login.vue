@@ -1,15 +1,26 @@
 <template>
   <div>
+    <!-- NOMBRE DE LA PAGINA -->
+    <vue-headful title="Login" description="Login page" />
+
     <h2>Haz login</h2>
-    <input type="text" name="usuario" v-model="usuario" placeholder="Usuario..." />
+    <input
+      type="text"
+      name="usuario"
+      v-model="usuario"
+      placeholder="Usuario..."
+    />
     <br />
-    <input type="password" name="password" v-model="password" placeholder="Password..." />
+    <input
+      type="password"
+      name="password"
+      v-model="password"
+      placeholder="Password..."
+    />
 
     <br />
-    <router-link :to="{name:'Register'}">Register</router-link>
-    <br />
-
     <button @click="login()">Login</button>
+    <router-link :to="{ name: 'Register' }">Registro</router-link>
   </div>
 </template>
 
@@ -20,7 +31,7 @@ export default {
   data() {
     return {
       usuario: "",
-      password: ""
+      password: "",
     };
   },
   methods: {
@@ -31,8 +42,8 @@ export default {
       } catch (error) {
         alert(`Error: ${error}`);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

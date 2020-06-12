@@ -1,6 +1,11 @@
 <template>
   <div>
+    <!-- NOMBRE DE LA PAGINA -->
+    <vue-headful title="New client" description="Adding new clients page" />
+
+    <!--  MENU -->
     <menucustom></menucustom>
+
     <div>
       <p v-show="required">Tienes datos sin completar</p>
       <label for="nombre">Nombre:</label>
@@ -69,6 +74,7 @@ export default {
     };
   },
   methods: {
+    //VALIDAR LOS CAMPOS DEL INPUT
     validatingData() {
       if (
         this.nombre === "" ||
@@ -83,6 +89,7 @@ export default {
         this.required = false;
       }
     },
+    //FUNCION PARA AÑADIR CLIENTES A LA BBDD
     addClient() {
       this.validatingData();
       if (this.correctData == true) {
@@ -104,6 +111,7 @@ export default {
         console.log("No has rellenado todos los campos");
       }
     },
+    //LIMPIAR LOS INPUTS
     emptyFields() {
       (this.nombre = ""),
         (this.apellido = ""),

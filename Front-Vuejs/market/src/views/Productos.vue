@@ -1,7 +1,15 @@
 <template>
   <div>
+    <!-- NOMBRE DE LA PAGINA -->
+    <vue-headful title="Prodcucts" description="Product page" />
+
+    <!-- MENU -->
     <menucustom></menucustom>
+
+    <!-- PRODUCTOS -->
     <listaproductos :productos="productos" v-on:pedir="pedir"></listaproductos>
+
+    <!-- FOOTER -->
     <footercustom></footercustom>
   </div>
 </template>
@@ -14,6 +22,7 @@ import menucustom from "../components/MenuCustom.vue";
 import footercustom from "../components/FooterCustom.vue";
 //IMPORTANDO PRODUCTOS
 import listaproductos from "../components/listaProductos.vue";
+//IMPORTANDO SWEETALERT
 import Swal from "sweetalert2";
 
 export default {
@@ -25,6 +34,7 @@ export default {
     };
   },
   methods: {
+    //OBTENER LOS PRODUCTOS DE LA BBD
     getProducts() {
       let self = this;
       axios
@@ -36,6 +46,7 @@ export default {
           console.log(error);
         });
     },
+    //MOSTRAR MENSAJE CON SWEETALERT
     pedir() {
       Swal.fire({
         title: "Pedido en camino",
