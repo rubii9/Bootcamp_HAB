@@ -3,36 +3,16 @@
     <div>
       <p v-show="required">Tienes datos sin completar</p>
       <label for="nombre">Nombre:</label>
-      <input
-        type="text"
-        name="nombre"
-        placeholder="Nombre del cliente"
-        v-model="nombre"
-      />
+      <input type="text" name="nombre" placeholder="Nombre del cliente" v-model="nombre" />
       <br />
       <label for="apellido">Apellido:</label>
-      <input
-        type="text"
-        name="apellido"
-        placeholder="Apellido del cliente"
-        v-model="apellido"
-      />
+      <input type="text" name="apellido" placeholder="Apellido del cliente" v-model="apellido" />
       <br />
       <label for="ciudad">Ciudad:</label>
-      <input
-        type="text"
-        name="ciudad"
-        placeholder="Ciudad del cliente"
-        v-model="ciudad"
-      />
+      <input type="text" name="ciudad" placeholder="Ciudad del cliente" v-model="ciudad" />
       <br />
       <label for="empresa">Empresa:</label>
-      <input
-        type="text"
-        name="empresa"
-        placeholder="Empresa del cliente"
-        v-model="empresa"
-      />
+      <input type="text" name="empresa" placeholder="Empresa del cliente" v-model="empresa" />
       <br />
       <button @click="addClientEvent">CREAR</button>
     </div>
@@ -43,22 +23,51 @@
 export default {
   name: "FormularioClientes",
   props: {
-    required: Boolean,
+    required: Boolean
   },
   data() {
     return {
       nombre: "",
       apellido: "",
       ciudad: "",
-      empresa: "",
+      empresa: ""
     };
   },
   methods: {
     addClientEvent() {
       this.$emit("add", this.nombre, this.apellido, this.ciudad, this.empresa);
-    },
-  },
+    }
+  }
 };
 </script>
 
-<style></style>
+<style scoped>
+input {
+  margin: 1rem;
+  border: 1px solid white;
+  border-radius: 20px;
+  padding: 0.5rem;
+}
+button {
+  width: 80px;
+  cursor: pointer;
+  text-align: center;
+  color: white;
+  background: #42b983;
+  border: 2px solid #d6cdb6;
+  border-radius: 20px;
+  padding: 0.5rem;
+  margin: 0.667rem;
+  font-weight: bold;
+  align-self: center;
+  justify-self: center;
+}
+button:hover {
+  background-color: #008cba;
+  color: white;
+  border: 2px solid gray;
+}
+button:focus {
+  outline: none;
+}
+</style>

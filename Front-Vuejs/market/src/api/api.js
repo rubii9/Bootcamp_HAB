@@ -138,7 +138,7 @@ app.post("/auth", (req, res) => {
         isAdmin: admin,
       });
     } else {
-      console.log("Datos incorrectos");
+      res.status(404).send({ message: "Usuario o contraseña no correctos" });
     }
   });
 });

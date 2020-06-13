@@ -56,6 +56,7 @@ export default {
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap");
 .about {
   min-height: 100vh;
+  color: white;
   /* font-family: "Roboto"; */
 }
 a {

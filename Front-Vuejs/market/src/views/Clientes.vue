@@ -6,29 +6,63 @@
     <!-- MENU -->
     <menucustom></menucustom>
 
-    <h2>Lista de clientes</h2>
+    <h2>Lista de clientes 👔</h2>
+
+    <!-- BUSQUEDA -->
+    <div class="searchProduct">
+      <label for="bySearch">Buscar un cliente:</label>
+      <input
+        v-model="search"
+        id="search"
+        name="bySearch"
+        type="search"
+        placeholder="Nombre o id..."
+      />
+    </div>
+
+    <!--  SIMBOLO DE CARGA  -->
+    <div v-show="loading" class="lds-roller">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
 
     <!-- COMPONENTE DE CLIENTES -->
-    <listaclientes :clientes="clientes" v-on:edit="openModal" v-on:delete="deleteClients"></listaclientes>
+    <listaclientes :clientes="filteredClient" v-on:edit="openModal" v-on:delete="deleteClients"></listaclientes>
 
     <!-- MODAL PARA EDITAR CLIENTE -->
     <div class="modal" v-show="modal">
       <div class="modalBox" v-on:edit="showEditText">
-        <h2>Editar cliente</h2>
-        <label for="newName">Nombre:</label>
-        <input v-model="newName" placeholder="Text appears here" />
-        <br />
-        <label for="newSurname">Apellido:</label>
-        <input v-model="newSurname" placeholder="Text appears here" />
-        <br />
-        <label for="newCity">Ciudad:</label>
-        <input v-model="newCity" placeholder="Text appears here" />
-        <br />
-        <label for="newCompany">Empresa:</label>
-        <input v-model="newCompany" placeholder="Text appears here" />
-        <br />
-        <button @click="updateClient()">UPDATE</button>
-        <button @click="closeModal()">Cerrar</button>
+        <h3>Editar cliente</h3>
+        <div>
+          <label for="newName">Nombre:</label>
+          <input v-model="newName" placeholder="Text appears here" />
+        </div>
+
+        <div>
+          <label for="newSurname">Apellido:</label>
+          <input v-model="newSurname" placeholder="Text appears here" />
+        </div>
+
+        <div>
+          <label for="newCity">Ciudad:</label>
+          <input v-model="newCity" placeholder="Text appears here" />
+        </div>
+
+        <div>
+          <label for="newCompany">Empresa:</label>
+          <input v-model="newCompany" placeholder="Text appears here" />
+        </div>
+
+        <div>
+          <button @click="updateClient()" class="update">UPDATE</button>
+          <button @click="closeModal()">Cerrar</button>
+        </div>
       </div>
     </div>
 
@@ -61,7 +95,9 @@ export default {
       newSurname: "",
       newCity: "",
       newCompany: "",
-      id: null
+      id: null,
+      search: "",
+      loading: true
     };
   },
   methods: {
@@ -71,7 +107,11 @@ export default {
       axios
         .get("http://localhost:3050/clientes")
         .then(function(response) {
-          self.clientes = response.data;
+          //TIEMPO DE CARGA
+          setTimeout(function() {
+            self.loading = false;
+            self.clientes = response.data;
+          }, 1000);
         })
         .catch(function(error) {
           console.log(error);
@@ -138,11 +178,26 @@ export default {
   },
   created() {
     this.getClients();
+  },
+  computed: {
+    filteredClient() {
+      if (!this.search) {
+        return this.clientes;
+      }
+      return this.clientes.filter(
+        cliente =>
+          cliente.nombre.toLowerCase().includes(this.search.toLowerCase()) ||
+          cliente.id === parseInt(this.search)
+      );
+    }
   }
 };
 </script>
 
 <style scoped>
+.home {
+  color: white;
+}
 .modal {
   position: fixed;
   top: 0;
@@ -158,5 +213,137 @@ export default {
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+}
+
+.update {
+  background: goldenrod;
+}
+
+input {
+  width: 20%;
+  border-radius: 20px;
+  border: 1px solid grey;
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+label {
+  font-weight: bold;
+  margin: 0.5rem auto;
+}
+
+h2 {
+  font-size: 3rem;
+  text-shadow: 2px 2px #42b983;
+}
+button {
+  width: 80px;
+  cursor: pointer;
+  text-align: center;
+  color: white;
+  background: #42b983;
+  border: 2px solid #d6cdb6;
+  border-radius: 20px;
+  padding: 0.5rem;
+  margin: 0.667rem;
+  font-weight: bold;
+  align-self: center;
+  justify-self: center;
+}
+button:hover {
+  background-color: #008cba;
+  color: white;
+  border: 2px solid gray;
+}
+button:focus {
+  outline: none;
+}
+.lds-roller {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-roller div {
+  animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  transform-origin: 40px 40px;
+}
+.lds-roller div:after {
+  content: " ";
+  display: block;
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: cadetblue;
+  margin: -4px 0 0 -4px;
+}
+.lds-roller div:nth-child(1) {
+  animation-delay: -0.036s;
+}
+.lds-roller div:nth-child(1):after {
+  top: 63px;
+  left: 63px;
+}
+.lds-roller div:nth-child(2) {
+  animation-delay: -0.072s;
+}
+.lds-roller div:nth-child(2):after {
+  top: 68px;
+  left: 56px;
+}
+.lds-roller div:nth-child(3) {
+  animation-delay: -0.108s;
+}
+.lds-roller div:nth-child(3):after {
+  top: 71px;
+  left: 48px;
+}
+.lds-roller div:nth-child(4) {
+  animation-delay: -0.144s;
+}
+.lds-roller div:nth-child(4):after {
+  top: 72px;
+  left: 40px;
+}
+.lds-roller div:nth-child(5) {
+  animation-delay: -0.18s;
+}
+.lds-roller div:nth-child(5):after {
+  top: 71px;
+  left: 32px;
+}
+.lds-roller div:nth-child(6) {
+  animation-delay: -0.216s;
+}
+.lds-roller div:nth-child(6):after {
+  top: 68px;
+  left: 24px;
+}
+.lds-roller div:nth-child(7) {
+  animation-delay: -0.252s;
+}
+.lds-roller div:nth-child(7):after {
+  top: 63px;
+  left: 17px;
+}
+.lds-roller div:nth-child(8) {
+  animation-delay: -0.288s;
+}
+.lds-roller div:nth-child(8):after {
+  top: 56px;
+  left: 12px;
+}
+@keyframes lds-roller {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>

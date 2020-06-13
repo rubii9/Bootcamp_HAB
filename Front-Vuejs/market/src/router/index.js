@@ -26,10 +26,6 @@ const routes = [
           text: "Solo para admin",
           confirmButtonText: "Ok",
         });
-
-        next({
-          path: "/productos",
-        });
       } else {
         next();
       }
@@ -61,9 +57,6 @@ const routes = [
           title: "Acceso denegado",
           text: "Solo para admin",
           confirmButtonText: "Ok",
-        });
-        next({
-          path: "/productos",
         });
       } else {
         next();

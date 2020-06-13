@@ -22,8 +22,11 @@ export function loginUser(email, password) {
       setIsAdmin(res.data.isAdmin);
       resolve();
     } catch (err) {
+      if (err.response.status === 404) {
+        alert(err.response.data.message);
+      }
+
       console.log("Error en login: ", err);
-      reject(err);
     }
   });
 }

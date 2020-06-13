@@ -42,6 +42,19 @@ export default {
 </script>
 
 <style scoped>
+.menu {
+  color: white;
+}
+.user {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+.user p {
+  margin: 0 1rem;
+  padding: 1rem;
+}
+
 #nav {
   padding: 20px;
   display: flex;
@@ -71,6 +84,25 @@ div .enlaces {
   justify-content: center;
 }
 button {
-  display: inline-block;
+  width: 80px;
+  cursor: pointer;
+  text-align: center;
+  color: white;
+  background: #42b983;
+  border: 2px solid #d6cdb6;
+  border-radius: 20px;
+  padding: 0.5rem;
+  margin: 0.667rem;
+  font-weight: bold;
+  align-self: center;
+  justify-self: center;
+}
+button:hover {
+  background-color: #008cba;
+  color: white;
+  border: 2px solid gray;
+}
+button:focus {
+  outline: none;
 }
 </style>
