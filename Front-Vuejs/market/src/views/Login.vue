@@ -2,7 +2,7 @@
   <div class="login">
     <!-- NOMBRE DE LA PAGINA -->
     <vue-headful title="Login" description="Login page" />
-    <h1 class="title">Bienvenido a mi tienda</h1>
+    <h1 class="title">Bienvenido/a a mi tienda</h1>
     <img
       class="image1"
       src="https://images.unsplash.com/photo-1537476102677-80bac0ab1d8b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
@@ -58,6 +58,7 @@ export default {
 
 <style scoped>
 .login {
+  margin: 1rem;
   padding: 1rem;
   height: 80vh;
   display: grid;
@@ -139,5 +140,38 @@ button:focus {
 a {
   color: #42b983;
   text-decoration: none;
+}
+@media (max-width: 600px) {
+  .login {
+    grid-template-areas: "head head head" "box box box";
+  }
+
+  .loginBox {
+    background: url("https://images.unsplash.com/photo-1537476102677-80bac0ab1d8b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60")
+      no-repeat center top fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    border-radius: 20px;
+    text-shadow: 1px 1px black;
+  }
+  input {
+    width: 60%;
+    padding: 0.5rem;
+  }
+  img {
+    display: none;
+  }
+  a {
+    font-size: 1.15rem;
+  }
+}
+
+@media (max-width: 1100px) {
+  input {
+    width: 60%;
+    padding: 0.5rem;
+  }
 }
 </style>

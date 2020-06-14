@@ -114,6 +114,10 @@ export default {
   background-size: cover;
 }
 
+.searchProduct {
+  padding: 0.5rem;
+}
+
 input {
   border-radius: 20px;
   border: 1px solid grey;
@@ -126,6 +130,15 @@ label {
 h2 {
   font-size: 3rem;
   text-shadow: 2px 2px #42b983;
+}
+@media (max-width: 700px) {
+  .menu {
+    background-color: rgba(43, 39, 39, 0.25);
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
 }
 
 .lds-roller {

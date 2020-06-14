@@ -68,4 +68,15 @@ button:hover {
 button:focus {
   outline: none;
 }
+
+@media (max-width: 800px) {
+  .client {
+    width: 30%;
+  }
+}
+@media (max-width: 700px) {
+  .client {
+    width: 60%;
+  }
+}
 </style>

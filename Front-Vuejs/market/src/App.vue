@@ -32,7 +32,7 @@ export default {
 
 body {
   box-sizing: border-box;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
   background: #404040;
 }

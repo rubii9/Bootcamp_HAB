@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div>
+    <div class="formulario">
+      <h2>Crear nuevo cliente ✍🏻</h2>
       <p v-show="required">Tienes datos sin completar</p>
       <label for="nombre">Nombre:</label>
       <input type="text" name="nombre" placeholder="Nombre del cliente" v-model="nombre" />
@@ -69,5 +70,18 @@ button:hover {
 }
 button:focus {
   outline: none;
+}
+
+@media (max-width: 700px) {
+  .formulario {
+    margin: 1rem;
+  }
+  input {
+    padding: 0.25rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+  }
 }
 </style>

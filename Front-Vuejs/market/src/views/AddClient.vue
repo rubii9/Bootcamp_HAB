@@ -21,6 +21,8 @@ import menucustom from "@/components/MenuCustom.vue";
 import footercustom from "@/components/FooterCustom.vue";
 //IMPORTANDO FORMULARIO
 import formulario from "@/components/FormularioClientes.vue";
+//IMPORTANDO SWEETALERT
+import Swal from "sweetalert2";
 
 export default {
   name: "AddClient",
@@ -53,8 +55,12 @@ export default {
             empresa: empresa
           })
           .then(function(response) {
-            location.reload();
-            //VACIAR CAMPOS
+            Swal.fire({
+              icon: "success",
+              title: "Your client has been created",
+              showConfirmButton: false,
+              timer: 1500
+            }).then(result => location.reload());
           })
           .catch(function(error) {
             console.log(error);
@@ -87,5 +93,11 @@ export default {
 
 .footer {
   grid-area: footer;
+}
+
+@media (max-width: 700px) {
+  .addclient {
+    gap: 0;
+  }
 }
 </style>

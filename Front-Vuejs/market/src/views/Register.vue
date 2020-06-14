@@ -2,7 +2,7 @@
   <div class="register">
     <!-- NOMBRE DE LA PAGINA -->
     <vue-headful title="Register" description="Register page" />
-    <h1 class="title">Bienvenido a mi tienda</h1>
+    <h1 class="title">Eres nuevo/a ?</h1>
     <img
       class="image1"
       src="https://images.unsplash.com/photo-1537476102677-80bac0ab1d8b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
@@ -10,7 +10,7 @@
     />
 
     <div class="registerBox">
-      <h2>Registrate</h2>
+      <h2>Regístrate</h2>
       <p v-show="required">Tienes datos sin completar</p>
       <p v-show="match">Las contraseñas no coinciden</p>
       <input type="email" name="email" v-model="email" placeholder="Email..." />
@@ -100,6 +100,7 @@ export default {
 .register {
   padding: 1rem;
   height: 80vh;
+  margin: 1rem;
   display: grid;
   grid-template-columns: 0.5fr 0.5fr 0.5fr;
   grid-template-rows: auto 1fr;
@@ -184,5 +185,39 @@ a {
 
 p {
   color: red;
+}
+
+@media (max-width: 600px) {
+  .register {
+    grid-template-areas: "head head head" "box box box";
+  }
+
+  .registerBox {
+    background: url("https://images.unsplash.com/photo-1537476102677-80bac0ab1d8b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60")
+      no-repeat center top fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    border-radius: 20px;
+    text-shadow: 1px 1px black;
+  }
+  input {
+    width: 60%;
+    padding: 0.5rem;
+  }
+  img {
+    display: none;
+  }
+  a {
+    font-size: 1.15rem;
+  }
+}
+
+@media (max-width: 1100px) {
+  input {
+    width: 60%;
+    padding: 0.5rem;
+  }
 }
 </style>

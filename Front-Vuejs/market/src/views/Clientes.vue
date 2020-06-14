@@ -262,6 +262,24 @@ button:hover {
 button:focus {
   outline: none;
 }
+
+@media (max-width: 700px) {
+  .searchProduct {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+  }
+
+  input {
+    align-self: center;
+    width: 50%;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+}
+
 .lds-roller {
   display: inline-block;
   position: relative;

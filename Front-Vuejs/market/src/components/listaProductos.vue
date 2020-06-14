@@ -3,7 +3,7 @@
     <div class="product" v-for="product in productos" :key="product.id">
       <p>Producto ID: {{ product.id }}</p>
       <img :src="product.img" />
-      <p>
+      <p class="nombre">
         <strong>{{ product.nombre }}</strong>
       </p>
       <p>{{ product.descripcion }}</p>
@@ -73,5 +73,24 @@ button:hover {
 }
 button:focus {
   outline: none;
+}
+
+.nombre {
+  color: #42b983;
+  font-size: 1.25rem;
+}
+
+@media (max-width: 700px) {
+  .product {
+    width: 60%;
+  }
+
+  img {
+    width: 150px;
+    height: 150px;
+  }
+  p {
+    font-size: 0.85rem;
+  }
 }
 </style>

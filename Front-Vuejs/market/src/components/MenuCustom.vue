@@ -105,4 +105,18 @@ button:hover {
 button:focus {
   outline: none;
 }
+
+@media (max-width: 700px) {
+  #nav {
+    font-size: 0.75rem;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+  }
+
+  button {
+    padding: 0.2rem;
+    width: 60px;
+  }
+}
 </style>

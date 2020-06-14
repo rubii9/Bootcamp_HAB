@@ -5,36 +5,37 @@
 
     <!-- MENU -->
     <menucustom></menucustom>
-
-    <h1>¡Hey!👋</h1>
-    <img src="../assets/img/ruben.jpg" alt />
     <div class="info">
-      <p>
-        This proyect has been created by
-        <a
-          href="https://www.linkedin.com/in/rub%C3%A9n-p%C3%A9rez-outeiral-8b4b041a0/"
-          target="_blank"
-          alt="link a mi linkedin"
-        >Rubén Pérez</a>
-      </p>
-      <p>
-        I made use of
-        <a href="https://sweetalert2.github.io/" target="_blank">SweetAlert2</a>,
-        <a href="https://www.npmjs.com/package/vue-headful" target="_blank">Vue-Headful</a>,
-        <a href="https://loading.io/css/" target="_blank">CSS Loader Spiner</a>,
-        <a href="https://www.npmjs.com/package/express" target="_blank">Express</a>,
-        <a href="https://www.npmjs.com/package/body-parser" target="_blank">BodyParser</a>,
-        <a href="https://www.npmjs.com/package/cors" target="_blank">Cors</a>,
-        <a href="https://www.npmjs.com/package/mysql" target="_blank">MySQL</a>
-      </p>
+      <h1>¡Hey!👋</h1>
+      <img src="../assets/img/ruben.jpg" alt />
+      <div class="info">
+        <p>
+          This proyect has been created by
+          <a
+            href="https://www.linkedin.com/in/rub%C3%A9n-p%C3%A9rez-outeiral-8b4b041a0/"
+            target="_blank"
+            alt="link a mi linkedin"
+          >Rubén Pérez</a>
+        </p>
+        <p>
+          I made use of
+          <a href="https://sweetalert2.github.io/" target="_blank">SweetAlert2</a>,
+          <a href="https://www.npmjs.com/package/vue-headful" target="_blank">Vue-Headful</a>,
+          <a href="https://loading.io/css/" target="_blank">CSS Loader Spiner</a>,
+          <a href="https://www.npmjs.com/package/express" target="_blank">Express</a>,
+          <a href="https://www.npmjs.com/package/body-parser" target="_blank">BodyParser</a>,
+          <a href="https://www.npmjs.com/package/cors" target="_blank">Cors</a>,
+          <a href="https://www.npmjs.com/package/mysql" target="_blank">MySQL</a>
+        </p>
 
-      <p>
-        You can see the code on my github
-        <a
-          href="https://github.com/rubii9/Bootcamp_HAB/tree/master/Front-Vuejs/hackamusic"
-          target="_blank"
-        >Code</a>
-      </p>
+        <p>
+          You can see the code on my github
+          <a
+            href="https://github.com/rubii9/Bootcamp_HAB/tree/master/Front-Vuejs/market"
+            target="_blank"
+          >Code</a>
+        </p>
+      </div>
     </div>
 
     <!-- FOOTER -->
@@ -57,7 +58,9 @@ export default {
 .about {
   min-height: 100vh;
   color: white;
-  /* font-family: "Roboto"; */
+}
+.info {
+  font-family: "Roboto";
 }
 a {
   color: #42b983;
