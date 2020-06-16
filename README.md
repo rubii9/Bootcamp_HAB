@@ -1,4 +1,4 @@
-# Bootcamp_HAB
+# Bootcamp_HAB - Rubén Pérez
 Ejercicios como programador Full-Stack en el bootcamp de HackaBoss
 
 ## Módulos
