@@ -1,7 +1,7 @@
 # Bootcamp_HAB
 Ejercicios como programador Full-Stack en el bootcamp de HackaBoss
 
-## Modulos
+## Módulos
 
 [1. HTML](https://github.com/rubii9/Bootcamp_HAB/tree/master/HTML)
 
