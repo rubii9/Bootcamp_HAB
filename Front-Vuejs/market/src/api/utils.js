@@ -43,7 +43,7 @@ export function clearLogin() {
 
 //GUARDAR TOKEN EN LOCALSTORAGE
 export function setAuthToken(token) {
-  axios.defaults.headers.common[':authorization'] = Bearer ${token}
+  axios.defaults.headers.common[':authorization'] =`Bearer ${token}`
   localStorage.setItem(AUTH_TOKEN_KEY, token);
 }
 
