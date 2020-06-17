@@ -33,7 +33,7 @@ export function loginUser(email, password) {
 
 //LOGOUT
 export function clearLogin() {
-  axios.defaults.headers.common["Authorization"] = "";
+  axios.defaults.headers.common[':authorization'] = "";
   localStorage.removeItem(AUTH_TOKEN_KEY);
   localStorage.removeItem("Usuario");
   clearAdmin();
@@ -43,7 +43,7 @@ export function clearLogin() {
 
 //GUARDAR TOKEN EN LOCALSTORAGE
 export function setAuthToken(token) {
-  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  axios.defaults.headers.common[':authorization'] = Bearer ${token}
   localStorage.setItem(AUTH_TOKEN_KEY, token);
 }
 
