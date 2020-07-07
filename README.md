@@ -17,7 +17,7 @@ Ejercicios como programador Full-Stack en el bootcamp de HackaBoss
 
 ## Entregas
 
-[Entregas de ejercicios](https://github.com/rubii9/entregas-hab)
+[Entregas  ejercicios](https://github.com/rubii9/entregas-hab)
 
 
 ## Proyectos web
