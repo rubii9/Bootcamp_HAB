@@ -1,0 +1,136 @@
+{
+	"info": {
+		"_postman_id": "05624154-59f3-4468-ba3f-0e3e385fb4b7",
+		"name": "Insta-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "List Photos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{server}}/photos",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"photos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Photo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "Bonita foto",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "O puto banco de loiba",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/Users/berto/Downloads/vaca-header.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{server}}/photos",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"photos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Photo",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{server}}/photos/1",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"photos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Photo",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{server}}",
+					"host": [
+						"{{server}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Like Photo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "470eb967-a43e-4a78-aa11-58ef7fbbdb1e",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "1759ac58-4f99-4c03-bee4-eee1ca28da40",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "59e69b5f-e834-48d6-af76-f1af2c7c379b",
+			"key": "server",
+			"value": "http://localhost:3001"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
