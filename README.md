@@ -13,7 +13,9 @@ Ejercicios como programador Full-Stack en el bootcamp de HackaBoss
 
 [5. Backend](https://github.com/rubii9/Bootcamp_HAB/tree/master/Backend)
 
-[6. Frontend](https://github.com/rubii9/Bootcamp_HAB/tree/master/Front-Vuejs)
+[6. Vue](https://github.com/rubii9/Bootcamp_HAB/tree/master/Vue)
+
+[7. React](https://github.com/rubii9/Bootcamp_HAB/tree/master/React)
 
 ## Entregas
 
