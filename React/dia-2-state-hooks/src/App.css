@@ -1,0 +1,37 @@
+header h1 {
+  margin: 2rem;
+}
+
+.todo-done {
+  text-decoration: line-through;
+}
+
+.error {
+  font-size: 0.75rem;
+  color: orange;
+  margin: 0;
+}
+
+.filter {
+  display: flex;
+  background-color: lightgrey;
+  padding: 1rem;
+}
+
+.filter fieldset:nth-of-type(1) {
+  border-right: 1px solid gray;
+}
+
+.new-todo {
+  padding: 1rem;
+  background-color: lightslategray;
+}
+
+label {
+  font-size: 0.75rem;
+  display: block;
+}
+
+fieldset {
+  border: none;
+}
