@@ -5,6 +5,7 @@ export default function Filter({
   onlyPending,
   handleFilterChange,
   handlePendingCheckbox,
+  cleanTodos,
 }) {
   return (
     <section className="filter">
@@ -26,6 +27,16 @@ export default function Filter({
           onChange={handlePendingCheckbox}
           checked={onlyPending}
         />
+      </fieldset>
+
+      <fieldset>
+        <button
+          onClick={() => {
+            cleanTodos();
+          }}
+        >
+          Borrar los todos hechos
+        </button>
       </fieldset>
     </section>
   );

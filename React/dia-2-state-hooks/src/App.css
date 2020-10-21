@@ -2,7 +2,7 @@ header h1 {
   margin: 2rem;
 }
 
-.todo-done {
+.todo-done span.text{
   text-decoration: line-through;
 }
 
@@ -14,11 +14,12 @@ header h1 {
 
 .filter {
   display: flex;
+  flex-wrap: wrap;
   background-color: lightgrey;
   padding: 1rem;
 }
 
-.filter fieldset:nth-of-type(1) {
+.filter fieldset:not(:last-of-type)  {
   border-right: 1px solid gray;
 }
 

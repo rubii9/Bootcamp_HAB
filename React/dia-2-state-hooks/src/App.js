@@ -23,9 +23,22 @@ import TodoList from "./components/TodoList";
 */
 
 function App() {
-  const [todos, setTodos] = React.useState([]);
-  const [filter, setFilter] = React.useState("");
-  const [onlyPending, setOnlyPending] = React.useState(false);
+  const [todos, setTodos] = React.useState(
+    JSON.parse(localStorage.getItem("todoCache")) || []
+  );
+  const [filter, setFilter] = React.useState(
+    localStorage.getItem("todoFilter") || ""
+  );
+  const [onlyPending, setOnlyPending] = React.useState(
+    JSON.parse(localStorage.getItem("todoOnlyPendingCache")) || false
+  );
+
+  //Funcion que se ejecuta cuando cambia la variable todos
+  React.useEffect(() => {
+    localStorage.setItem("todoCache", JSON.stringify(todos));
+    localStorage.setItem("todoFilter", filter);
+    localStorage.setItem("todoOnlyPendingCache", JSON.stringify(onlyPending));
+  }, [todos, filter, onlyPending]);
 
   // Esta función se ejecuta cuando cambia el input de filter (en el componente Filter)
   const handleFilterChange = (event) => {
@@ -53,6 +66,22 @@ function App() {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
+  //Esta funcion cambia el estad del todo
+  const toggleTodo = (id) => {
+    const updatedTodos = todos.map((todo) => {
+      if (todo.id === id) {
+        todo.done = !todo.done;
+      }
+      return todo;
+    });
+    setTodos(updatedTodos);
+  };
+
+  //Esta funcion borra todos los hechos
+  const cleanTodos = () => {
+    setTodos(todos.filter((todo) => !todo.done));
+  };
+
   // Filtro el array de todos en base al estado de "filter"
   let filteredTodos = todos.filter((todo) => {
     return todo.text.toLowerCase().includes(filter.toLowerCase());
@@ -74,10 +103,16 @@ function App() {
         onlyPending={onlyPending}
         handleFilterChange={handleFilterChange}
         handlePendingCheckbox={handlePendingCheckbox}
+        cleanTodos={cleanTodos}
       />
 
       <main>
-        <TodoList list={filteredTodos} name="berto" deleteTodo={deleteTodo} />
+        <TodoList
+          list={filteredTodos}
+          name="berto"
+          deleteTodo={deleteTodo}
+          toggleTodo={toggleTodo}
+        />
       </main>
     </>
   );
