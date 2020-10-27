@@ -13,6 +13,7 @@ const port = process.env.PORT;
 
 const {
   listPhotos,
+  getPhoto,
   newPhoto,
   deletePhoto,
   editPhoto,
@@ -39,6 +40,7 @@ app.use(
 
 // Routes
 app.get('/photos', listPhotos);
+app.get('/photos/:id', getPhoto);
 app.post('/photos', newPhoto);
 app.delete('/photos/:id', deletePhoto);
 app.put('/photos/:id', editPhoto);

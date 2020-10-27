@@ -1,4 +1,4 @@
-const { getDB } = require('../db');
+onst { getDB } = require('../db');
 
 const {
   formatDateToDB,
@@ -23,6 +23,32 @@ async function listPhotos(req, res, next) {
     res.send({
       status: 'ok',
       data: entries
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+// GET - /photos/:id
+async function getPhoto(req, res, next) {
+  try {
+    const { id } = req.params;
+    const db = await getDB();
+
+    const photo = await db.get(
+      `
+      SELECT photos.*,
+      (SELECT COUNT(*) FROM photos_likes WHERE photo_id=photos.id) AS likes
+      FROM photos
+      WHERE photos.id = :id
+      ORDER BY date DESC
+      `,
+      { ':id': id }
+    );
+
+    res.send({
+      status: 'ok',
+      data: photo
     });
   } catch (error) {
     next(error);
@@ -117,18 +143,19 @@ async function editPhoto(req, res, next) {
     const { id } = req.params;
 
     if (!title) {
-      const error = new Error(
-        'Required fields place or description are missing'
-      );
+      const error = new Error('Required fields are missing');
       error.httpCode = 400;
       throw error;
     }
 
     const db = await getDB();
 
-    const currentPhoto = await db.get('SELECT image FROM photos WHERE id=:id', {
-      ':id': id
-    });
+    const currentPhoto = await db.get(
+      'SELECT photos.image, photos.date, (SELECT COUNT(*) FROM photos_likes WHERE photo_id=photos.id) AS likes FROM photos WHERE id=:id',
+      {
+        ':id': id
+      }
+    );
 
     if (!currentPhoto) {
       const error = new Error('Photo not found');
@@ -151,7 +178,9 @@ async function editPhoto(req, res, next) {
         id,
         title,
         description,
-        image: currentPhoto.image
+        date: currentPhoto.date,
+        image: currentPhoto.image,
+        likes: currentPhoto.likes
       }
     });
   } catch (error) {
@@ -210,6 +239,7 @@ async function likePhoto(req, res, next) {
 
 module.exports = {
   listPhotos,
+  getPhoto,
   newPhoto,
   deletePhoto,
   editPhoto,
