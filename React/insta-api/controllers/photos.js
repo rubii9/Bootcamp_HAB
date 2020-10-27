@@ -1,4 +1,4 @@
-onst { getDB } = require('../db');
+const { getDB } = require('../db');
 
 const {
   formatDateToDB,
