@@ -1,0 +1,8 @@
+.app-photolist {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.app-photolist li {
+  width: 50%;
+}

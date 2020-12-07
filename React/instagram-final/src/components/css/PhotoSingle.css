@@ -1,0 +1,23 @@
+.app-photo-single figure {
+  position: relative;
+}
+
+.app-photo-single figure button {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
+  padding: 0 0.2rem;
+}
+
+.app-photo-single footer {
+  display: flex;
+}
+
+.app-photo-single footer .data {
+  flex-grow: 1;
+}
+
+.app-photo-single footer span.likes {
+  cursor: pointer;
+  user-select: none;
+}

@@ -1,0 +1,12 @@
+.app-upload h2 {
+  margin-bottom: 1rem;
+}
+
+.app-upload .cancel {
+  margin-top: 1rem;
+  font-size: 0.75rem;
+}
+
+.app-upload .cancel a {
+  color: black;
+}
